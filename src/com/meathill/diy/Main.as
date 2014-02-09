@@ -12,7 +12,6 @@ package com.meathill.diy
 	 * ...
 	 * @author Meathill
 	 */
-	[Frame(factoryClass="com.meathill.diy.Preloader")]
 	public class Main extends Sprite 
 	{
     private var _context:Context;
@@ -27,10 +26,10 @@ package com.meathill.diy
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
-      _context = new Context()
-          .install(MVCSBundle)
-          .configure(AppConfig)
-          .configure(new ContextView(this));
+      _context = new Context();
+      _context.install(MVCSBundle)
+      _context.configure(AppConfig)
+      _context.configure(new ContextView(this));
 		}
 
 	}
