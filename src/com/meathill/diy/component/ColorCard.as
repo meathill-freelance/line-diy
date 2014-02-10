@@ -1,4 +1,4 @@
-package com.meathill.diy.view 
+package com.meathill.diy.component 
 {
 	import flash.display.Sprite;
 	
@@ -6,10 +6,10 @@ package com.meathill.diy.view
    * ...
    * @author Meathill
    */
-  public class Wizard extends Sprite 
+  public class ColorCard extends Sprite 
   {
     
-    public function Wizard() 
+    public function ColorCard() 
     {
       super();
 			

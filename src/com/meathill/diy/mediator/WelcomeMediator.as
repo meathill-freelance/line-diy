@@ -13,12 +13,6 @@ package com.meathill.diy.mediator
     [Inject]
     public var view:WelcomeView;
     
-    public function WelcomeMediator() 
-    {
-      super();
-			
-    }
-    
     override public function initialize(): void {
       addViewListener(UserEvent.START_DIY, dispatch);
     }

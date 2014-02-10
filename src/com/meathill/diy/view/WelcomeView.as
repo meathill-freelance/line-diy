@@ -20,7 +20,7 @@ package com.meathill.diy.view
     }
     
     private function draw():void {
-      startButton = new PrimaryButton();
+      startButton = new PrimaryButton('开始DIY');
       startButton.x = 100;
       startButton.y = 100;
       addChild(startButton);

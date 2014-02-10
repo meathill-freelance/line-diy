@@ -1,6 +1,7 @@
 package com.meathill.diy
 {
   import com.meathill.diy.config.AppConfig;
+  import com.meathill.diy.config.GUIConfig;
 	import flash.display.Sprite;
 	import flash.events.Event;
   import robotlegs.bender.bundles.mvcs.MVCSBundle;
@@ -27,8 +28,8 @@ package com.meathill.diy
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
       _context = new Context();
-      _context.install(MVCSBundle)
-      _context.configure(AppConfig)
+      _context.install(MVCSBundle);
+      _context.configure(AppConfig);
       _context.configure(new ContextView(this));
 		}
 
