@@ -1,4 +1,6 @@
 package com.meathill.diy.config {
+  import com.meathill.diy.component.wizard.Wizard;
+  import com.meathill.diy.component.wizard.WizardMediator;
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.mediator.WelcomeMediator;
@@ -30,10 +32,12 @@ package com.meathill.diy.config {
     
     public function configure():void {
       injector.map(ClothModel).asSingleton();
+      injector.map(Manag
       
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
       
       mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
+      mediatorMap.map(Wizard).toMediator(WizardMediator);
       
       contextView.view.addChild(new WelcomeView());
     }

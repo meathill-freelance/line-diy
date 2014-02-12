@@ -15,6 +15,9 @@ package com.meathill.diy.component.wizard
 			
     }
     
+    public function draw(steps:uint):void {
+      
+    }
   }
 
 }

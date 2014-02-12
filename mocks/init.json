@@ -1,3 +1,17 @@
 {
   "name": "篮球背心",
-  "
+  "steps": [
+    {
+      type: 'color'
+    },
+    {
+      type: 'color'
+    },
+    {
+      type: 'color'
+    },
+    {
+      type: 'color'
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 package com.meathill.diy.view 
 {
-  import com.meathill.diy.component.Wizard;
+  import com.meathill.diy.component.wizard.Wizard;
 	import flash.display.Sprite;
 	
 	/**
