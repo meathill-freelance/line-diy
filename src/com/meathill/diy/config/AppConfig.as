@@ -2,6 +2,7 @@ package com.meathill.diy.config {
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.mediator.WelcomeMediator;
+  import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.view.WelcomeView;
   import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
@@ -28,6 +29,8 @@ package com.meathill.diy.config {
     public var contextView:ContextView;
     
     public function configure():void {
+      injector.map(ClothModel).asSingleton();
+      
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
       
       mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);

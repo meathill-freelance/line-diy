@@ -1,4 +1,4 @@
-package com.meathill.diy.component 
+package com.meathill.diy.component.wizard 
 {
 	import flash.display.Sprite;
 	
