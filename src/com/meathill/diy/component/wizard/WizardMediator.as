@@ -16,7 +16,7 @@ package com.meathill.diy.component.wizard
     public var cloth:ClothModel;
     
     override public function initialize():void {
-      view.draw(cloth.get('steps'));
+      view.draw(cloth.steps);
     }
     
   }

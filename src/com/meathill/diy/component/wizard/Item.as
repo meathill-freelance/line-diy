@@ -1,5 +1,6 @@
 package com.meathill.diy.component.wizard 
 {
+  import com.meathill.diy.model.vo.SingleStepConfig;
 	import flash.display.Sprite;
   import flash.filters.GlowFilter;
 	
@@ -16,12 +17,12 @@ package com.meathill.diy.component.wizard
     
     public static var glow:GlowFilter = new GlowFilter(0xffffff, 0.125, 4, 4);
     
-    private var status:uint = 0;
+    private var _status:uint = 0;
+    private var config:SingleStepConfig;
     
-    public function Item() 
-    {
-      super();
-			draw();
+    public function Item(config:SingleStepConfig) {
+			this.config = config;
+      draw();
     }
     
     private function draw():void {
@@ -29,7 +30,7 @@ package com.meathill.diy.component.wizard
     }
     
     public function set status(value:int):void {
-      status = value;
+      _status = value;
       draw();
     }
     

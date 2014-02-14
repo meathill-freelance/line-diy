@@ -1,5 +1,6 @@
 package com.meathill.diy.component 
 {
+  import com.meathill.diy.config.Typography;
 	import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.filters.BitmapFilterQuality;
@@ -20,8 +21,8 @@ package com.meathill.diy.component
     protected var borderColor:uint = 0xCCCCCC;
     protected var hoverBgColor:uint = 0xEBEBEB;
     protected var hoverBorderColor:uint = 0xADADAD;
-    protected var textFormat:TextFormat = new TextFormat('宋体', 14, 0x333333);
     protected var activeFilter:DropShadowFilter = new DropShadowFilter(4, 90, 0, 0.125, 4, 4, 2, BitmapFilterQuality.MEDIUM, true);
+    protected var textFormat:TextFormat = Typography.getTextFormat(Typography.BODY);
     
     public function Button(label:String = 'button') 
     {

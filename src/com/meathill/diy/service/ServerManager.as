@@ -65,13 +65,13 @@ package com.meathill.diy.service
       }
     }
     private function loader_progressHandler(e:ProgressEvent):void {
-      if (queue[0].progress) {
+      if (queue[0].progress !== null) {
         queue[0].progress(e);
       }
     }
     private function loader_errorHandler(e:IOErrorEvent):void {
       trace('load error');
-      if (queue[0].error) {
+      if (queue[0].error !== null) {
         queue[0].error(e);
       }
     }
