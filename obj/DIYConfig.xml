@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'2014/2/15'</value>
+      <value>'2014/2/16'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -42,7 +42,7 @@
   <file-specs>
     <path-element>C:\Users\路佳\Documents\FlashProjects\DIY\src\com\meathill\diy\Main.as</path-element>
   </file-specs>
-  <default-background-color>#FFFFFF</default-background-color>
+  <default-background-color>#333333</default-background-color>
   <default-frame-rate>30</default-frame-rate>
   <default-size>
     <width>800</width>

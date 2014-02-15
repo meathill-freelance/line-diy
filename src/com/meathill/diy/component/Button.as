@@ -43,7 +43,7 @@ package com.meathill.diy.component
       label = new TextField();
       label.defaultTextFormat = textFormat;
       label.x = 12;
-      label.y = 8;
+      label.y = 10;
       label.mouseEnabled = false;
       label.autoSize = TextFieldAutoSize.LEFT;
       label.text = labelText;

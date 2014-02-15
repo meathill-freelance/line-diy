@@ -2,15 +2,20 @@
   "name": "篮球背心",
   "steps": [
     {
+      "title": "正面",
+      "type": "color",
+      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f"]
+    },
+    {
+      "title": "背面",
       "type": "color"
     },
     {
+      "title": "肩部",
       "type": "color"
     },
     {
-      "type": "color"
-    },
-    {
+      "title": "侧面",
       "type": "color"
     }
   ]

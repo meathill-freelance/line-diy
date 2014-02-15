@@ -1,6 +1,9 @@
 package com.meathill.diy.config {
+  import com.meathill.diy.component.options.Options;
+  import com.meathill.diy.component.options.OptionsMediator;
   import com.meathill.diy.component.wizard.Wizard;
   import com.meathill.diy.component.wizard.WizardMediator;
+  import com.meathill.diy.controller.GotoStepCommand;
   import com.meathill.diy.controller.ShowWelcomeCommand;
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.SystemEvent;
@@ -51,9 +54,11 @@ package com.meathill.diy.config {
       
       commandMap.map(SystemEvent.READY).toCommand(ShowWelcomeCommand);
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
+      commandMap.map(UserEvent.GO_TO_STEP).toCommand(GotoStepCommand);
       
       mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
       mediatorMap.map(Wizard).toMediator(WizardMediator);
+      mediatorMap.map(Options).toMediator(OptionsMediator);
       
       contextView.view.addChild(new Spinner());
       
