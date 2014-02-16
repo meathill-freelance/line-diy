@@ -30,6 +30,8 @@ package com.meathill.diy.controller
       var diy:DIYView = new DIYView();
       injector.map(DIYView).toValue(diy);
       contextView.view.addChild(diy);
+      
+      
     }
   }
 

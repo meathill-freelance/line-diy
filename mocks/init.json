@@ -1,22 +1,32 @@
 {
   "name": "篮球背心",
+  "templates": [
+    "../mocks/cloth.swf"
+  ],
   "steps": [
     {
       "title": "正面",
       "type": "color",
-      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f"]
+      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "currColor": "ffffff"
     },
     {
       "title": "背面",
-      "type": "color"
+      "type": "color",
+      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "currColor": "ffffff"
     },
     {
       "title": "肩部",
-      "type": "color"
+      "type": "color",
+      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "currColor": "ffffff"
     },
     {
       "title": "侧面",
-      "type": "color"
+      "type": "color",
+      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "currColor": "ffffff"
     }
   ]
 }

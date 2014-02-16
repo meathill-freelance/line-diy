@@ -34,6 +34,11 @@ package com.meathill.diy.view
       options.x = 10;
       options.y = 60;
       addChild(options);
+      
+      preview = new Preview();
+      preview.x = 240
+      preview.y = 60;
+      addChild(preview);
     }
     
   }

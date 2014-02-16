@@ -6,6 +6,7 @@ package com.meathill.diy.component.wizard
 	import flash.display.Sprite;
   import flash.filters.GlowFilter;
   import flash.text.TextField;
+  import flash.text.TextFormat;
   import flash.text.TextFormatAlign;
 	
 	/**
@@ -32,34 +33,44 @@ package com.meathill.diy.component.wizard
       this.config = config;
       buttonMode = useHandCursor = true;
       mouseChildren = false;
+      _status = config.type === 'color' ? 1 : 0;
       
       draw();
       createTextField(index);
     }
     
+    public function set status(value:uint):void {
+      _status = value;
+      draw();
+      changeFontColor();
+    }
+    public function get status():uint {
+      return _status;
+    }
+    
     private function createTextField(index:uint):void {
       label = new TextField();
-      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {align: TextFormatAlign.CENTER, bold: true});
+      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {align: TextFormatAlign.CENTER, bold: true, color: _status ? 0xFFFFFF : 0});
       label.y = 10;
       label.width = stepWidth;
       label.text = index.toString();
       addChild(label);
     }
+    private function changeFontColor():void {
+      var format:TextFormat = label.defaultTextFormat;
+      format.color = _status ? 0xFFFFFF : 0;
+      label.defaultTextFormat = format;
+    }
     private function draw():void {
-      graphics.beginFill(Colors.SILVER);
+      graphics.beginFill(_status ? Colors.NEPHRITIS : Colors.SILVER);
       graphics.drawRect(0, 0, 1, 40);
-      graphics.beginFill(Colors.CLOUDS);
+      graphics.beginFill(_status ? Colors.EMERALD : Colors.CLOUDS);
       if (isLast) {
         graphics.drawRoundRectComplex(1, 0, stepWidth - 1, 40, 0, 4, 0, 4);
       } else {
         graphics.drawRect(1, 0, stepWidth - 1, 40);
       }
       graphics.endFill();
-    }
-    
-    public function set status(value:int):void {
-      _status = value;
-      draw();
     }
     
     public function active():void {

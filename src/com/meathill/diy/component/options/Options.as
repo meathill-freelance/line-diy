@@ -1,6 +1,6 @@
 package com.meathill.diy.component.options 
 {
-  import com.meathill.diy.component.ColorCard;
+  import com.meathill.diy.component.colorCard.ColorCard;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.model.vo.SingleStepConfig;
@@ -28,7 +28,7 @@ package com.meathill.diy.component.options
     
     public function show(type:String, config:SingleStepConfig):void {
       while (components.length) {
-        this.removeChild(components[0]);
+        removeChild(components.pop());
       }
       
       var all:Array = type.split('|');

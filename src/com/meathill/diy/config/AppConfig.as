@@ -1,4 +1,6 @@
 package com.meathill.diy.config {
+  import com.meathill.diy.component.colorCard.ColorCard;
+  import com.meathill.diy.component.colorCard.ColorCardMediator;
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.options.OptionsMediator;
   import com.meathill.diy.component.wizard.Wizard;
@@ -8,9 +10,12 @@ package com.meathill.diy.config {
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
+  import com.meathill.diy.mediator.PreviewMediator;
   import com.meathill.diy.mediator.WelcomeMediator;
   import com.meathill.diy.model.ClothModel;
+  import com.meathill.diy.model.DIYModel;
   import com.meathill.diy.service.ServerManager;
+  import com.meathill.diy.view.Preview;
   import com.meathill.diy.view.Spinner;
   import com.meathill.diy.view.WelcomeView;
   import flash.events.Event;
@@ -51,6 +56,7 @@ package com.meathill.diy.config {
       
       injector.map(ClothModel).toValue(cloth);
       injector.map(ServerManager).toValue(server);
+      injector.map(DIYModel).asSingleton();
       
       commandMap.map(SystemEvent.READY).toCommand(ShowWelcomeCommand);
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
@@ -59,6 +65,8 @@ package com.meathill.diy.config {
       mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
       mediatorMap.map(Wizard).toMediator(WizardMediator);
       mediatorMap.map(Options).toMediator(OptionsMediator);
+      mediatorMap.map(Preview).toMediator(PreviewMediator);
+      mediatorMap.map(ColorCard).toMediator(ColorCardMediator);
       
       contextView.view.addChild(new Spinner());
       

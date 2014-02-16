@@ -2,10 +2,8 @@ package com.meathill.diy.component.wizard
 {
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
-  import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
 	import flash.display.Sprite;
-  import flash.events.MouseEvent;
   import flash.text.TextField;
   import flash.text.TextFieldAutoSize;
   import flash.text.TextFormat;
@@ -17,15 +15,20 @@ package com.meathill.diy.component.wizard
    */
   public class Wizard extends Sprite 
   {
-    private var items:Vector.<Item>;
+    private var _items:Vector.<Item>;
     private var count:TextField;
     
     public function Wizard() 
     {
       super();
-			items = new Vector.<Item>();
-      
-      addEventListener(MouseEvent.CLICK, clickHandler);
+			_items = new Vector.<Item>();
+    }
+    
+    public function get items():Vector.<Item> {
+      return _items;
+    }
+    public function set ok(value:uint):void {
+      count.text = value + '/' +items.length;
     }
     
     public function draw(steps:Vector.<SingleStepConfig>):void {
@@ -43,19 +46,15 @@ package com.meathill.diy.component.wizard
       addChild(count);
       
       // 计步器
+      var okCount:uint = 0;
       for (var i:uint = 0; i < steps.length; i++) {
         var item:Item = new Item(steps[i], i + 1, i === steps.length - 1);
         item.x = stepWidth * (i + 1);
         addChild(item);
-        items.push(item);
+        _items.push(item);
+        okCount += item.status;
       }
-    }
-    
-    private function clickHandler(e:MouseEvent):void {
-      var index:uint = getChildIndex(Sprite(e.target)),
-          event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
-      event.step = index - 1;
-      dispatchEvent(event);
+      ok = okCount;
     }
   }
 
