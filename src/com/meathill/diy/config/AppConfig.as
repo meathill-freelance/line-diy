@@ -1,23 +1,15 @@
 package com.meathill.diy.config {
-  import com.meathill.diy.component.colorCard.ColorCard;
-  import com.meathill.diy.component.colorCard.ColorCardMediator;
-  import com.meathill.diy.component.options.Options;
-  import com.meathill.diy.component.options.OptionsMediator;
-  import com.meathill.diy.component.wizard.Wizard;
-  import com.meathill.diy.component.wizard.WizardMediator;
   import com.meathill.diy.controller.GotoStepCommand;
+  import com.meathill.diy.controller.PreloadAssetsCommand;
   import com.meathill.diy.controller.ShowWelcomeCommand;
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
-  import com.meathill.diy.mediator.PreviewMediator;
-  import com.meathill.diy.mediator.WelcomeMediator;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.model.DIYModel;
+  import com.meathill.diy.popup.PopupManager;
+  import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.service.ServerManager;
-  import com.meathill.diy.view.Preview;
-  import com.meathill.diy.view.Spinner;
-  import com.meathill.diy.view.WelcomeView;
   import flash.events.Event;
   import flash.events.IEventDispatcher;
   import robotlegs.bender.extensions.contextView.ContextView;
@@ -36,16 +28,10 @@ package com.meathill.diy.config {
     public var injector:IInjector;
     
     [Inject]
-    public var mediatorMap:IMediatorMap;
-    
-    [Inject]
     public var commandMap:IEventCommandMap;
     
     [Inject]
     public var eventDispatcher:IEventDispatcher;
-    
-    [Inject]
-    public var contextView:ContextView;
     
     private var server:ServerManager;
     private var cloth:ClothModel;
@@ -57,18 +43,13 @@ package com.meathill.diy.config {
       injector.map(ClothModel).toValue(cloth);
       injector.map(ServerManager).toValue(server);
       injector.map(DIYModel).asSingleton();
+      injector.map(PopupManager).asSingleton();
+      injector.map(AssetsManager).asSingleton();
       
-      commandMap.map(SystemEvent.READY).toCommand(ShowWelcomeCommand);
+      commandMap.map(SystemEvent.DATA_READY).toCommand(PreloadAssetsCommand);
+      commandMap.map(SystemEvent.ASSETS_READY).toCommand(ShowWelcomeCommand);
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
       commandMap.map(UserEvent.GO_TO_STEP).toCommand(GotoStepCommand);
-      
-      mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
-      mediatorMap.map(Wizard).toMediator(WizardMediator);
-      mediatorMap.map(Options).toMediator(OptionsMediator);
-      mediatorMap.map(Preview).toMediator(PreviewMediator);
-      mediatorMap.map(ColorCard).toMediator(ColorCardMediator);
-      
-      contextView.view.addChild(new Spinner());
       
       loadConfig();
     }
@@ -79,7 +60,8 @@ package com.meathill.diy.config {
     
     private function config_loadCompleteHandler(data:String):void {
       cloth.parse(data);
-      eventDispatcher.dispatchEvent(new SystemEvent(SystemEvent.READY));
+      
+      eventDispatcher.dispatchEvent(new SystemEvent(SystemEvent.DATA_READY));
     }
   }
 

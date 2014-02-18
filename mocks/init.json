@@ -1,7 +1,8 @@
 {
   "name": "篮球背心",
   "templates": [
-    "../mocks/cloth.swf"
+    "../mocks/cloth.swf",
+    "../mocks/cloth2.swf"
   ],
   "steps": [
     {

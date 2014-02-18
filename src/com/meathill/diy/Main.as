@@ -29,7 +29,7 @@ package com.meathill.diy
 			// entry point
       _context = new Context();
       _context.install(MVCSBundle);
-      _context.configure(AppConfig);
+      _context.configure(AppConfig, GUIConfig);
       _context.configure(new ContextView(this));
 		}
 
