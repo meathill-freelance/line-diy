@@ -24,6 +24,11 @@ package com.meathill.diy.controller
     
     override public function execute():void {
       assets.addEventListener(Event.COMPLETE, completeHandler);
+      
+      for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
+        assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);
+      }
+      assets.load();
     }
     
     private function completeHandler(e:Event):void {

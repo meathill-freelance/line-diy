@@ -21,10 +21,12 @@ package com.meathill.diy.view
 			
     }
     
-    public function show(url:String):void {
-      loader = new Loader();
-      loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loader_completeHandler);
-      loader.load(new URLRequest(url));
+    public function show(mc:Sprite):void {
+      if (numChildren > 0) {
+        removeChildAt(0);
+      }
+      cloth = mc;
+      addChild(cloth);
     }
     public function setColor(color:uint, step:uint):void {
       var piece:DisplayObject = cloth.getChildAt(step),
@@ -34,14 +36,6 @@ package com.meathill.diy.view
       ct.blueOffset = (color & 0xFF) * .66;
       ct.alphaOffset = 0;
       piece.transform.colorTransform = ct;
-    }
-    
-    private function loader_completeHandler(e:Event):void {
-      if (cloth && contains(cloth)) {
-        removeChild(cloth);
-      }
-      cloth = Sprite(e.currentTarget.content);
-      addChild(cloth);
     }
     
   }

@@ -10,7 +10,7 @@ package com.meathill.diy.model
     private var _step:uint;
     private var store:Object;
     private var _steps:Vector.<SingleStepConfig>
-    private var _templates:Array;
+    private var _templates:Vector.<String>;
     
     public function ClothModel() 
     {
@@ -22,9 +22,11 @@ package com.meathill.diy.model
     public function set step(value:uint):void {
       _step = value;
     }
-    
-    public function get(key:String):* {
-      return store[key];
+    public function get steps():Vector.<SingleStepConfig> {
+      return _steps;
+    }
+    public function get templates():Vector.<String> {
+      return _templates;
     }
     
     public function parse(data:String):void {
@@ -33,15 +35,12 @@ package com.meathill.diy.model
       for (var i:uint = 0, len:uint = store.steps.length; i < len; i++) {
         _steps.push(new SingleStepConfig(store.steps[i]));
       }
-      _templates = store.templates;
+      _templates = new Vector.<String>();
+      for (i = 0, len = store.templates.length; i < len; i++) {
+        _templates.push(store.templates[i]);
+      }
     }
     
-    public function get steps():Vector.<SingleStepConfig> {
-      return _steps;
-    }
-    public function get templates():Array {
-      return _templates;
-    }
     
   }
 
