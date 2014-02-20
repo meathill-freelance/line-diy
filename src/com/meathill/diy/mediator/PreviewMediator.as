@@ -1,9 +1,11 @@
 package com.meathill.diy.mediator 
 {
   import com.meathill.diy.event.DesignEvent;
+  import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.view.Preview;
+  import flash.display.Sprite;
   import flash.events.MouseEvent;
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
@@ -29,12 +31,18 @@ package com.meathill.diy.mediator
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
       addContextListener(DesignEvent.SELECT_COLOR, color_changeHandler, DesignEvent);
+      addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
     }
     
+    private function user_gotoStepHandler(e:UserEvent):void {
+      view.highlight(e.step);
+    }
     private function view_clickHanaler(e:MouseEvent):void {
-      
+      var index:uint = Sprite(e.target).parent.getChildIndex(Sprite(e.target)),
+          event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
+      event.step = index;
+      dispatch(event);
     }
-    
     private function color_changeHandler(e:DesignEvent):void {
       view.setColor(e.color, e.piece);
     }

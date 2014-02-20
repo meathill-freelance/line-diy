@@ -4,6 +4,7 @@ package com.meathill.diy
   import com.meathill.diy.config.GUIConfig;
 	import flash.display.Sprite;
 	import flash.events.Event;
+  import flash.system.Security;
   import robotlegs.bender.bundles.mvcs.MVCSBundle;
   import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.framework.impl.Context;
@@ -27,6 +28,7 @@ package com.meathill.diy
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
+      Security.allowDomain('*');
       _context = new Context();
       _context.install(MVCSBundle);
       _context.configure(AppConfig, GUIConfig);

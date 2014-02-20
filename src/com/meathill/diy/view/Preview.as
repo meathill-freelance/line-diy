@@ -1,5 +1,6 @@
 package com.meathill.diy.view 
 {
+  import com.greensock.TweenMax;
   import flash.display.DisplayObject;
   import flash.display.Loader;
 	import flash.display.Sprite;
@@ -17,7 +18,7 @@ package com.meathill.diy.view
     private var cloth:Sprite;
     
     public function Preview() {
-      super();
+      useHandCursor = true;
 			
     }
     
@@ -36,6 +37,21 @@ package com.meathill.diy.view
       ct.blueOffset = (color & 0xFF) * .66;
       ct.alphaOffset = 0;
       piece.transform.colorTransform = ct;
+    }
+    public function highlight(step:uint):void {
+      var tween:TweenMax = TweenMax.to(cloth.getChildAt(step), 0.3, {
+        glowFilter: {
+          color: 0xFFFFFF,
+          alpha: 0.8,
+          blurX: 16,
+          blurY: 16,
+          strength: 2,
+          quality: 2
+        },
+        onComplete: function ():void {
+          tween.reverse();
+        }
+      });
     }
     
   }

@@ -20,24 +20,27 @@ package com.meathill.diy.component.wizard
     
     override public function initialize():void {
       view.draw(cloth.steps);
-      dispatchStep(view.items[0], 0);
+      view.highhight(0);
+      dispatchStep(0);
       
       addViewListener(MouseEvent.CLICK, view_clickHandler);
+      
+      addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
+    }
+    
+    private function dispatchStep(step:uint):void {
+      var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
+      event.step = step;
+      dispatch(event);
     }
     
     private function view_clickHandler(e:MouseEvent):void {
       var item:Item = Item(e.target),
           index:uint = view.getChildIndex(item);
-      dispatchStep(item, index - 1);
+      dispatchStep(index - 1);
     }
-    private function dispatchStep(item:Item, step:uint):void {
-      var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
-      for (var i:uint = 0, len:uint = view.items.length; i < len; i++) {
-        view.items[i].deactive();
-      }
-      item.active();
-      event.step = step;
-      dispatch(event);
+    private function user_gotoStepHandler(e:UserEvent):void {
+      view.highhight(e.step);
     }
   }
 

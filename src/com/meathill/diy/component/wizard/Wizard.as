@@ -24,11 +24,8 @@ package com.meathill.diy.component.wizard
 			_items = new Vector.<Item>();
     }
     
-    public function get items():Vector.<Item> {
-      return _items;
-    }
     public function set ok(value:uint):void {
-      count.text = value + '/' +items.length;
+      count.text = value + '/' +_items.length;
     }
     
     public function draw(steps:Vector.<SingleStepConfig>):void {
@@ -55,6 +52,12 @@ package com.meathill.diy.component.wizard
         okCount += item.status;
       }
       ok = okCount;
+    }
+    public function highhight(step:uint):void {
+      for (var i:uint = 0, len:uint = _items.length; i < len; i++) {
+        _items[i].deactive();
+      }
+      _items[step].active();
     }
   }
 

@@ -39,6 +39,9 @@ package com.meathill.diy.component.options
         components.push(component);
       }
     }
+    public function showStepButtons(length:int):void {
+      
+    }
     
     private function createComponent(type:String, config:SingleStepConfig):Sprite {
       switch(type) {
