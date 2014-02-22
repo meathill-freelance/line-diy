@@ -16,13 +16,7 @@ package com.meathill.diy.view
     private var options:Options;
     
     public function DIYView() {
-      super();
 			layout();
-    }
-    
-    public function showOperation(config:SingleStepConfig):void {
-      options.title = config.title;
-      options.show(config.type, config);
     }
     
     private function layout():void {

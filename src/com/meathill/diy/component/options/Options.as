@@ -1,10 +1,13 @@
 package com.meathill.diy.component.options 
 {
+  import com.meathill.diy.component.Button;
   import com.meathill.diy.component.colorCard.ColorCard;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
+  import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
 	import flash.display.Sprite;
+  import flash.events.MouseEvent;
   import flash.text.TextField;
 	
 	/**
@@ -15,6 +18,8 @@ package com.meathill.diy.component.options
   {
     private var label:TextField;
     private var components:Vector.<Sprite>
+    private var prevButton:Button;
+    private var nextButton:Button;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -26,21 +31,45 @@ package com.meathill.diy.component.options
       label.text = value;
     }
     
-    public function show(type:String, config:SingleStepConfig):void {
+    public function clear():void {
       while (components.length) {
         removeChild(components.pop());
       }
-      
-      var all:Array = type.split('|');
+      if (prevButton && contains(prevButton)) {
+        removeChild(prevButton);
+      }
+      if (nextButton && contains(nextButton)) {
+        removeChild(nextButton);
+      }
+    }
+    public function show(config:SingleStepConfig):void {
+      label.text = config.title;
+      var all:Array = config.type.split('|');
       for (var i:uint = 0, len:uint = all.length; i < len; i++) {
         var component:Sprite = createComponent(all[i], config);
-        component.y = this.height + 10;
+        component.y = height + 10;
         addChild(component);
         components.push(component);
       }
     }
-    public function showStepButtons(length:int):void {
-      
+    public function showStepButtons(hasPrev:Boolean, hasNext:Boolean):void {
+      if (hasPrev) {
+        if (!prevButton) {
+          prevButton = new Button('上一步');
+          prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
+        }
+        prevButton.y = height + 20;
+        addChild(prevButton);
+      }
+      if (hasNext) {
+        if (!nextButton) {
+          nextButton = new Button('下一步');
+          nextButton.x = 120;
+          nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
+        }
+        nextButton.y = prevButton && contains(prevButton) ? prevButton.y : height + 20;
+        addChild(nextButton);
+      }
     }
     
     private function createComponent(type:String, config:SingleStepConfig):Sprite {
@@ -67,6 +96,15 @@ package com.meathill.diy.component.options
       graphics.beginFill(Colors.TURQUOISE);
       graphics.drawRoundRect(0, 0, 200, 40, 4, 4);
       graphics.endFill();
+    }
+    
+    private function prevButton_clickHandler(e:MouseEvent):void {
+      var event:UserEvent = new UserEvent(UserEvent.PREV);
+      dispatchEvent(event);
+    }
+    private function nextButton_clickHandler(e:MouseEvent):void {
+      var event:UserEvent = new UserEvent(UserEvent.NEXT);
+      dispatchEvent(event);
     }
   }
 

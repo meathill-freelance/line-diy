@@ -17,12 +17,8 @@ package com.meathill.diy.controller
     [Inject]
     public var cloth:ClothModel;
     
-    [Inject]
-    public var diy:DIYView;
-    
     override public function execute():void {
       cloth.step = event.step;
-      diy.showOperation(cloth.steps[event.step]);
     }
     
   }

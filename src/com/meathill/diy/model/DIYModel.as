@@ -27,7 +27,7 @@ package com.meathill.diy.model
         eventDispatcher.dispatchEvent(new Event(Event.CHANGE));
       }
     }
-    public function toJSON():void {
+    public function toJSON():String {
       return JSON.stringify(store);
     }
   }

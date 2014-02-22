@@ -10,6 +10,8 @@ package com.meathill.diy.event
   {
     public static const START_DIY:String = "start_diy";
     public static const GO_TO_STEP:String = "go_to_step";
+    static public const NEXT:String = "next";
+    static public const PREV:String = "prev";
     
     private var _step:uint = 0;
     
