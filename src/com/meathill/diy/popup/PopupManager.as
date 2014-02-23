@@ -12,6 +12,10 @@ package com.meathill.diy.popup
       
     }
     
+    public function popup(popup:IPopup):void {
+      
+    }
+    
   }
 
 }

@@ -24,8 +24,7 @@ package com.meathill.diy.component
     protected var activeFilter:DropShadowFilter = new DropShadowFilter(4, 90, 0, 0.125, 4, 4, 2, BitmapFilterQuality.MEDIUM, true);
     protected var textFormat:TextFormat = Typography.getTextFormat(Typography.BODY);
     
-    public function Button(label:String = 'button') 
-    {
+    public function Button(label:String = 'button') {
       labelText = label;
       resetAttr();
       createLabel();
@@ -49,7 +48,7 @@ package com.meathill.diy.component
       label.text = labelText;
       addChild(label);
     }
-    private function draw(bg:uint, border:uint, width:uint, height:uint):void {
+    protected function draw(bg:uint, border:uint, width:uint, height:uint):void {
       graphics.beginFill(bg);
       graphics.lineStyle(0, border);
       graphics.drawRoundRect(0.5, 0.5, width, height, 6);

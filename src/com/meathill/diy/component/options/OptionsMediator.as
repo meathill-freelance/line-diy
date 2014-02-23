@@ -17,8 +17,8 @@ package com.meathill.diy.component.options
     public var cloth:ClothModel;
     
     override public function initialize():void {
-      addViewListener(UserEvent.PREV, view_gotoPrevHandler);
-      addViewListener(UserEvent.NEXT, view_gotoNextHandler);
+      addViewListener(UserEvent.PREV_STEP, view_gotoPrevHandler);
+      addViewListener(UserEvent.NEXT_STEP, view_gotoNextHandler);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
     }
     

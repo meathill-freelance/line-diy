@@ -99,11 +99,11 @@ package com.meathill.diy.component.options
     }
     
     private function prevButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.PREV);
+      var event:UserEvent = new UserEvent(UserEvent.PREV_STEP);
       dispatchEvent(event);
     }
     private function nextButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.NEXT);
+      var event:UserEvent = new UserEvent(UserEvent.NEXT_STEP);
       dispatchEvent(event);
     }
   }

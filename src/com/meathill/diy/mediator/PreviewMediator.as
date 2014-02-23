@@ -24,18 +24,22 @@ package com.meathill.diy.mediator
     [Inject]
     public var assets:AssetsManager;
     
-    private var curr:uint = 0;
-    
     override public function initialize():void {
-      view.show(assets.templates[curr]);
+      view.show(assets.templates[cloth.template]);
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
+      
       addContextListener(DesignEvent.SELECT_COLOR, color_changeHandler, DesignEvent);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
+      addContextListener(UserEvent.SELECT_TPL, user_selectTemplateHandler);
     }
+    
     
     private function user_gotoStepHandler(e:UserEvent):void {
       view.highlight(e.step);
+    }
+    private function user_selectTemplateHandler(e:UserEvent):void {
+      view.show(assets.templates[e.template]);
     }
     private function view_clickHanaler(e:MouseEvent):void {
       var index:uint = Sprite(e.target).parent.getChildIndex(Sprite(e.target)),

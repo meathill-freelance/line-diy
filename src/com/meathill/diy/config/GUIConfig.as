@@ -13,6 +13,14 @@ package com.meathill.diy.config {
   import com.meathill.diy.component.wizard.WizardMediator;
   import com.meathill.diy.mediator.PreviewMediator;
   import com.meathill.diy.mediator.WelcomeMediator;
+  import com.meathill.diy.popup.mediator.BuyMediator;
+  import com.meathill.diy.popup.mediator.HaibaoMediator;
+  import com.meathill.diy.popup.mediator.SaveMediator;
+  import com.meathill.diy.popup.mediator.ShareMediator;
+  import com.meathill.diy.popup.view.BuyPopup;
+  import com.meathill.diy.popup.view.HaibaoPopup;
+  import com.meathill.diy.popup.view.SavePopup;
+  import com.meathill.diy.popup.view.SharePopup;
   import com.meathill.diy.view.DIYView;
   import com.meathill.diy.view.Preview;
   import com.meathill.diy.view.Spinner;
@@ -39,6 +47,7 @@ package com.meathill.diy.config {
     
     public function configure():void {
       mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
+      
       mediatorMap.map(Wizard).toMediator(WizardMediator);
       mediatorMap.map(Options).toMediator(OptionsMediator);
       mediatorMap.map(Preview).toMediator(PreviewMediator);
@@ -46,6 +55,11 @@ package com.meathill.diy.config {
       mediatorMap.map(BottomButtonGroup).toMediator(BottomButtonGroupMediator);
       mediatorMap.map(RightBar).toMediator(RightBarMediator);
       mediatorMap.map(Footer).toMediator(FooterMediator);
+      
+      mediatorMap.map(SavePopup).toMediator(SaveMediator);
+      mediatorMap.map(BuyPopup).toMediator(BuyMediator);
+      mediatorMap.map(SharePopup).toMediator(ShareMediator);
+      mediatorMap.map(HaibaoPopup).toMediator(HaibaoMediator);
       
       contextView.view.addChild(new Spinner());
     }

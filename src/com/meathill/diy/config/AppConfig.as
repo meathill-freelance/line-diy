@@ -1,8 +1,13 @@
 package com.meathill.diy.config {
+  import com.meathill.diy.controller.BuyCommand;
   import com.meathill.diy.controller.GotoStepCommand;
   import com.meathill.diy.controller.PreloadAssetsCommand;
+  import com.meathill.diy.controller.SaveCommand;
+  import com.meathill.diy.controller.SelectColorCommand;
+  import com.meathill.diy.controller.SelectTemplateCommand;
   import com.meathill.diy.controller.ShowWelcomeCommand;
   import com.meathill.diy.controller.StartDiyCommand;
+  import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
@@ -50,6 +55,10 @@ package com.meathill.diy.config {
       commandMap.map(SystemEvent.ASSETS_READY).toCommand(ShowWelcomeCommand);
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
       commandMap.map(UserEvent.GO_TO_STEP).toCommand(GotoStepCommand);
+      commandMap.map(UserEvent.SELECT_TPL).toCommand(SelectTemplateCommand);
+      commandMap.map(UserEvent.SAVE).toCommand(SaveCommand);
+      commandMap.map(UserEvent.BUY).toCommand(BuyCommand);
+      commandMap.map(DesignEvent.SELECT_COLOR).toCommand(SelectColorCommand);
       
       loadConfig();
     }

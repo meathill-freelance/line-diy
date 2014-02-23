@@ -12,24 +12,26 @@ package com.meathill.diy.model
     [Inject]
     public var eventDispatcher:IEventDispatcher;
     
-    private var store:Object;
+    private var _store:Object;
     
     public function DIYModel() {
-      store = { };
+      _store = { };
     }
     
-    public function get(key:String):* {
-      return store[key];
+    public function get store():Object {
+      return _store;
     }
-    public function set(vo:Object, options:Object):void {
-      ObjectOperator.extend(store, vo);
+    
+    public function getValue(key:String):* {
+      return _store[key];
+    }
+    public function setValue(vo:Object, options:Object):void {
+      ObjectOperator.extend(_store, vo);
       if (!options.silent) {
         eventDispatcher.dispatchEvent(new Event(Event.CHANGE));
       }
     }
-    public function toJSON():String {
-      return JSON.stringify(store);
-    }
+    
   }
 
 }
