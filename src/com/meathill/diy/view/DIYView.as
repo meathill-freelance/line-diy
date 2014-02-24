@@ -52,7 +52,7 @@ package com.meathill.diy.view
       addChild(rightBar);
       
       footer = new Footer(stage.stageWidth);
-      footer.y = stage.stageHeight - 160;
+      footer.y = stage.stageHeight - Footer.HEIGHT;
       addChild(footer);
     }
     

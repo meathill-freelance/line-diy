@@ -16,6 +16,8 @@ package com.meathill.diy.component.options
    */
   public class Options extends Sprite 
   {
+    public static const WIDTH:uint = 200;
+    
     private var label:TextField;
     private var components:Vector.<Sprite>
     private var prevButton:Button;
@@ -64,7 +66,7 @@ package com.meathill.diy.component.options
       if (hasNext) {
         if (!nextButton) {
           nextButton = new Button('下一步');
-          nextButton.x = 120;
+          nextButton.x = WIDTH - nextButton.width;
           nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
         }
         nextButton.y = prevButton && contains(prevButton) ? prevButton.y : height + 20;

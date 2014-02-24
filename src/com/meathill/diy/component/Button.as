@@ -42,7 +42,7 @@ package com.meathill.diy.component
       label = new TextField();
       label.defaultTextFormat = textFormat;
       label.x = 12;
-      label.y = 10;
+      label.y = 5;
       label.mouseEnabled = false;
       label.autoSize = TextFieldAutoSize.LEFT;
       label.text = labelText;
@@ -55,7 +55,7 @@ package com.meathill.diy.component
       graphics.endFill();
     }
     private function drawBG():void {
-      draw(bgColor, borderColor, label.width + 24, label.height + 16);
+      draw(bgColor, borderColor, label.width + 24, label.height + 6);
     }
     
     protected function resetAttr():void {
@@ -71,7 +71,7 @@ package com.meathill.diy.component
       drawBG();
     }
     protected function rollOverHandler(event:MouseEvent):void {
-      draw(hoverBgColor, hoverBorderColor, label.width + 24, label.height + 16);
+      draw(hoverBgColor, hoverBorderColor, label.width + 24, label.height + 6);
     }
   }
 

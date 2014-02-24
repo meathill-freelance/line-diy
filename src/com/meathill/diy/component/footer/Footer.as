@@ -16,7 +16,7 @@ package com.meathill.diy.component.footer
    */
   public class Footer extends Sprite 
   {
-    public static const HEIGHT:uint = 160;
+    public static const HEIGHT:uint = 100;
     
     private var haibaoButton:Button;
     private var shareButton:Button;
@@ -36,8 +36,8 @@ package com.meathill.diy.component.footer
     }
     private function layout():void {
       var socialTxt:TextField = new TextField();
-      socialTxt.defaultTextFormat = Typography.getTextFormat(Typography.LEAD);
-      socialTxt.x = socialTxt.y = 10;
+      socialTxt.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {color: 0xFFFFFF});
+      socialTxt.x = 30;
       socialTxt.autoSize = TextFieldAutoSize.LEFT;
       socialTxt.text = '分享给大家：';
       addChild(socialTxt);
@@ -45,29 +45,29 @@ package com.meathill.diy.component.footer
       var haibaoTxt:TextField = new TextField();
       haibaoTxt.defaultTextFormat = socialTxt.defaultTextFormat;
       haibaoTxt.x = 300;
-      haibaoTxt.y = 10;
       haibaoTxt.autoSize = TextFieldAutoSize.LEFT;
       haibaoTxt.text = '制作海报';
       addChild(haibaoTxt);
       haibaoButton = new Button('开始');
       haibaoButton.x = 300;
-      haibaoButton.y = 60;
       haibaoButton.addEventListener(MouseEvent.CLICK, haibaoBtn_clickHandler);
       addChild(haibaoButton);
       
       var shareTxt:TextField = new TextField();
       shareTxt.x = 600;
-      shareTxt.y = 10;
       shareTxt.autoSize = TextFieldAutoSize.LEFT;
+      shareTxt.defaultTextFormat = socialTxt.defaultTextFormat;
       shareTxt.text = '贡献到XLine设计库';
       addChild(shareTxt);
       shareButton = new Button('开始');
       shareButton.x = 600;
-      shareButton.y = 60;
       shareButton.addEventListener(MouseEvent.CLICK, shareButton_clickHandler);
       addChild(shareButton);
       
+      socialTxt.y = haibaoTxt.y = shareTxt.y = 20;
       socialTxt.mouseEnabled = haibaoTxt.mouseEnabled = shareTxt.mouseEnabled = false;
+      
+      haibaoButton.y = shareButton.y = 50;
     }
     
     

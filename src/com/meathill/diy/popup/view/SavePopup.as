@@ -1,29 +1,19 @@
 package com.meathill.diy.popup.view 
 {
-  import com.meathill.diy.popup.IPopup;
+  import com.meathill.diy.popup.AbstractPopup;
 	import flash.display.Sprite;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class SavePopup extends Sprite implements IPopup
+  public class SavePopup extends AbstractPopup
   {
     
     public function SavePopup() {
       super();
 			
     }
-    
-    /* INTERFACE com.meathill.diy.popup.IPopup */
-    
-    public function show():void {
-      
-    }
-    public function hide():void {
-      
-    }
-    
   }
 
 }

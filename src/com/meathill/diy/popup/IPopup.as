@@ -7,8 +7,8 @@ package com.meathill.diy.popup
    */
   public interface IPopup 
   {
-    function show():void;
-    function hide():void;
+    function beforeShow():void;
+    function afterHide():void;
   }
   
 }

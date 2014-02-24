@@ -25,9 +25,9 @@ package com.meathill.diy.model
     public function getValue(key:String):* {
       return _store[key];
     }
-    public function setValue(vo:Object, options:Object):void {
-      ObjectOperator.extend(_store, vo);
-      if (!options.silent) {
+    public function setValue(key:String, value:*, options:Object = null):void {
+      _store[key] = value;
+      if (options && !options.silent) {
         eventDispatcher.dispatchEvent(new Event(Event.CHANGE));
       }
     }
