@@ -29,6 +29,13 @@
       "type": "color",
       "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
       "currColor": "ffffff"
+    },
+    {
+      "title": "号码框",
+      "type": "number",
+      "asset": "../mocks/number.swf",
+      "length": 4,
+      "font": "Microsoft Yahei"
     }
   ]
 }
