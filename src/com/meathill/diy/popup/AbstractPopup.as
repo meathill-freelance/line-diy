@@ -16,13 +16,13 @@ package com.meathill.diy.popup
   {
     protected var hasConfirm:Boolean;
     protected var hasCancel:Boolean;
-    
+    protected var title:String;
     
     public function AbstractPopup(hasConfirm:Boolean = true, hasCancel:Boolean = true) {
       this.hasCancel = hasCancel;
       this.hasConfirm = hasConfirm;
-      draw();
 			layout();
+      draw();
       
       addEventListener(Event.ADDED_TO_STAGE, addedHandler);
     }
@@ -51,6 +51,8 @@ package com.meathill.diy.popup
       title.height = 30;
       title.x = title.y = 10;
       title.autoSize = TextFieldAutoSize.LEFT;
+      title.text = title;
+      title.mouseEnabled = false;
       addChild(title);
       
       if (hasCancel) {

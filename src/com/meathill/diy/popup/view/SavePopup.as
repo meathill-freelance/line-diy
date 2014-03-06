@@ -10,9 +10,8 @@ package com.meathill.diy.popup.view
   public class SavePopup extends AbstractPopup
   {
     
-    public function SavePopup() {
-      super();
-			
+    override protected function createContent():void {
+      super.createContent();
     }
   }
 

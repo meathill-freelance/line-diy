@@ -9,25 +9,25 @@
     {
       "title": "正面",
       "type": "color",
-      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
       "currColor": "ffffff"
     },
     {
       "title": "背面",
       "type": "color",
-      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
       "currColor": "ffffff"
     },
     {
       "title": "肩部",
       "type": "color",
-      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
       "currColor": "ffffff"
     },
     {
       "title": "侧面",
       "type": "color",
-      "colors": ["428bca", "5cb85c", "5bc0de", "f0ad4e", "d9534f", "ffffff"],
+      "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
       "currColor": "ffffff"
     },
     {
