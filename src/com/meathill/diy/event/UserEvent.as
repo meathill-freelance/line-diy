@@ -18,6 +18,7 @@ package com.meathill.diy.event
     static public const NEXT_TPL:String = "nextTpl";
     static public const PREV_TPL:String = "prevTpl";
     
+    static public const CONFIRM:String = "confirm";
     static public const BUY:String = "buy";
     static public const SAVE:String = "save";
     static public const HAIBAO:String = "haibao";
@@ -25,6 +26,7 @@ package com.meathill.diy.event
     
     private var _template:uint;
     private var _step:uint = 0;
+    private var _name:String = '';
     
     public function UserEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
     {
@@ -44,6 +46,13 @@ package com.meathill.diy.event
     }
     public function set template(value:uint):void {
       _template = value;
+    }
+    
+    public function get name():String {
+      return _name;
+    }
+    public function set name(value:String):void {
+      _name = value;
     }
   }
 

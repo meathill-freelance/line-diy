@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'2014/3/4'</value>
+      <value>'2014/3/9'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -38,6 +38,7 @@
     <library-path append="true">
       <path-element>C:\Users\路佳\Documents\FlashProjects\DIY\libs\robotlegs-framework-v2.1.0.swc</path-element>
       <path-element>C:\Users\路佳\Documents\FlashProjects\DIY\libs\greensock.swc</path-element>
+      <path-element>C:\Users\路佳\Documents\FlashProjects\DIY\libs\framework.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
@@ -46,7 +47,7 @@
   <default-background-color>#333333</default-background-color>
   <default-frame-rate>30</default-frame-rate>
   <default-size>
-    <width>800</width>
-    <height>600</height>
+    <width>1170</width>
+    <height>800</height>
   </default-size>
 </flex-config>

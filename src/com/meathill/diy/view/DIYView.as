@@ -5,8 +5,8 @@ package com.meathill.diy.view
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.rightBar.RightBar;
   import com.meathill.diy.component.wizard.Wizard;
-  import com.meathill.diy.model.vo.SingleStepConfig;
-	import flash.display.Sprite;
+  import flash.display.BitmapData;
+  import flash.display.Sprite;
   import flash.events.Event;
 	
 	/**
@@ -24,6 +24,12 @@ package com.meathill.diy.view
     
     public function DIYView() {
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+    }
+    
+    public function get image():BitmapData {
+      var bmpd:BitmapData = new BitmapData(preview.width, preview.height);
+      bmpd.draw(preview);
+      return bmpd;
     }
     
     private function layout():void {

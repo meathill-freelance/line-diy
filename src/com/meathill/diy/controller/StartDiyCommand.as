@@ -2,9 +2,8 @@ package com.meathill.diy.controller
 {
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.view.DIYView;
-  import com.meathill.diy.view.WelcomeView;
   import flash.events.IEventDispatcher;
-	import robotlegs.bender.bundles.mvcs.Command;
+  import robotlegs.bender.bundles.mvcs.Command;
   import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.framework.api.IInjector;
 	
@@ -23,11 +22,12 @@ package com.meathill.diy.controller
     [Inject]
     public var eventDispatcher:IEventDispatcher;
     
+    [Inject]
+    public var diy:DIYView;
+    
     override public function execute():void {
       contextView.view.removeChildAt(0);
       
-      var diy:DIYView = new DIYView();
-      injector.map(DIYView).toValue(diy);
       contextView.view.addChild(diy);
       
       var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);

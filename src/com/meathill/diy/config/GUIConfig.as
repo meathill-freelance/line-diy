@@ -64,6 +64,8 @@ package com.meathill.diy.config {
       mediatorMap.map(SharePopup).toMediator(ShareMediator);
       mediatorMap.map(HaibaoPopup).toMediator(HaibaoMediator);
       
+      injector.map(DIYView).asSingleton();
+      
       contextView.view.addChild(new Spinner());
     }
     

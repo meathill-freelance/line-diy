@@ -15,11 +15,8 @@ package com.meathill.diy.config {
   import com.meathill.diy.popup.PopupManager;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.service.ServerManager;
-  import flash.events.Event;
   import flash.events.IEventDispatcher;
-  import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
-  import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
   import robotlegs.bender.framework.api.IConfig;
   import robotlegs.bender.framework.api.IInjector;
 	
@@ -64,7 +61,7 @@ package com.meathill.diy.config {
     }
     
     private function loadConfig():void {
-      server.add('../mocks/init.json', null, config_loadCompleteHandler);
+      server.add(ServerManager.INIT, null, config_loadCompleteHandler);
     }
     
     private function config_loadCompleteHandler(data:String):void {

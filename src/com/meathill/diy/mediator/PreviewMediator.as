@@ -4,10 +4,11 @@ package com.meathill.diy.mediator
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.service.AssetsManager;
+  import com.meathill.diy.utils.ColorMaker;
   import com.meathill.diy.view.Preview;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
-	import robotlegs.bender.bundles.mvcs.Mediator;
+  import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
    * ...
@@ -48,7 +49,7 @@ package com.meathill.diy.mediator
       dispatch(event);
     }
     private function color_changeHandler(e:DesignEvent):void {
-      view.setColor(e.color, e.piece);
+      view.setColor(ColorMaker.color2rgb(e.color, 255), e.piece);
     }
     
   }

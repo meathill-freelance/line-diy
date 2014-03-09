@@ -5,6 +5,9 @@
     "../mocks/cloth.swf",
     "../mocks/cloth2.swf"
   ],
+  "assets": {
+    "number": "../mocks/number.swf",
+  },
   "steps": [
     {
       "title": "正面",
@@ -31,11 +34,10 @@
       "currColor": "ffffff"
     },
     {
-      "title": "号码框",
+      "title": "号码",
       "type": "number",
-      "asset": "../mocks/number.swf",
-      "length": 4,
-      "font": "Microsoft Yahei"
+      "asset": "number",
+      "length": 2
     }
   ]
 }

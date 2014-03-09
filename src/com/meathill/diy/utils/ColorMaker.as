@@ -6,11 +6,11 @@ package com.meathill.diy.utils
    */
   public class ColorMaker 
   {
-    public static function color2rgb(color:uint):Object {
+    public static function color2rgb(color:uint, percent:uint = 1):Object {
       return {
-        r: color >> 16 & 0xFF,
-        g: color >> 8 & 0xFF,
-        b: color & 0xFF
+        r: (color >> 16 & 0xFF) / percent,
+        g: (color >> 8 & 0xFF) / percent,
+        b: (color & 0xFF) / percent
       };
     }
     public static function rgb2color(rgb:Object):uint {

@@ -19,7 +19,7 @@ package com.meathill.diy.component
       super(label);
     }
     
-    override protected function draw(bg:uint, border:uint, width:uint, height:uint):void {
+    override protected function draw(bg:uint, border:uint, width:uint, height:uint, bgAlpha:Number = 1, hasBorder:Boolean = true):void {
       graphics.beginFill(bg);
       graphics.lineStyle(0, border);
       graphics.drawRoundRectComplex(0.5, 0.5, width, height, lt, rt, lb, rb);
