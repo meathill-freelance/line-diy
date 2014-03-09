@@ -18,10 +18,11 @@ package com.meathill.diy.config
         leading: 4
       },
       lead: {
-        font: '宋体',
-        size: 21,
+        font: '微软雅黑',
+        size: 20,
         color: 0x333333,
-        leading: 6
+        leading: 6,
+        bold: true
       }
     };
     public static function getTextFormat(type:String, init:Object = null):TextFormat {

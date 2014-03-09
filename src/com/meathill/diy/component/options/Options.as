@@ -2,12 +2,12 @@ package com.meathill.diy.component.options
 {
   import com.meathill.diy.component.Button;
   import com.meathill.diy.component.colorCard.ColorCard;
-  import com.meathill.diy.component.number.TeamNumber;
+  import com.meathill.diy.component.number.SquadNumber;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
-	import flash.display.Sprite;
+  import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.text.TextField;
 	
@@ -82,7 +82,7 @@ package com.meathill.diy.component.options
           break;
           
         case 'number':
-          return new TeamNumber(config);
+          return new SquadNumber(config);
           break;
           
         default:

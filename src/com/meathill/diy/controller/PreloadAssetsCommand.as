@@ -28,6 +28,9 @@ package com.meathill.diy.controller
       for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
         assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);
       }
+      for (var key:String in cloth.assets) {
+        assets.add(key, cloth.assets[key]);
+      }
       assets.load();
     }
     

@@ -18,11 +18,13 @@ package com.meathill.diy.service
     private var _templates:Vector.<Sprite>;
     private var queue:Array;
     private var isLoading:Boolean = false;
+    private var assets:Object;
     
     public function AssetsManager() 
     {
       queue = [];
       _templates = new Vector.<Sprite>();
+      assets = { };
     }
     
     public function get templates():Vector.<Sprite> {
@@ -34,6 +36,9 @@ package com.meathill.diy.service
         type: type,
         url: url
       });
+    }
+    public function getAsset(key:String):Sprite {
+      return assets[key];
     }
     public function load():void {
       if (isLoading) {
@@ -49,6 +54,7 @@ package com.meathill.diy.service
       loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
       loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
       loader.load(new URLRequest(queue[0].url));
+      trace('load: ', queue[0].url);
     }
     
     
@@ -57,6 +63,10 @@ package com.meathill.diy.service
       switch(queue[0].type) {
         case TEMPLATE:
           _templates.push(mc);
+          break;
+          
+        default:
+          assets[queue[0].type] = mc;
           break;
       }
       queue.shift();

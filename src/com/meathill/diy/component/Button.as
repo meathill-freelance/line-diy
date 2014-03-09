@@ -17,6 +17,8 @@ package com.meathill.diy.component
    */
   public class Button extends Sprite 
   {
+    protected var buttonWidth:uint = 0;
+    protected var buttonHeight:uint = 0;
     protected var label:TextField;
     protected var icon:Shape;
     protected var labelText:String = '';
@@ -56,20 +58,25 @@ package com.meathill.diy.component
       label = new TextField();
       label.defaultTextFormat = textFormat;
       label.x = 12 + (icon ? icon.width + 10 : 0);
-      label.y = 5;
+      label.y = 8;
       label.mouseEnabled = false;
       label.autoSize = TextFieldAutoSize.LEFT;
       label.text = labelText;
       addChild(label);
     }
     protected function draw(bg:uint, border:uint, width:uint, height:uint, bgAlpha:Number = 1, hasBorder:Boolean = true):void {
+      graphics.clear();
       graphics.beginFill(bg, bgAlpha);
-      graphics.lineStyle(0, border);
+      if (hasBorder) {
+        graphics.lineStyle(0, border);
+      }
       graphics.drawRoundRect(0.5, 0.5, width, height, 6);
       graphics.endFill();
     }
-    private function drawBG():void {
-      draw(bgColor, borderColor, label.width + 24, label.height + 6, bgAlpha, hasBorder);
+    protected function drawBG():void {
+      buttonWidth = 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
+      buttonHeight = 12 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
+      draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
     }
     
     protected function resetAttr():void {
@@ -82,10 +89,10 @@ package com.meathill.diy.component
       this.filters = null;
     }
     private function rollOutHandler(e:MouseEvent):void {
-      drawBG();
+      draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
     }
     protected function rollOverHandler(event:MouseEvent):void {
-      draw(hoverBgColor, hoverBorderColor, label.width + 24, label.height + 6, hoverBgAlpha, hasHoverBorder);
+      draw(hoverBgColor, hoverBorderColor, buttonWidth, buttonHeight, hoverBgAlpha, hasHoverBorder);
     }
   }
 

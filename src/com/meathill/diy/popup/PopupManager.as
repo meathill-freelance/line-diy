@@ -44,7 +44,7 @@ package com.meathill.diy.popup
         return;
       }
       cover.graphics.clear();
-      cover.graphics.beginFill(0, .8);
+      cover.graphics.beginFill(0, .6);
       cover.graphics.drawRect(0, 0, cover.stage.stageWidth, cover.stage.stageHeight);
       cover.graphics.endFill();
     }

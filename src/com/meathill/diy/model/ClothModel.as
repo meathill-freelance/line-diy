@@ -12,6 +12,7 @@ package com.meathill.diy.model
     private var _steps:Vector.<SingleStepConfig>
     private var _template:uint;
     private var _templates:Vector.<String>;
+    private var _assets:Object;
     
     public function get step():uint {
       return _step;
@@ -25,6 +26,9 @@ package com.meathill.diy.model
     public function get templates():Vector.<String> {
       return _templates;
     }
+    public function get assets():Object {
+      return _assets;
+    }
     
     public function get template():uint {
       return _template;
@@ -32,6 +36,7 @@ package com.meathill.diy.model
     public function set template(value:uint):void {
       _template = value;
     }
+    
     
     public function parse(data:String):void {
       store = JSON.parse(data);
@@ -43,6 +48,9 @@ package com.meathill.diy.model
       for (i = 0, len = store.templates.length; i < len; i++) {
         _templates.push(store.templates[i]);
       }
+      
+      _assets = store.assets;
+      
     }
     
     

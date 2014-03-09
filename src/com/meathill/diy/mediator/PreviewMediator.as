@@ -31,10 +31,10 @@ package com.meathill.diy.mediator
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
       
       addContextListener(DesignEvent.SELECT_COLOR, color_changeHandler, DesignEvent);
+      addContextListener(DesignEvent.SET_SQUAD_NUMBER, squadNumber_changeHandler, DesignEvent);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
       addContextListener(UserEvent.SELECT_TPL, user_selectTemplateHandler);
     }
-    
     
     private function user_gotoStepHandler(e:UserEvent):void {
       view.highlight(e.step);
@@ -48,10 +48,13 @@ package com.meathill.diy.mediator
       event.step = index;
       dispatch(event);
     }
+    
     private function color_changeHandler(e:DesignEvent):void {
       view.setColor(ColorMaker.color2rgb(e.color, 255), e.piece);
     }
-    
+    private function squadNumber_changeHandler(e:DesignEvent):void {
+      view.setNumber(e.number, assets.getAsset(e.asset), cloth.step);
+    }
   }
 
 }

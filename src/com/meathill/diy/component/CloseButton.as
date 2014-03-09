@@ -7,13 +7,6 @@ package com.meathill.diy.component
    */
   public class CloseButton extends Button {
     
-    public function CloseButton() {
-      bgColor = 0;
-      hoverBgAlpha = 0.6;
-      hasBorder = hasHoverBorder = false;
-      super('');
-    }
-    
     override protected function createIcon():void {
       icon = new Shape();
       icon.graphics.lineStyle(2, 0x666666);
@@ -21,11 +14,22 @@ package com.meathill.diy.component
       icon.graphics.lineTo(9, 9);
       icon.graphics.moveTo(9, 1);
       icon.graphics.lineTo(1, 9);
-      icon.x = 10;
-      icon.y = 10;
+      icon.x = 6;
+      icon.y = 6;
       addChild(icon);
     }
-    
+    override protected function drawBG():void {
+      buttonWidth = 21;
+      buttonHeight = 21;
+      draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
+    }
+    override protected function resetAttr():void {
+      bgAlpha = 0;
+      hoverBgAlpha = 1;
+      hoverBgColor = 0xFFFFFF;
+      hasBorder = hasHoverBorder = false;
+      labelText = '';
+    }
   }
 
 }

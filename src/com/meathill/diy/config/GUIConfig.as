@@ -5,8 +5,8 @@ package com.meathill.diy.config {
   import com.meathill.diy.component.colorCard.ColorCardMediator;
   import com.meathill.diy.component.footer.Footer;
   import com.meathill.diy.component.footer.FooterMediator;
-  import com.meathill.diy.component.number.TeamNumber;
-  import com.meathill.diy.component.number.TeamNumberMediator;
+  import com.meathill.diy.component.number.SquadNumber;
+  import com.meathill.diy.component.number.SquadNumberMediator;
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.options.OptionsMediator;
   import com.meathill.diy.component.rightBar.RightBar;
@@ -54,7 +54,7 @@ package com.meathill.diy.config {
       mediatorMap.map(Options).toMediator(OptionsMediator);
       mediatorMap.map(Preview).toMediator(PreviewMediator);
       mediatorMap.map(ColorCard).toMediator(ColorCardMediator);
-      mediatorMap.map(TeamNumber).toMediator(TeamNumberMediator);
+      mediatorMap.map(SquadNumber).toMediator(SquadNumberMediator);
       mediatorMap.map(BottomButtonGroup).toMediator(BottomButtonGroupMediator);
       mediatorMap.map(RightBar).toMediator(RightBarMediator);
       mediatorMap.map(Footer).toMediator(FooterMediator);

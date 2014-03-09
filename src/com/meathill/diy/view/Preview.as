@@ -25,6 +25,7 @@ package com.meathill.diy.view
         removeChildAt(0);
       }
       cloth = mc;
+      cloth.mouseEnabled = cloth.useHandCursor = true;
       addChild(cloth);
     }
     public function setColor(color:Object, step:uint):void {
@@ -35,6 +36,13 @@ package com.meathill.diy.view
       matrix = matrix.concat([0, 0, 0, 1, 0]);
       var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
       piece.filters = [filter];
+    }
+    public function setNumber(number:uint, asset:Sprite, step:uint):void {
+      var piece:Sprite = Sprite(cloth.getChildAt(step));
+      while (piece.numChildren) {
+        piece.removeChildAt(0);
+      }
+      
     }
     public function highlight(step:uint):void {
       var tween:TweenMax = TweenMax.to(cloth.getChildAt(step), 0.3, {
@@ -51,6 +59,7 @@ package com.meathill.diy.view
         }
       });
     }
+    
     
   }
 

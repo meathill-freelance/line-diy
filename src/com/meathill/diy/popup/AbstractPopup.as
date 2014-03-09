@@ -25,13 +25,14 @@ package com.meathill.diy.popup
     protected var cancelLable:String = '取消';
     protected var title:String = '窗体';
     protected var popupWidth:uint = 600;
-    protected var headerHeight:uint = 56;
+    protected var headerHeight:uint = 50;
     protected var contentHeight:uint = 300;
-    protected var footerHeight:uint = 74;
+    protected var footerHeight:uint = 64;
     
     public function AbstractPopup(hasConfirm:Boolean = true, hasCancel:Boolean = true) {
       this.hasCancel = hasCancel;
       this.hasConfirm = hasConfirm;
+      resetAttr();
 			layout();
       draw();
       this.filters = [FILTER];
@@ -54,8 +55,8 @@ package com.meathill.diy.popup
     }
     protected function draw():void {
       graphics.beginFill(0xF0F0F0);
-      graphics.lineStyle(1, 0x999999);
-      graphics.drawRoundRectComplex(0, 0, popupWidth, headerHeight, 10, 10, 0, 0);
+      graphics.lineStyle(1, 0xCCCCCC);
+      graphics.drawRoundRectComplex(0.5, 0.5, popupWidth, headerHeight, 10, 10, 0, 0);
       if (hasConfirm || hasCancel) {
         graphics.drawRect(0, headerHeight, popupWidth, contentHeight);
         graphics.drawRoundRectComplex(0, headerHeight + contentHeight, popupWidth, footerHeight, 0, 0, 10, 10);
@@ -68,7 +69,8 @@ package com.meathill.diy.popup
       var title:TextField = new TextField();
       title.defaultTextFormat = Typography.getTextFormat(Typography.LEAD);
       title.height = 30;
-      title.x = title.y = 10;
+      title.x = 12;
+      title.y = 10;
       title.autoSize = TextFieldAutoSize.LEFT;
       title.text = this.title;
       title.mouseEnabled = false;
@@ -76,8 +78,8 @@ package com.meathill.diy.popup
       
       if (hasCancel) {
         var closeButton:CloseButton = new CloseButton();
-        closeButton.x = popupWidth - 10 - closeButton.width;
-        closeButton.y = 10;
+        closeButton.x = popupWidth - 12 - closeButton.width;
+        closeButton.y = 12;
         closeButton.addEventListener(MouseEvent.CLICK, closeButton_clickHandler);
         addChild(closeButton);
       }
@@ -86,20 +88,25 @@ package com.meathill.diy.popup
       
       if (hasCancel) {
         var cancelButton:Button = new Button(cancelLable);
-        cancelButton.y = 20;
-        cancelButton.x = popupWidth - 20 - cancelButton.width;
+        cancelButton.y = 15 + contentHeight + headerHeight;
+        cancelButton.x = popupWidth - 15 - cancelButton.width;
         cancelButton.addEventListener(MouseEvent.CLICK, cancelButton_clickHandler);
+        addChild(cancelButton);
       }
       if (hasConfirm) {
         var confirmButton:PrimaryButton = new PrimaryButton(confirmLable);
-        confirmButton.y = 20;
-        confirmButton.x = hasCancel ? cancelButton.x : popupWidth - 20 - confirmButton.width;
+        confirmButton.y = 15 + contentHeight + headerHeight;
+        confirmButton.x = (hasCancel ? cancelButton.x : popupWidth) - 15 - confirmButton.width;
         confirmButton.addEventListener(MouseEvent.CLICK, confirmButton_clickHandler);
+        addChild(confirmButton);
       }
     }
     protected function remove():void {
       parent.removeChild(this);
       afterHide();
+    }
+    protected function resetAttr():void {
+      
     }
     
     private function cancelButton_clickHandler(e:MouseEvent):void {
