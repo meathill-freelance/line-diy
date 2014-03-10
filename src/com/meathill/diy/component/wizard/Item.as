@@ -35,7 +35,7 @@ package com.meathill.diy.component.wizard
       this.config = config;
       buttonMode = useHandCursor = true;
       mouseChildren = false;
-      _status = config.type === 'color' ? 1 : 0;
+      _status = 1;
       
       draw(bgColor, borderColor);
       createTextField(index);

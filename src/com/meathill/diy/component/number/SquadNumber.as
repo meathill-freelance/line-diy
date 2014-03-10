@@ -1,15 +1,13 @@
 package com.meathill.diy.component.number 
 {
+  import com.meathill.diy.component.Button;
+  import com.meathill.diy.component.Input;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
-  import flash.display.Shape;
   import flash.display.Sprite;
-  import flash.events.FocusEvent;
+  import flash.events.Event;
   import flash.events.MouseEvent;
-  import flash.events.TextEvent;
-  import flash.filters.DropShadowFilter;
-  import flash.text.TextField;
   import flash.text.TextFormatAlign;
 	
 	/**
@@ -18,58 +16,60 @@ package com.meathill.diy.component.number
    */
   public class SquadNumber extends Sprite 
   {
-    private var config:SingleStepConfig;
-    private var numberInput:TextField;
-    private var bgShape:Shape;
+    private var _config:SingleStepConfig;
+    private var numberInput:Input;
+    private var asset:Sprite;
+    private var preview:Sprite;
+    private var prevButton:Button;
+    private var nextButton:Button;
     
     public function SquadNumber(config:SingleStepConfig) {
-      this.config = config;
-      draw();
+      _config = config;
       layout();
-      
-      addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
-      addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
     }
     
-    
-    private function draw():void {
-      bgShape = new Shape();
-      bgShape.graphics.beginFill(0xFFFFFF);
-      bgShape.graphics.drawRoundRect(0, 0, 180, 30, 4);
-      bgShape.graphics.endFill();
-      bgShape.filters = [new DropShadowFilter(2, 45, 0, 0.25, 4, 4, 1, 1, true)];
-      addChild(bgShape);
+    public function get config():SingleStepConfig {
+      return _config;
     }
+    public function set asset(value:Sprite):void {
+      asset = value;
+    }
+    
     private function layout():void {
-      numberInput = new TextField();
-      numberInput.x = 15;
-      numberInput.y = 15;
-      numberInput.maxChars = config.length;
-      numberInput.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { align: TextFormatAlign.CENTER } );
-      numberInput.addEventListener(FocusEvent.FOCUS_IN, numberInput_focusInHandler);
-      numberInput.addEventListener(FocusEvent.FOCUS_OUT, numberInput_focusOutHandler);
-      numberInput.addEventListener(TextEvent.TEXT_INPUT, numberInput_changeHandler);
+      // 输入队服号码
+      var init:Object = {
+        width: 200,
+        height: 45,
+        maxLength: 2,
+        restrict: '0-9',
+        text: _config.curr.toString(),
+        textFormat: Typography.getTextFormat(Typography.LEAD, { align: TextFormatAlign.CENTER } )
+      }
+      numberInput = new Input(init);
+      numberInput.addEventListener(Event.CHANGE, numberInput_changeHandler);
       addChild(numberInput);
+      
+      // 选择号码样式
+      prevButton = new Button('<');
+      prevButton.y = 80;
+      prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
+      addChild(prevButton);
+      nextButton = new Button('>');
+      nextButton.x = 200 - nextButton.width;
+      nextButton.y = 80;
+      nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
+      addChild(nextButton);
+      preview = new Sprite();
+      preview.x = prevButton.width + 10;
+      preview.y = 60;
+      addChild(preview);
     }
     
-    
-    private function numberInput_changeHandler(e:TextEvent):void {
+    private function numberInput_changeHandler(e:Event):void {
       var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
-      event.number = uint(numberInput.text);
-      event.asset = config.asset;
+      event.number = uint(numberInput.value);
+      event.asset = _config.asset;
       dispatchEvent(event);
-    }
-    private function numberInput_focusInHandler(e:FocusEvent):void {
-      
-    }
-    private function numberInput_focusOutHandler(e:FocusEvent):void {
-      
-    }
-    private function rollOverHandler(e:MouseEvent):void {
-      
-    }
-    private function rollOutHandler(e:MouseEvent):void {
-      
     }
     
   }

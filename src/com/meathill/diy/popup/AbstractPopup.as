@@ -54,7 +54,7 @@ package com.meathill.diy.popup
       
     }
     protected function draw():void {
-      graphics.beginFill(0xF0F0F0);
+      graphics.beginFill(0xFFFFFF);
       graphics.lineStyle(1, 0xCCCCCC);
       graphics.drawRoundRectComplex(0.5, 0.5, popupWidth, headerHeight, 10, 10, 0, 0);
       if (hasConfirm || hasCancel) {

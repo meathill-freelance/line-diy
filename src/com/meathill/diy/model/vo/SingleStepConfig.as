@@ -7,6 +7,7 @@ package com.meathill.diy.model.vo
    */
   public class SingleStepConfig 
   {
+    private var _curr:uint;
     private var _type:String;
     private var _title:String;
     private var _colors:Array;
@@ -19,6 +20,7 @@ package com.meathill.diy.model.vo
       _colors = src.colors
       _asset = src.asset;
       _length = src.length;
+      _curr = src.curr;
     }
     
     public function get type():String {
@@ -35,6 +37,9 @@ package com.meathill.diy.model.vo
     }
     public function get length():uint {
       return _length;
+    }
+    public function get curr():uint {
+      return _curr;
     }
     
   }

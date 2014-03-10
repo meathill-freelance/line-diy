@@ -12,21 +12,24 @@ package com.meathill.diy.model
     [Inject]
     public var eventDispatcher:IEventDispatcher;
     
-    private var _store:Object;
+    private var _squadNumber:uint;
     
     public function DIYModel() {
-      _store = { };
+      
     }
     
-    public function get store():Object {
-      return _store;
+    public function get squadNumber():uint {
+      return _squadNumber;
+    }
+    public function set squadNumber(value:uint):void {
+      _squadNumber = value;
     }
     
     public function getValue(key:String):* {
-      return _store[key];
+      return this[key];
     }
     public function setValue(key:String, value:*, options:Object = null):void {
-      _store[key] = value;
+      this[key] = value;
       if (options && !options.silent) {
         eventDispatcher.dispatchEvent(new Event(Event.CHANGE));
       }

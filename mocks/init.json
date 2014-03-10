@@ -38,7 +38,8 @@
       "title": "号码",
       "type": "number",
       "asset": "number",
-      "length": 2
+      "length": 2,
+      "curr": 23
     }
   ]
 }
