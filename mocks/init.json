@@ -39,7 +39,10 @@
       "type": "number",
       "asset": "number",
       "length": 2,
-      "curr": 23
+      "number": 23,
+      "style": 0,
+      "width": 200,
+      "height": 100
     }
   ]
 }

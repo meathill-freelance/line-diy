@@ -3,14 +3,13 @@ package com.meathill.diy.controller
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
-  import com.meathill.diy.model.DIYModel;
   import com.meathill.diy.service.ServerManager;
   import com.meathill.diy.view.DIYView;
   import flash.display.BitmapData;
   import flash.events.IEventDispatcher;
   import flash.utils.ByteArray;
   import mx.graphics.codec.JPEGEncoder;
-	import robotlegs.bender.bundles.mvcs.Command;
+  import robotlegs.bender.bundles.mvcs.Command;
 	
 	/**
    * ...
@@ -23,9 +22,6 @@ package com.meathill.diy.controller
     
     [Inject]
     public var view:DIYView;
-    
-    [Inject]
-    public var diy:DIYModel;
     
     [Inject]
     public var server:ServerManager;
@@ -42,7 +38,8 @@ package com.meathill.diy.controller
           bytes:ByteArray = coder.encode(bmpd);
       server.add(ServerManager.API, {
         pic: bytes,
-        name: event.name
+        name: event.name,
+        data: JSON.stringify(cloth.steps)
       }, successHandler, null, errorHandler);
     }
     

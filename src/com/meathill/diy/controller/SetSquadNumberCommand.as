@@ -2,13 +2,14 @@ package com.meathill.diy.controller
 {
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.ClothModel;
-	import robotlegs.bender.bundles.mvcs.Command;
+  import com.meathill.diy.model.vo.SingleStepConfig;
+  import robotlegs.bender.bundles.mvcs.Command;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class SelectColorCommand extends Command 
+  public class SetSquadNumberCommand extends Command 
   {
     [Inject]
     public var cloth:ClothModel;
@@ -17,8 +18,11 @@ package com.meathill.diy.controller
     public var event:DesignEvent;
     
     override public function execute():void {
-      cloth.steps[event.piece].color = event.color;
+      var step:SingleStepConfig = cloth.steps[cloth.step];
+      step.number = event.number;
+      step.style = event.style;
     }
+    
   }
 
 }

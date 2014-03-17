@@ -1,6 +1,8 @@
 package com.meathill.diy.view 
 {
   import com.greensock.TweenMax;
+  import flash.display.Bitmap;
+  import flash.display.BitmapData;
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.Sprite;
@@ -37,10 +39,22 @@ package com.meathill.diy.view
       var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
       piece.filters = [filter];
     }
-    public function setNumber(number:uint, asset:Sprite, step:uint):void {
+    public function setNumber(number:uint, style:uint, step:uint, length:uint, asset:Sprite):void {
       var piece:Sprite = Sprite(cloth.getChildAt(step));
+      var numberAsset:Sprite = Sprite(asset.getChildAt(style));
       while (piece.numChildren) {
         piece.removeChildAt(0);
+      }
+      var str:String = number.toString();
+      for (var i:uint = 0, len:uint = str.length; i < len; i++) {
+        var index:uint = parseInt(str.charAt(i));
+        index = index === 0 ? 10 : index;
+        var mc:DisplayObject = numberAsset.getChildAt(index - 1);
+        var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
+        bmpd.draw(mc);
+        var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
+        bmp.x = piece.width + (i % len * 10) + ((length - len ) * numberAsset.width >> 1); 
+        piece.addChild(bmp);
       }
       
     }

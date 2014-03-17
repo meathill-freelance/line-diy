@@ -3,6 +3,7 @@ package com.meathill.diy.mediator
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
+  import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.utils.ColorMaker;
   import com.meathill.diy.view.Preview;
@@ -27,6 +28,12 @@ package com.meathill.diy.mediator
     
     override public function initialize():void {
       view.show(assets.templates[cloth.template]);
+      // 是否需要设置号码
+      for (var i:uint = 0, steps:Vector.<SingleStepConfig> = cloth.steps, len:uint = steps.length; i < len; i++) {
+        if (steps[i].type === 'number') {
+          view.setNumber(steps[i].number, steps[i].style, i, steps[i].length, assets.getAsset(steps[i].asset));
+        }
+      }
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
       
@@ -53,7 +60,8 @@ package com.meathill.diy.mediator
       view.setColor(ColorMaker.color2rgb(e.color, 255), e.piece);
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
-      view.setNumber(e.number, assets.getAsset(e.asset), cloth.step);
+      var config:SingleStepConfig = cloth.steps[cloth.step];
+      view.setNumber(e.number, e.style, cloth.step, config.length, assets.getAsset(config.asset));
     }
   }
 

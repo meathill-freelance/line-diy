@@ -5,6 +5,10 @@ package com.meathill.diy.component.number
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
+  import com.meathill.diy.utils.Scaler;
+  import flash.display.Bitmap;
+  import flash.display.BitmapData;
+  import flash.display.DisplayObject;
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
@@ -18,10 +22,12 @@ package com.meathill.diy.component.number
   {
     private var _config:SingleStepConfig;
     private var numberInput:Input;
-    private var asset:Sprite;
+    private var _asset:Sprite;
     private var preview:Sprite;
     private var prevButton:Button;
     private var nextButton:Button;
+    private var style:uint;
+    private var totalStyle:uint;
     
     public function SquadNumber(config:SingleStepConfig) {
       _config = config;
@@ -32,9 +38,28 @@ package com.meathill.diy.component.number
       return _config;
     }
     public function set asset(value:Sprite):void {
-      asset = value;
+      _asset = value;
+      totalStyle = _asset.numChildren;
+      draw();
     }
     
+    private function draw():void {
+      var numberAsset:Sprite = Sprite(_asset.getChildAt(style));
+      while (preview.numChildren) {
+        preview.removeChildAt(0);
+      }
+      for (var i:uint = 0, len:uint = numberInput.value.length; i < len; i++) {
+        var index:uint = parseInt(numberInput.value.charAt(i));
+        index = index === 0 ? 10 : index;
+        var mc:DisplayObject = numberAsset.getChildAt(index - 1);
+        var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
+        bmpd.draw(mc);
+        var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
+        Scaler.resize(bmp, 50, 100);
+        bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
+        preview.addChild(bmp);
+      }
+    }
     private function layout():void {
       // 输入队服号码
       var init:Object = {
@@ -42,7 +67,7 @@ package com.meathill.diy.component.number
         height: 45,
         maxLength: 2,
         restrict: '0-9',
-        text: _config.curr.toString(),
+        text: _config.number.toString(),
         textFormat: Typography.getTextFormat(Typography.LEAD, { align: TextFormatAlign.CENTER } )
       }
       numberInput = new Input(init);
@@ -64,12 +89,30 @@ package com.meathill.diy.component.number
       preview.y = 60;
       addChild(preview);
     }
-    
-    private function numberInput_changeHandler(e:Event):void {
+    private function dispatchChangeEvent():void {
       var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
       event.number = uint(numberInput.value);
-      event.asset = _config.asset;
+      event.style = style;
+      event
       dispatchEvent(event);
+    }
+    
+    
+    private function prevButton_clickHandler(e:MouseEvent):void {
+      style = style === 0 ? totalStyle - 1 : (style - 1);
+      draw();
+      dispatchChangeEvent();
+    }
+    
+    private function nextButton_clickHandler(e:MouseEvent):void {
+      style++;
+      style = style > totalStyle - 1 ? totalStyle - 1: style;
+      draw();
+      dispatchChangeEvent();
+    }
+    private function numberInput_changeHandler(e:Event):void {
+      draw();
+      dispatchChangeEvent();
     }
     
   }

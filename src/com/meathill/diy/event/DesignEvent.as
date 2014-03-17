@@ -15,7 +15,7 @@ package com.meathill.diy.event
     private var _piece:uint;
     private var _color:uint;
     private var _number:uint;
-    private var _asset:String;
+    private var _style:uint;
     
     public function DesignEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) { 
       super(type, bubbles, cancelable);
@@ -40,11 +40,11 @@ package com.meathill.diy.event
     public function set number(value:uint):void {
       _number = value;
     }
-    public function get asset():String {
-      return _asset;
+    public function get style():uint {
+      return _style;
     }
-    public function set asset(value:String):void {
-      _asset = value;
+    public function set style(value:uint):void {
+      _style = value;
     }
     
     public override function clone():Event {
@@ -52,7 +52,7 @@ package com.meathill.diy.event
       event.color = _color;
       event.piece = _piece;
       event.number = _number;
-      event.asset = _asset;
+      event.style = _style;
       return event;
     } 
     

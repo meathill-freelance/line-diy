@@ -5,13 +5,13 @@ package com.meathill.diy.config {
   import com.meathill.diy.controller.SaveCommand;
   import com.meathill.diy.controller.SelectColorCommand;
   import com.meathill.diy.controller.SelectTemplateCommand;
+  import com.meathill.diy.controller.SetSquadNumberCommand;
   import com.meathill.diy.controller.ShowWelcomeCommand;
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
-  import com.meathill.diy.model.DIYModel;
   import com.meathill.diy.popup.PopupManager;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.service.ServerManager;
@@ -44,7 +44,6 @@ package com.meathill.diy.config {
       
       injector.map(ClothModel).toValue(cloth);
       injector.map(ServerManager).toValue(server);
-      injector.map(DIYModel).asSingleton();
       injector.map(PopupManager).asSingleton();
       injector.map(AssetsManager).asSingleton();
       
@@ -56,6 +55,7 @@ package com.meathill.diy.config {
       commandMap.map(UserEvent.SAVE).toCommand(SaveCommand);
       commandMap.map(UserEvent.BUY).toCommand(BuyCommand);
       commandMap.map(DesignEvent.SELECT_COLOR).toCommand(SelectColorCommand);
+      commandMap.map(DesignEvent.SET_SQUAD_NUMBER).toCommand(SetSquadNumberCommand);
       
       loadConfig();
     }
