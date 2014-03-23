@@ -14,3 +14,5 @@ libs/
 # information for Eclipse / Flash Builder.
 *.as3proj
 *.old
+.idea/
+html-template/
