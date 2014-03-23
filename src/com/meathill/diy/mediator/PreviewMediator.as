@@ -28,12 +28,7 @@ package com.meathill.diy.mediator
     
     override public function initialize():void {
       view.show(assets.templates[cloth.template]);
-      // 是否需要设置号码
-      for (var i:uint = 0, steps:Vector.<SingleStepConfig> = cloth.steps, len:uint = steps.length; i < len; i++) {
-        if (steps[i].type === 'number') {
-          view.setNumber(steps[i].number, steps[i].style, i, steps[i].length, assets.getAsset(steps[i].asset));
-        }
-      }
+      useUserDesign();
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
       
@@ -43,19 +38,37 @@ package com.meathill.diy.mediator
       addContextListener(UserEvent.SELECT_TPL, user_selectTemplateHandler);
     }
     
-    private function user_gotoStepHandler(e:UserEvent):void {
-      view.highlight(e.step);
+    private function useUserDesign():void {
+      // 是否需要设置号码
+      for (var i:uint = 0, steps:Vector.<SingleStepConfig> = cloth.steps, len:uint = steps.length; i < len; i++) {
+        var config:SingleStepConfig = steps[i];
+        if (config.type === 'color') {
+          trace('use color: ', config.color.toString(16));
+          view.setColor(ColorMaker.color2rgb(config.color, 255), i);
+          continue;
+        }
+        if (config.type === 'number') {
+          view.setNumber(config.number, config.style, i, config.length, assets.getAsset(config.asset));
+        }
+      }
     }
-    private function user_selectTemplateHandler(e:UserEvent):void {
-      view.show(assets.templates[e.template]);
-    }
+    
+    // View Event
     private function view_clickHanaler(e:MouseEvent):void {
       var index:uint = Sprite(e.target).parent.getChildIndex(Sprite(e.target)),
           event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
       event.step = index;
       dispatch(event);
     }
-    
+    // UserEvent
+    private function user_gotoStepHandler(e:UserEvent):void {
+      view.highlight(e.step);
+    }
+    private function user_selectTemplateHandler(e:UserEvent):void {
+      view.show(assets.templates[e.template]);
+      useUserDesign();
+    }
+    // DesignEvent
     private function color_changeHandler(e:DesignEvent):void {
       view.setColor(ColorMaker.color2rgb(e.color, 255), e.piece);
     }

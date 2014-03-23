@@ -20,7 +20,8 @@ package com.meathill.diy.model.vo
       trace(JSON.stringify(src));
       _type = src.type;
       _title = src.title;
-      _colors = src.colors
+      _color = parseInt(src.color, 16);
+      _colors = src.colors;
       _asset = src.asset;
       _length = src.length;
       _number = src.number;

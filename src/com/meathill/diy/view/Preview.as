@@ -1,6 +1,7 @@
 package com.meathill.diy.view 
 {
   import com.greensock.TweenMax;
+  import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
   import flash.display.BitmapData;
   import flash.display.DisplayObject;
@@ -18,7 +19,7 @@ package com.meathill.diy.view
     private var cloth:Sprite;
     
     public function Preview() {
-      useHandCursor = true;
+      buttonMode = useHandCursor = true;
 			
     }
     
@@ -27,7 +28,6 @@ package com.meathill.diy.view
         removeChildAt(0);
       }
       cloth = mc;
-      cloth.mouseEnabled = cloth.useHandCursor = true;
       addChild(cloth);
     }
     public function setColor(color:Object, step:uint):void {
@@ -53,7 +53,8 @@ package com.meathill.diy.view
         var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
         bmpd.draw(mc);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x = piece.width + (i % len * 10) + ((length - len ) * numberAsset.width >> 1); 
+        Scaler.resize(bmp, 120, 160);
+        bmp.x = piece.width + (i % len * 40) + ((length - len ) * numberAsset.width >> 1); 
         piece.addChild(bmp);
       }
       

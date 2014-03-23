@@ -16,19 +16,19 @@
       "title": "正面",
       "type": "color",
       "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
-      "currColor": "ffffff"
+      "color": "9a2831"
     },
     {
       "title": "侧面",
       "type": "color",
       "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
-      "currColor": "ffffff"
+      "color": "c84225"
     },
     {
       "title": "肩部",
       "type": "color",
       "colors": ["E1E1E1", "1B1B1B", "9A2831", "D68323", "2E2E36", "7A7879", "13593D", "161E45", "C84225", "3C2447", "C68D3E", "3593AF", "007074", "FF4C82", "00AE33"],
-      "currColor": "ffffff"
+      "color": "00ae33"
     },
     {
       "title": "号码",
@@ -37,8 +37,8 @@
       "length": 2,
       "number": 23,
       "style": 0,
-      "width": 200,
-      "height": 100
+      "width": 240,
+      "height": 160
     }
   ]
 }
