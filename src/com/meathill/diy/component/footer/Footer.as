@@ -1,8 +1,10 @@
 package com.meathill.diy.component.footer 
 {
   import com.meathill.diy.component.Button;
+  import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.UserEvent;
+  import com.meathill.diy.filter.Filters;
   import flash.display.GradientType;
 	import flash.display.Sprite;
   import flash.events.MouseEvent;
@@ -16,7 +18,7 @@ package com.meathill.diy.component.footer
    */
   public class Footer extends Sprite 
   {
-    public static const HEIGHT:uint = 100;
+    public static const HEIGHT:uint = 130;
     
     private var haibaoButton:Button;
     private var shareButton:Button;
@@ -28,11 +30,11 @@ package com.meathill.diy.component.footer
     
     
     private function draw(w:uint):void {
-      var matrix:Matrix = new Matrix();
-      matrix.createGradientBox(w, HEIGHT, Math.PI / 2);
-      graphics.beginGradientFill(GradientType.LINEAR, [0x333333, 0x111111], [1, 1], [0, 1], matrix);
+      graphics.beginFill(Colors.FOOTER_BG);
       graphics.drawRect(0, 0, w, HEIGHT);
       graphics.endFill();
+      
+      filters = [Filters.TUQI];
     }
     private function layout():void {
       var socialTxt:TextField = new TextField();

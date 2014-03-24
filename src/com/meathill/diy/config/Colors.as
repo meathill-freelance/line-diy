@@ -26,6 +26,9 @@ package com.meathill.diy.config
     public static const SILVER:uint = 0xBDC3C7;
     public static const CONCRETE:uint = 0x95A5A6;
     public static const ASBESTOS:uint = 0x7F8C8D;
+    
+    public static const HEADER_BG:uint = 0x27282a;
+    public static const FOOTER_BG:uint = 0x2b323a;
   }
 
 }

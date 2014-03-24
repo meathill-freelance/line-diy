@@ -34,7 +34,6 @@ package com.meathill.diy.view
     
     private function layout():void {
       wizard = new Wizard();
-      wizard.x = wizard.y = 10;
       addChild(wizard);
       
       options = new Options();

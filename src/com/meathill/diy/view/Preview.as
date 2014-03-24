@@ -53,8 +53,8 @@ package com.meathill.diy.view
         var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
         bmpd.draw(mc);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        Scaler.resize(bmp, 120, 160);
-        bmp.x = piece.width + (i % len * 40) + ((length - len ) * numberAsset.width >> 1); 
+        Scaler.resize(bmp, 80, 160);
+        bmp.x = piece.width + (i % len * 10) + ((length - len ) * numberAsset.width >> 1); 
         piece.addChild(bmp);
       }
       
