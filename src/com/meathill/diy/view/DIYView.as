@@ -5,6 +5,7 @@ package com.meathill.diy.view
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.rightBar.RightBar;
   import com.meathill.diy.component.wizard.Wizard;
+  import flash.display.Bitmap;
   import flash.display.BitmapData;
   import flash.display.Sprite;
   import flash.events.Event;
@@ -32,13 +33,19 @@ package com.meathill.diy.view
       return bmpd;
     }
     
+    public function addBg(bmp:Bitmap):void {
+      bmp.x = stage.stageWidth - bmp.width >> 1;
+      bmp.y = wizard.height;
+      addChildAt(bmp, 0);
+    }
+    
     private function layout():void {
       wizard = new Wizard();
       addChild(wizard);
       
       options = new Options();
       options.x = 10;
-      options.y = 60;
+      options.y = 70;
       addChild(options);
       
       preview = new Preview();

@@ -1,6 +1,8 @@
 package com.meathill.diy.service 
 {
+  import flash.display.DisplayObject;
   import flash.display.Loader;
+  import flash.display.LoaderInfo;
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.EventDispatcher;
@@ -37,7 +39,7 @@ package com.meathill.diy.service
         url: url
       });
     }
-    public function getAsset(key:String):Sprite {
+    public function getAsset(key:String):DisplayObject {
       return assets[key];
     }
     public function load():void {
@@ -59,10 +61,10 @@ package com.meathill.diy.service
     
     
     private function loader_completeHandler(e:Event):void {
-      var mc:Sprite = Sprite(e.target.content);
+      var mc:DisplayObject = LoaderInfo(e.target).content;
       switch(queue[0].type) {
         case TEMPLATE:
-          _templates.push(mc);
+          _templates.push(Sprite(mc));
           break;
           
         default:

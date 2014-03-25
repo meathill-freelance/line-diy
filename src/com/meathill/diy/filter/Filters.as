@@ -14,6 +14,8 @@ package com.meathill.diy.filter
     public static const INPUT_GLOW:GlowFilter = new GlowFilter(Colors.PETER_RIVER, 0.6, 8, 8);
     
     public static const TUQI:DropShadowFilter = new DropShadowFilter(1, 120, 0xFFFFFF, 0.4, 2, 2, 1, 1, true);
+    
+    public static const SUNKEN:DropShadowFilter = new DropShadowFilter(2, 45, 0, 0.4, 2, 2, 2, 1, true);
   }
 
 }

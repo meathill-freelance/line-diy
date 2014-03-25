@@ -3,6 +3,7 @@ package com.meathill.diy.component.number
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.service.AssetsManager;
+  import flash.display.Sprite;
   import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
@@ -21,7 +22,7 @@ package com.meathill.diy.component.number
     public var assets:AssetsManager;
     
     override public function initialize():void {
-      view.asset = assets.getAsset(view.config.asset);
+      view.asset = Sprite(assets.getAsset(view.config.asset));
       
       addViewListener(DesignEvent.SET_SQUAD_NUMBER, squadNumber_changeHandler);
     }

@@ -4,8 +4,10 @@ package com.meathill.diy.config
    * ...
    * @author Meathill
    */
-  public class Colors 
-  {
+  public class Colors {
+    public static const WHITE:uint = 0xFFFFFF;
+    public static const BLACK:uint = 0x000000;
+    
     public static const TURQUOISE:uint = 0x1ABC9C;
     public static const GREEN_SEA:uint = 0x16A085;
     public static const EMERALD:uint = 0x2ECC71;

@@ -26,7 +26,7 @@ package com.meathill.diy.component.wizard
     public function draw(steps:Vector.<SingleStepConfig>):void {
       var stepWidth:uint = stage.stageWidth / (steps.length + 1);
       stepWidth = stepWidth < MAX_WIDTH ? stepWidth : MAX_WIDTH;
-      Item.stepWidth = stepWidth;
+      Item.stepWidth = stepWidth - 10;
       
       // 背景
       graphics.beginFill(Colors.HEADER_BG);
@@ -36,7 +36,8 @@ package com.meathill.diy.component.wizard
       // 计步器
       for (var i:uint = 0; i < steps.length; i++) {
         var item:Item = new Item(steps[i], i + 1, i === steps.length - 1);
-        item.x = stepWidth * i;
+        item.x = stepWidth * i + 10;
+        item.y = 10;
         addChild(item);
         _items.push(item);
       }

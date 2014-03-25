@@ -37,7 +37,7 @@ package com.meathill.diy.component.wizard
     private function view_clickHandler(e:MouseEvent):void {
       var item:Item = Item(e.target),
           index:uint = view.getChildIndex(item);
-      dispatchStep(index - 1);
+      dispatchStep(index);
     }
     private function user_gotoStepHandler(e:UserEvent):void {
       view.highhight(e.step);

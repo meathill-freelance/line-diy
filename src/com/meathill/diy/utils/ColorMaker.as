@@ -25,6 +25,14 @@ package com.meathill.diy.utils
       return rgb2color(rgb);
     }
     
+    static public function lighten(color:uint, percent:Number):uint {
+      var rgb:Object = color2rgb(color);
+      for (var prop:String in rgb) {
+        rgb[prop] = rgb[prop] * (100 + percent) / 100;
+      }
+      return rgb2color(rgb);
+    }
+    
   }
 
 }

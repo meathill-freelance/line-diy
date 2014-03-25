@@ -48,7 +48,7 @@ package com.meathill.diy.mediator
           continue;
         }
         if (config.type === 'number') {
-          view.setNumber(config.number, config.style, i, config.length, assets.getAsset(config.asset));
+          view.setNumber(config.number, config.style, i, config.length, Sprite(assets.getAsset(config.asset)));
         }
       }
     }
@@ -74,7 +74,7 @@ package com.meathill.diy.mediator
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.steps[cloth.step];
-      view.setNumber(e.number, e.style, cloth.step, config.length, assets.getAsset(config.asset));
+      view.setNumber(e.number, e.style, cloth.step, config.length, Sprite(assets.getAsset(config.asset)));
     }
   }
 
