@@ -1,6 +1,8 @@
 package com.meathill.diy.component.rightBar 
 {
   import com.meathill.diy.component.Button;
+  import com.meathill.diy.component.PrimaryButton;
+  import com.meathill.diy.component.SuccessButton;
   import com.meathill.diy.event.UserEvent;
 	import flash.display.Sprite;
   import flash.events.MouseEvent;
@@ -20,12 +22,12 @@ package com.meathill.diy.component.rightBar
     }
     
     private function draw():void {
-      saveButton = new Button('保存');
+      saveButton = new PrimaryButton('保存', 'save');
       saveButton.addEventListener(MouseEvent.CLICK, saveButton_clickHandler);
       addChild(saveButton);
       
-      buyButton = new Button('购买');
-      buyButton.y = 60;
+      buyButton = new SuccessButton('购买', 'shoppingCart');
+      buyButton.y = 50;
       buyButton.addEventListener(MouseEvent.CLICK, buyButton_clickHandler);
       addChild(buyButton);
     }

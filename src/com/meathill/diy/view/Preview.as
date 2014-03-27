@@ -28,6 +28,8 @@ package com.meathill.diy.view
         removeChildAt(0);
       }
       cloth = mc;
+      cloth.x = - cloth.width >> 1;
+      cloth.y = - cloth.height >> 1;
       addChild(cloth);
     }
     public function setColor(color:Object, step:uint):void {

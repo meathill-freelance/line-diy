@@ -31,7 +31,7 @@ package com.meathill.diy.component.footer
     
     private function draw(w:uint):void {
       graphics.beginFill(Colors.FOOTER_BG);
-      graphics.drawRect(0, 0, w, HEIGHT);
+      graphics.drawRect(2, 0, w - 4, HEIGHT - 2);
       graphics.endFill();
       
       filters = [Filters.TUQI];

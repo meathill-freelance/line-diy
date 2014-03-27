@@ -8,7 +8,7 @@ package com.meathill.diy.component
   public class CloseButton extends Button {
     
     override protected function createIcon():void {
-      icon = new Shape();
+      var icon:Shape = new Shape();
       icon.graphics.lineStyle(2, 0x666666);
       icon.graphics.moveTo(1, 1);
       icon.graphics.lineTo(9, 9);
@@ -17,6 +17,7 @@ package com.meathill.diy.component
       icon.x = 6;
       icon.y = 6;
       addChild(icon);
+      this.icon = icon;
     }
     override protected function drawBG():void {
       buttonWidth = 21;

@@ -49,8 +49,9 @@ package com.meathill.diy.view
       addChild(options);
       
       preview = new Preview();
-      preview.x = 240
-      preview.y = 60;
+      preview.x = stage.stageWidth >> 1;
+      preview.y = stage.stageHeight - 80 >> 1 ;
+      preview.scaleX = preview.scaleY = 0.75;
       addChild(preview);
       
       bottom = new BottomButtonGroup();
@@ -59,7 +60,7 @@ package com.meathill.diy.view
       addChild(bottom);
       
       rightBar = new RightBar();
-      rightBar.x = stage.stageWidth - 80;
+      rightBar.x = stage.stageWidth - 120;
       rightBar.y = 80;
       addChild(rightBar);
       

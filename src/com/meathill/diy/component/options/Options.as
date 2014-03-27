@@ -93,7 +93,7 @@ package com.meathill.diy.component.options
     }
     private function createTextField():void {
       label = new TextField();
-      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff, align: TextFormatAlign.CENTER } );
+      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff, align: TextFormatAlign.CENTER, bold: true } );
       label.x = 30;
       label.y = 10;
       label.width = 140;
@@ -102,7 +102,7 @@ package com.meathill.diy.component.options
       addChild(label);
     }
     private function draw():void {
-      graphics.beginFill(Colors.TURQUOISE);
+      graphics.beginFill(Colors.WET_ASPHALT);
       graphics.drawRoundRect(0, 0, 200, 40, 4, 4);
       graphics.endFill();
     }

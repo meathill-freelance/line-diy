@@ -1,5 +1,8 @@
 package com.meathill.diy.service 
 {
+  import com.meathill.diy.utils.Scaler;
+  import flash.display.Bitmap;
+  import flash.display.BitmapData;
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.LoaderInfo;
@@ -51,6 +54,17 @@ package com.meathill.diy.service
         return;
       }
       next();
+    }
+    public function clone(string:String, width:uint = 0, height:uint = 0):Bitmap {
+      var asset:Sprite = Sprite(getAsset('assets'));
+      var target:DisplayObject = asset.getChildByName(string);
+      if (width !== 0 && height !== 0) {
+        Scaler.resize(target, width, height);
+      }
+      var bmpd:BitmapData = new BitmapData(target.width, target.height, true, 0);
+      bmpd.draw(target);
+      var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
+      return bmp;
     }
     
     private function next():void {

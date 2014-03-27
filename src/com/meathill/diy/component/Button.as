@@ -1,9 +1,10 @@
 package com.meathill.diy.component 
 {
   import com.meathill.diy.config.Typography;
+  import com.meathill.diy.service.AssetsManager;
+  import com.meathill.diy.utils.Scaler;
   import flash.display.DisplayObject;
-  import flash.display.Shape;
-	import flash.display.Sprite;
+  import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.filters.BitmapFilterQuality;
   import flash.filters.DropShadowFilter;
@@ -17,11 +18,12 @@ package com.meathill.diy.component
    */
   public class Button extends Sprite 
   {
+    protected var iconAsset:String;
     protected var buttonWidth:uint = 0;
     protected var buttonHeight:uint = 0;
     protected var label:TextField;
-    protected var icon:Shape;
     protected var labelText:String = '';
+    protected var icon:DisplayObject;
     protected var bgColor:uint = 0xFFFFFF;
     protected var borderColor:uint = 0xCCCCCC;
     protected var bgAlpha:Number = 1;
@@ -33,7 +35,8 @@ package com.meathill.diy.component
     protected var activeFilter:DropShadowFilter = new DropShadowFilter(4, 90, 0, 0.125, 4, 4, 2, BitmapFilterQuality.MEDIUM, true);
     protected var textFormat:TextFormat = Typography.getTextFormat(Typography.BODY);
     
-    public function Button(label:String = 'button') {
+    public function Button(label:String = 'button', icon:String = '') {
+      iconAsset = icon;
       labelText = label;
       resetAttr();
       createIcon();
@@ -49,7 +52,14 @@ package com.meathill.diy.component
     }
     
     protected function createIcon():void {
-      
+      if (!iconAsset) {
+        return;
+      }
+      icon = AssetsManager.instance.clone(iconAsset);
+      Scaler.resize(icon, 18, 18);
+      icon.x += 10;
+      icon.y += 8;
+      addChild(icon);
     }
     protected function createLabel():void {
       if (!labelText) {
