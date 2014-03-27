@@ -1,6 +1,6 @@
 package com.meathill.diy.component.options 
 {
-  import com.meathill.diy.component.Button;
+  import com.meathill.diy.component.ChevronButton;
   import com.meathill.diy.component.colorCard.ColorCard;
   import com.meathill.diy.component.number.SquadNumber;
   import com.meathill.diy.config.Colors;
@@ -10,6 +10,7 @@ package com.meathill.diy.component.options
   import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.text.TextField;
+  import flash.text.TextFormatAlign;
 	
 	/**
    * ...
@@ -21,8 +22,8 @@ package com.meathill.diy.component.options
     
     private var label:TextField;
     private var components:Vector.<Sprite>
-    private var prevButton:Button;
-    private var nextButton:Button;
+    private var prevButton:ChevronButton;
+    private var nextButton:ChevronButton;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -58,19 +59,20 @@ package com.meathill.diy.component.options
     public function showStepButtons(hasPrev:Boolean, hasNext:Boolean):void {
       if (hasPrev) {
         if (!prevButton) {
-          prevButton = new Button('上一步');
+          prevButton = new ChevronButton(false);
           prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
         }
-        prevButton.y = height + 20;
+        prevButton.x = 5;
+        prevButton.y = 5;
         addChild(prevButton);
       }
       if (hasNext) {
         if (!nextButton) {
-          nextButton = new Button('下一步');
-          nextButton.x = WIDTH - nextButton.width;
+          nextButton = new ChevronButton();
+          nextButton.x = WIDTH - nextButton.width - 5;
           nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
         }
-        nextButton.y = prevButton && contains(prevButton) ? prevButton.y : height + 20;
+        nextButton.y = 5;
         addChild(nextButton);
       }
     }
@@ -91,10 +93,10 @@ package com.meathill.diy.component.options
     }
     private function createTextField():void {
       label = new TextField();
-      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff } );
-      label.x = 10;
+      label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff, align: TextFormatAlign.CENTER } );
+      label.x = 30;
       label.y = 10;
-      label.width = 180;
+      label.width = 140;
       label.height = 20;
       label.mouseEnabled = false;
       addChild(label);

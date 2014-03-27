@@ -1,9 +1,11 @@
 package com.meathill.diy.component.wizard {
+  import com.greensock.TweenLite;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.utils.ColorMaker;
+  import flash.display.Shape;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.text.TextField;
@@ -22,76 +24,79 @@ package com.meathill.diy.component.wizard {
 		
 		public static var stepWidth:uint = 0;
 		
-		private var _status:uint = 0;
 		private var config:SingleStepConfig;
-		private var isLast:Boolean;
 		private var label:TextField;
+    private var bg:Shape;
+    private var tween:TweenLite;
+    private var isActivated:Boolean;
 		
-		public function Item(config:SingleStepConfig, index:uint, isLast:Boolean = false) {
-			this.isLast = isLast;
+		public function Item(config:SingleStepConfig, index:uint) {
 			this.config = config;
 			buttonMode = useHandCursor = true;
 			mouseChildren = false;
-			_status = 1;
 			
+      bg = new Shape();
+      bg.alpha = 0;
+      addChild(bg);
 			draw();
 			createTextField(index);
 			
 			addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 		}
-		
-		public function set status(value:uint):void {
-			_status = value;
-			draw();
-			changeFontColor();
-		}
-		
-		public function get status():uint {
-			return _status;
-		}
-		public function get bgColor():uint {
-			return _status ? Colors.EMERALD : 0xFFFFFF
-		}
-		public function get bgAlpha():Number {
-			return _status ? 1 : 0;
-		}
     
 		public function active():void {
-			filters = [Filters.SUNKEN];
+      isActivated = true;
+      draw(0);
+      bg.alpha = 0.5;
+			bg.filters = [Filters.SUNKEN];
 		}
 		public function deactive():void {
-			filters = null;
+      isActivated = false;
+      draw();
+      bg.alpha = 0;
+			bg.filters = null;
 		}
 		
 		private function createTextField(index:uint):void {
 			label = new TextField();
-			label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {align: TextFormatAlign.CENTER, bold: true, color: _status ? 0xFFFFFF : 0});
-			label.y = 10;
+			label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {
+        align: TextFormatAlign.CENTER,
+        bold: true,
+        color: 0xFFFFFF,
+        font: 'Arial',
+        size: 18
+      });
+			label.y = 8;
 			label.width = stepWidth;
-			label.height = 20;
+			label.height = 24;
 			label.text = index.toString();
 			label.mouseEnabled = false;
 			addChild(label);
 		}
 		private function changeFontColor():void {
 			var format:TextFormat = label.defaultTextFormat;
-			format.color = _status ? 0xFFFFFF : 0;
+			format.color = 0xFFFFFF;
 			label.defaultTextFormat = format;
 		}
-		private function draw(bg:uint = 0):void {
-			bg = bg || bgColor;
-			graphics.clear();
-			graphics.beginFill(bg, bgAlpha);
-			graphics.drawRect(1, 0, stepWidth - 1, 40);
-			graphics.endFill();
+		private function draw(color:uint = 0xFFFFFF):void {
+			bg.graphics.clear();
+			bg.graphics.beginFill(color);
+			bg.graphics.drawRect(0, 0, stepWidth, 40);
+			bg.graphics.endFill();
 		}
 		
 		private function rollOutHandler(e:MouseEvent):void {
-			draw();
+      if (tween) {
+        tween.kill();
+      }
+			tween = TweenLite.to(bg, 0.3, { alpha: isActivated ? 0.5 : 0 } );
 		}
 		private function rollOverHandler(e:MouseEvent):void {
-			draw(ColorMaker.lighten(bgColor, 10));
+      if (tween) {
+        tween.kill();
+      }
+			tween = TweenLite.to(bg, 0.3, { alpha: isActivated ? 0.5 : 0.3 } );
 		}
 	}
 

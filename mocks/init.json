@@ -10,7 +10,8 @@
   "assets": {
     "number": "../mocks/number.swf",
     "char": "../mocks/char.swf",
-    "bg": "../assets/bg.jpg"
+    "bg": "../assets/bg.jpg",
+    "assets": "../assets/assets.swf"
   },
   "steps": [
     {

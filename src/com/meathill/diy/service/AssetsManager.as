@@ -16,17 +16,21 @@ package com.meathill.diy.service
   public class AssetsManager extends EventDispatcher
   {
     public static const TEMPLATE:String = 'template';
+    public static var instance:AssetsManager;
     
     private var _templates:Vector.<Sprite>;
     private var queue:Array;
     private var isLoading:Boolean = false;
     private var assets:Object;
     
-    public function AssetsManager() 
-    {
+    public function AssetsManager() {
+      if (instance) {
+        throw new Error('already exist');
+      }
       queue = [];
       _templates = new Vector.<Sprite>();
       assets = { };
+      instance = this;
     }
     
     public function get templates():Vector.<Sprite> {

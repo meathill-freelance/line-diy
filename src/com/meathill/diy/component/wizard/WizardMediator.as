@@ -35,6 +35,9 @@ package com.meathill.diy.component.wizard
     }
     
     private function view_clickHandler(e:MouseEvent):void {
+      if (e.target === view) {
+        return;
+      }
       var item:Item = Item(e.target),
           index:uint = view.getChildIndex(item);
       dispatchStep(index);

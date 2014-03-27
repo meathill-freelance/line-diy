@@ -35,7 +35,7 @@ package com.meathill.diy.component.wizard
       
       // 计步器
       for (var i:uint = 0; i < steps.length; i++) {
-        var item:Item = new Item(steps[i], i + 1, i === steps.length - 1);
+        var item:Item = new Item(steps[i], i + 1);
         item.x = stepWidth * i + 10;
         item.y = 10;
         addChild(item);
