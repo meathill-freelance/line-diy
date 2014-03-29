@@ -2,10 +2,10 @@
   "id": 1,
   "name": "篮球背心",
   "templates": [
-    "../mocks/cloth3.swf",
     "../mocks/cloth4.swf",
     "../mocks/cloth5.swf",
-    "../mocks/cloth6.swf"
+    "../mocks/cloth6.swf",
+    "../mocks/cloth3.swf"
   ],
   "assets": {
     "number": "../mocks/number.swf",

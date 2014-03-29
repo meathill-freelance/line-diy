@@ -28,8 +28,8 @@ package com.meathill.diy.view
     }
     
     public function get image():BitmapData {
-      var bmpd:BitmapData = new BitmapData(preview.width, preview.height);
       bmpd.draw(preview);
+      var bmpd:BitmapData = new BitmapData(preview.width, preview.height);
       return bmpd;
     }
     
@@ -50,13 +50,12 @@ package com.meathill.diy.view
       
       preview = new Preview();
       preview.x = stage.stageWidth >> 1;
-      preview.y = stage.stageHeight - 80 >> 1 ;
-      preview.scaleX = preview.scaleY = 0.75;
+      preview.y = stage.stageHeight - 120 >> 1;
       addChild(preview);
       
       bottom = new BottomButtonGroup();
-      bottom.x = 600;
-      bottom.y = 500;
+      bottom.x = stage.stageWidth - bottom.width >> 1;
+      bottom.y = stage.stageHeight - Footer.HEIGHT - bottom.height - 20;
       addChild(bottom);
       
       rightBar = new RightBar();

@@ -18,6 +18,7 @@ package com.meathill.diy.component
       hoverBgColor = ColorMaker.lighten(bgColor, 10);
       hoverBorderColor = ColorMaker.draken(bgColor, 10);
       textFormat.color = 0xFFFFFF;
+      textFormat.bold = true;
     }
     
   }

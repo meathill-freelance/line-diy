@@ -28,6 +28,7 @@ package com.meathill.diy.view
         removeChildAt(0);
       }
       cloth = mc;
+      Scaler.resize(cloth, 300, 500);
       cloth.x = - cloth.width >> 1;
       cloth.y = - cloth.height >> 1;
       addChild(cloth);
@@ -44,9 +45,12 @@ package com.meathill.diy.view
     public function setNumber(number:uint, style:uint, step:uint, length:uint, asset:Sprite):void {
       var piece:Sprite = Sprite(cloth.getChildAt(step));
       var numberAsset:Sprite = Sprite(asset.getChildAt(style));
-      while (piece.numChildren) {
-        piece.removeChildAt(0);
+      while (piece.numChildren > 1) {
+        piece.removeChildAt(1);
       }
+      var width:uint = piece.width;
+      var height:uint = piece.height;
+      piece.getChildAt(0).visible = false;
       var str:String = number.toString();
       for (var i:uint = 0, len:uint = str.length; i < len; i++) {
         var index:uint = parseInt(str.charAt(i));
@@ -55,8 +59,8 @@ package com.meathill.diy.view
         var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
         bmpd.draw(mc);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        Scaler.resize(bmp, 80, 160);
-        bmp.x = piece.width + (i % len * 10) + ((length - len ) * numberAsset.width >> 1); 
+        Scaler.resize(bmp, width / len, height);
+        bmp.x += i * width / len; 
         piece.addChild(bmp);
       }
       

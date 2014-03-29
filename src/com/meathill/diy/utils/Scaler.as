@@ -10,7 +10,7 @@ package com.meathill.diy.utils
     public static function resize(mc:DisplayObject, w:uint, h:uint, isContain:Boolean = true):void {
       var width:uint = mc.width;
       var height:uint = mc.height;
-      if (width > w || h > h) {
+      if (width > w || height > h) {
         if (w / h > width / height) {
           mc.height = h;
           mc.width = width / height * h;
