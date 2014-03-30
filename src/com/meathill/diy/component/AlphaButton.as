@@ -11,14 +11,14 @@ package com.meathill.diy.component
    * ...
    * @author Meathill
    */
-  public class ChevronButton extends Sprite {
+  public class AlphaButton extends Sprite {
     private var bg:Shape;
     private var tween:TweenLite;
     public static const WIDTH:uint = 30;
     public static const HEIGHT:uint = 30;
     
-    public function ChevronButton(isNext:Boolean = true) {
-      draw(isNext);
+    public function AlphaButton(iconName:String = 'chevronRight') {
+      draw(iconName);
       buttonMode = useHandCursor = true;
       mouseChildren = false;
 			
@@ -26,7 +26,7 @@ package com.meathill.diy.component
       addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
     }
     
-    private function draw(isNext:Boolean):void {
+    private function draw(iconName:String):void {
       bg = new Shape()
       bg.alpha = 0;
       bg.graphics.beginFill(0xFFFFFF);
@@ -34,9 +34,8 @@ package com.meathill.diy.component
       bg.graphics.endFill();
       addChild(bg);
       
-      var iconName:String = 'chevron' + (isNext ? 'Right' : 'Left');
-      var icon:DisplayObject = Sprite(AssetsManager.instance.getAsset('assets')).getChildByName(iconName);
-      icon.x = (WIDTH - icon.width >> 1) + (isNext ? 1 : 0);
+      var icon:DisplayObject = AssetsManager.instance.clone(iconName);
+      icon.x = (WIDTH - icon.width >> 1) + (iconName === 'chevronRight' ? 1 : 0);
       icon.y = HEIGHT - icon.height >> 1;
       addChild(icon);
     }

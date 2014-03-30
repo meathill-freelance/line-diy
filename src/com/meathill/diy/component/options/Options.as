@@ -1,6 +1,6 @@
 package com.meathill.diy.component.options 
 {
-  import com.meathill.diy.component.ChevronButton;
+  import com.meathill.diy.component.AlphaButton;
   import com.meathill.diy.component.colorCard.ColorCard;
   import com.meathill.diy.component.number.SquadNumber;
   import com.meathill.diy.config.Colors;
@@ -22,8 +22,8 @@ package com.meathill.diy.component.options
     
     private var label:TextField;
     private var components:Vector.<Sprite>
-    private var prevButton:ChevronButton;
-    private var nextButton:ChevronButton;
+    private var prevButton:AlphaButton;
+    private var nextButton:AlphaButton;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -59,7 +59,7 @@ package com.meathill.diy.component.options
     public function showStepButtons(hasPrev:Boolean, hasNext:Boolean):void {
       if (hasPrev) {
         if (!prevButton) {
-          prevButton = new ChevronButton(false);
+          prevButton = new AlphaButton('chevronLeft');
           prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
         }
         prevButton.x = 5;
@@ -68,7 +68,7 @@ package com.meathill.diy.component.options
       }
       if (hasNext) {
         if (!nextButton) {
-          nextButton = new ChevronButton();
+          nextButton = new AlphaButton('chevronRight');
           nextButton.x = WIDTH - nextButton.width - 5;
           nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
         }

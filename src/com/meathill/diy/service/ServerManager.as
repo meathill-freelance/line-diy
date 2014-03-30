@@ -14,8 +14,8 @@ package com.meathill.diy.service
    */
   public class ServerManager extends EventDispatcher
   {
-    public static const API:String = '../mocks/api.html';
-    static public const INIT:String = "../mocks/init.json";
+    public static const API:String = 'api.html';
+    static public const INIT:String = "init.json";
     
     public static const COMPLETE:String = 'complete';
     public static const COMPLETE_ALL:String = 'complete_all';

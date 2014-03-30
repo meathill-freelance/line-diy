@@ -1,6 +1,6 @@
 package com.meathill.diy.component.bottom 
 {
-  import com.meathill.diy.component.CustomRadiusButton;
+  import com.meathill.diy.component.BottomButton;
   import com.meathill.diy.event.UserEvent;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
@@ -10,19 +10,19 @@ package com.meathill.diy.component.bottom
    */
   public class BottomButtonGroup extends Sprite
   {
-    private var prevButton:CustomRadiusButton;
-    private var nextButton:CustomRadiusButton;
+    private var prevButton:BottomButton;
+    private var nextButton:BottomButton;
     
     public function BottomButtonGroup() {
       draw();
     }
     
     private function draw():void {
-      prevButton = new CustomRadiusButton('<', 6, 0, 6, 0);
+      prevButton = new BottomButton('', 'arrowLeft', true);
       prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
       addChild(prevButton);
       
-      nextButton = new CustomRadiusButton('>', 0, 6, 0, 6);
+      nextButton = new BottomButton('', 'arrowRight', false, true);
       nextButton.x = prevButton.width;
       nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
       addChild(nextButton);

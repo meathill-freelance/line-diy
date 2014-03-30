@@ -85,7 +85,7 @@ package com.meathill.diy.component
     }
     protected function drawBG():void {
       buttonWidth = 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
-      buttonHeight = 12 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
+      buttonHeight = 11 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
       draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
     }
     
@@ -98,7 +98,7 @@ package com.meathill.diy.component
     protected function mouseUpHandler(event:MouseEvent):void {
       this.filters = null;
     }
-    private function rollOutHandler(e:MouseEvent):void {
+    protected function rollOutHandler(e:MouseEvent):void {
       draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
     }
     protected function rollOverHandler(event:MouseEvent):void {

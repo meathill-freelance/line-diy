@@ -1,5 +1,6 @@
 package com.meathill.diy.component.footer 
 {
+  import com.meathill.diy.component.AlphaButton;
   import com.meathill.diy.component.Button;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
@@ -43,6 +44,7 @@ package com.meathill.diy.component.footer
       socialTxt.autoSize = TextFieldAutoSize.LEFT;
       socialTxt.text = '分享给大家：';
       addChild(socialTxt);
+      createSocialButtons();
       
       var haibaoTxt:TextField = new TextField();
       haibaoTxt.defaultTextFormat = socialTxt.defaultTextFormat;
@@ -70,6 +72,17 @@ package com.meathill.diy.component.footer
       socialTxt.mouseEnabled = haibaoTxt.mouseEnabled = shareTxt.mouseEnabled = false;
       
       haibaoButton.y = shareButton.y = 50;
+    }
+    
+    private function createSocialButtons():void {
+      var arr:Array = ['weibo', 'renren', 'douban', 'tweibo', 'wechat'];
+      for (var i:uint = 0, len:uint = arr.length; i < len; i++) {
+        var button:AlphaButton = new AlphaButton(arr[i]);
+        button.name = arr[i];
+        button.x = 30 + AlphaButton.WIDTH * i;
+        button.y = 50;
+        addChild(button);
+      }
     }
     
     
