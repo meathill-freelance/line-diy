@@ -75,7 +75,7 @@ package com.meathill.diy.component.footer
     }
     
     private function createSocialButtons():void {
-      var arr:Array = ['weibo', 'renren', 'douban', 'tweibo', 'wechat'];
+      var arr:Array = ['weibo', 'renren', 'douban', 'tweibo'];
       for (var i:uint = 0, len:uint = arr.length; i < len; i++) {
         var button:AlphaButton = new AlphaButton(arr[i]);
         button.name = arr[i];

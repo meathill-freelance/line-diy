@@ -1,6 +1,6 @@
 package com.meathill.diy.component.options 
 {
-  import com.meathill.diy.component.AlphaButton;
+  import com.meathill.diy.component.Button;
   import com.meathill.diy.component.colorCard.ColorCard;
   import com.meathill.diy.component.number.SquadNumber;
   import com.meathill.diy.config.Colors;
@@ -22,8 +22,8 @@ package com.meathill.diy.component.options
     
     private var label:TextField;
     private var components:Vector.<Sprite>
-    private var prevButton:AlphaButton;
-    private var nextButton:AlphaButton;
+    private var prevButton:Button;
+    private var nextButton:Button;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -59,20 +59,20 @@ package com.meathill.diy.component.options
     public function showStepButtons(hasPrev:Boolean, hasNext:Boolean):void {
       if (hasPrev) {
         if (!prevButton) {
-          prevButton = new AlphaButton('chevronLeft');
+          prevButton = new Button('上一步', 'chevronLeft');
           prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
         }
         prevButton.x = 5;
-        prevButton.y = 5;
+        prevButton.y = height + 20;
         addChild(prevButton);
       }
       if (hasNext) {
         if (!nextButton) {
-          nextButton = new AlphaButton('chevronRight');
+          nextButton = new Button('下一步', 'chevronRight', Button.ICON_RIGHT);
           nextButton.x = WIDTH - nextButton.width - 5;
           nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
         }
-        nextButton.y = 5;
+        nextButton.y = prevButton ? prevButton.y : height + 20;
         addChild(nextButton);
       }
     }

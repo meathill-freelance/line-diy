@@ -12,6 +12,7 @@ package com.meathill.diy.config {
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
+  import com.meathill.diy.model.ConfigModel;
   import com.meathill.diy.popup.PopupManager;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.service.ServerManager;
@@ -37,13 +38,16 @@ package com.meathill.diy.config {
     
     private var server:ServerManager;
     private var cloth:ClothModel;
+    private var config:ConfigModel;
     
     public function configure():void {
       server = new ServerManager();
       cloth = new ClothModel();
+      config = new ConfigModel();
       
       injector.map(ClothModel).toValue(cloth);
       injector.map(ServerManager).toValue(server);
+      injector.map(ConfigModel).toValue(config);
       injector.map(PopupManager).asSingleton();
       injector.map(AssetsManager).asSingleton();
       
@@ -65,7 +69,9 @@ package com.meathill.diy.config {
     }
     
     private function config_loadCompleteHandler(data:String):void {
-      cloth.parse(data);
+      var all:Object = JSON.parse(data);
+      cloth.parse(all);
+      config.parse(all);
       
       eventDispatcher.dispatchEvent(new SystemEvent(SystemEvent.DATA_READY));
     }

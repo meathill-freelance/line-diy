@@ -38,8 +38,7 @@ package com.meathill.diy.model
     }
     
     
-    public function parse(data:String):void {
-      store = JSON.parse(data);
+    public function parse(store:Object):void {
       _steps = new Vector.<SingleStepConfig>;
       for (var i:uint = 0, len:uint = store.steps.length; i < len; i++) {
         _steps.push(new SingleStepConfig(store.steps[i]));
