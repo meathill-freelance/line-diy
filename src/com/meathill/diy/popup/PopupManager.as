@@ -30,7 +30,7 @@ package com.meathill.diy.popup
       curr.beforeShow();
       curr.addEventListener(Event.REMOVED_FROM_STAGE, popup_removedHandler);
       contextView.view.addChild(cover);
-      contextView.view.addChild(popup);
+      contextView.view.addChild(curr);
     }
     
     private function popup_removedHandler(e:Event):void {

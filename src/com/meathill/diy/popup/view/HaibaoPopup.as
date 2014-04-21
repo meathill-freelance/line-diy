@@ -10,11 +10,12 @@ package com.meathill.diy.popup.view
   public class HaibaoPopup extends AbstractPopup
   {
     
-    public function HaibaoPopup() {
-      super();
-			
+    override protected function createContent():void {
+      super.createContent();
     }
-    
+    override protected function resetAttr():void {
+      title = '制作海报';
+    }
   }
 
 }

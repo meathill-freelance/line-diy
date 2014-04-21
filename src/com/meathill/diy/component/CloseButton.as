@@ -14,14 +14,12 @@ package com.meathill.diy.component
       icon.graphics.lineTo(9, 9);
       icon.graphics.moveTo(9, 1);
       icon.graphics.lineTo(1, 9);
-      icon.x = 6;
-      icon.y = 6;
       addChild(icon);
       this.icon = icon;
     }
     override protected function drawBG():void {
-      buttonWidth = 21;
-      buttonHeight = 21;
+      buttonWidth = 24;
+      buttonHeight = 24;
       draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);
     }
     override protected function resetAttr():void {

@@ -96,7 +96,7 @@ package com.meathill.diy.component
     protected function layout():void {
       if (iconPos === ICON_LEFT) {
         if (icon) {
-          icon.x += 10;
+          icon.x += 8;
           icon.y += 8;
         }
         if (label) {

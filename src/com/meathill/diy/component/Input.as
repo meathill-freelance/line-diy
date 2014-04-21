@@ -58,6 +58,7 @@ package com.meathill.diy.component
       if (init.restrict) {
         input.restrict = init.restrict;
       }
+      input.wordWrap = init.wrap;
       input.type = TextFieldType.INPUT;
       input.defaultTextFormat = init.textFormat;
       input.addEventListener(FocusEvent.FOCUS_IN, numberInput_focusInHandler);

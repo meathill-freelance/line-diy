@@ -1,5 +1,6 @@
 package com.meathill.diy.popup 
 {
+  import com.greensock.TweenLite;
   import com.meathill.diy.component.Button;
   import com.meathill.diy.component.CloseButton;
   import com.meathill.diy.component.PrimaryButton;
@@ -43,7 +44,7 @@ package com.meathill.diy.popup
     /* INTERFACE com.meathill.diy.popup.IPopup */
     
     public function beforeShow():void {
-      
+      alpha = 0;
     }
     
     public function afterHide():void {
@@ -124,7 +125,9 @@ package com.meathill.diy.popup
     
     private function addedHandler(e:Event):void {
       x = stage.stageWidth - width >> 1;
-      y = stage.stageHeight - height >> 1;
+      var toy:uint = stage.stageHeight - height >> 1;
+      y = toy + 20;
+      TweenLite.to(this, 0.3, { alpha: 1, y: toy } );
     }
   }
 
