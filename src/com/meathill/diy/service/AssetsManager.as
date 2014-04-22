@@ -19,9 +19,11 @@ package com.meathill.diy.service
   public class AssetsManager extends EventDispatcher
   {
     public static const TEMPLATE:String = 'template';
+    public static const WELCOME:String = 'welcome';
     public static var instance:AssetsManager;
     
     private var _templates:Vector.<Sprite>;
+    private var _welcome:Vector.<Bitmap>;
     private var queue:Array;
     private var isLoading:Boolean = false;
     private var assets:Object;
@@ -32,12 +34,16 @@ package com.meathill.diy.service
       }
       queue = [];
       _templates = new Vector.<Sprite>();
+      _welcome = new Vector.<Bitmap>();
       assets = { };
       instance = this;
     }
     
     public function get templates():Vector.<Sprite> {
       return _templates;
+    }
+    public function get welcome():Vector.<Bitmap> {
+      return _welcome;
     }
     
     public function add(type:String, url:String):void {
@@ -83,6 +89,10 @@ package com.meathill.diy.service
       switch(queue[0].type) {
         case TEMPLATE:
           _templates.push(Sprite(mc));
+          break;
+          
+        case WELCOME:
+          _welcome.push(Bitmap(mc));
           break;
           
         default:

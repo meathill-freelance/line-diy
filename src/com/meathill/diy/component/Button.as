@@ -114,9 +114,12 @@ package com.meathill.diy.component
         }
       }
       
-      
-      buttonWidth = 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
-      buttonHeight = 11 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
+      if (buttonWidth && buttonHeight) {
+        Scaler.recenter(buttonWidth, buttonHeight, icon, label);
+      } else {
+        buttonWidth = 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
+        buttonHeight = 11 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
+      }
     }
     
     protected function resetAttr():void {

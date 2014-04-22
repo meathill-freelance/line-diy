@@ -9,7 +9,9 @@ package com.meathill.diy.component
   public class PrimaryButton extends Button
   {
     
-    public function PrimaryButton(label:String = 'Primary', icon:String = '') {
+    public function PrimaryButton(label:String = 'Primary', icon:String = '', w:uint = 0, h:uint = 0) {
+      buttonWidth = w;
+      buttonHeight = h;
       super(label, icon);
     }
     

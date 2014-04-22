@@ -2,6 +2,7 @@ package com.meathill.diy.controller
 {
   import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.model.ClothModel;
+  import com.meathill.diy.model.ConfigModel;
   import com.meathill.diy.service.AssetsManager;
   import flash.events.Event;
   import flash.events.IEventDispatcher;
@@ -20,6 +21,9 @@ package com.meathill.diy.controller
     public var cloth:ClothModel;
     
     [Inject]
+    public var config:ConfigModel;
+    
+    [Inject]
     public var eventDispatcher:IEventDispatcher;
     
     override public function execute():void {
@@ -30,6 +34,9 @@ package com.meathill.diy.controller
       }
       for (var key:String in cloth.assets) {
         assets.add(key, cloth.assets[key]);
+      }
+      for (i = 0, len = config.welcome.length; i < len; i++) {
+        assets.add(AssetsManager.WELCOME, config.welcome[i]);
       }
       assets.load();
     }

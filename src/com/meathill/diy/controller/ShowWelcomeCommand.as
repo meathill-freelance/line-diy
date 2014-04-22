@@ -22,11 +22,7 @@ package com.meathill.diy.controller
     
     override public function execute():void {
       contextView.view.removeChildAt(0);
-      contextView.view.addChild(new WelcomeView);
-      
-      var mc:Sprite = Sprite(assets.getAsset('number'));
-      var type1:Sprite = Sprite(mc.getChildAt(0));
-      var number1:Sprite = Sprite(type1.getChildAt(0));
+      contextView.view.addChild(new WelcomeView(contextView.view.stage.stageWidth));
     }
     
   }
