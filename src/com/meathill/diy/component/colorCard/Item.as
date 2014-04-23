@@ -1,11 +1,11 @@
 package com.meathill.diy.component.colorCard 
 {
   import com.greensock.TweenLite;
+  import com.meathill.diy.filter.Filters;
   import com.meathill.diy.service.AssetsManager;
   import flash.display.Bitmap;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
-  import flash.filters.BevelFilter;
 	
 	/**
    * ...
@@ -13,7 +13,6 @@ package com.meathill.diy.component.colorCard
    */
   public class Item extends Sprite 
   {
-    public static var bevel:BevelFilter = new BevelFilter(2, 45, 0xFFFFFF, 0.25, 0, 0.25, 2, 2);
     private var _color:uint;
     private var tween:TweenLite;
     private var icon:Bitmap;
@@ -23,7 +22,7 @@ package com.meathill.diy.component.colorCard
 			
       buttonMode = useHandCursor = true;
       mouseChildren = false;
-      filters = [bevel];
+      filters = [Filters.BEVEL];
       draw();
     
       addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);

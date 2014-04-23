@@ -1,26 +1,24 @@
 package com.meathill.diy.view 
 {
   import com.greensock.TweenMax;
+  import com.meathill.diy.filter.Filters;
   import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
   import flash.display.BitmapData;
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.Sprite;
-  import flash.filters.ColorMatrixFilter;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class Preview extends Sprite 
-  {
+  public class Preview extends Sprite {
     private var loader:Loader;
     private var cloth:Sprite;
     
     public function Preview() {
       buttonMode = useHandCursor = true;
-			
     }
     
     public function show(mc:Sprite):void {
@@ -33,14 +31,8 @@ package com.meathill.diy.view
       cloth.y = - cloth.height >> 1;
       addChild(cloth);
     }
-    public function setColor(color:Object, step:uint):void {
-      var piece:DisplayObject = cloth.getChildAt(step),
-          matrix:Array = [color.r, 0, 0, 0, 1];
-      matrix = matrix.concat([0, color.g, 0, 0, 1]);
-      matrix = matrix.concat([0, 0, color.b, 0, 1]);
-      matrix = matrix.concat([0, 0, 0, 1, 0]);
-      var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
-      piece.filters = [filter];
+    public function setColor(color:uint, step:uint):void {
+      cloth.getChildAt(step).filters = [Filters.getColorFilter(color)];
     }
     public function setNumber(number:uint, style:uint, step:uint, length:uint, asset:Sprite):void {
       var piece:Sprite = Sprite(cloth.getChildAt(step));

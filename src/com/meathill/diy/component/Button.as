@@ -1,14 +1,13 @@
 package com.meathill.diy.component 
 {
   import com.meathill.diy.config.Typography;
+  import com.meathill.diy.filter.Filters;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.utils.ColorMaker;
   import com.meathill.diy.utils.Scaler;
   import flash.display.DisplayObject;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
-  import flash.filters.BitmapFilterQuality;
-  import flash.filters.DropShadowFilter;
   import flash.geom.ColorTransform;
   import flash.text.TextField;
   import flash.text.TextFieldAutoSize;
@@ -39,7 +38,6 @@ package com.meathill.diy.component
     protected var hoverBorderColor:uint = 0xADADAD;
     protected var hasBorder:Boolean = true;
     protected var hasHoverBorder:Boolean = true;
-    protected var activeFilter:DropShadowFilter = new DropShadowFilter(4, 90, 0, 0.125, 4, 4, 2, BitmapFilterQuality.MEDIUM, true);
     protected var textFormat:TextFormat = Typography.getTextFormat(Typography.BODY);
     
     public function Button(label:String = 'button', icon:String = '', iconPos:uint = 1) {
@@ -126,7 +124,7 @@ package com.meathill.diy.component
       
     }
     protected function mouseDownHandler(event:MouseEvent):void {
-      this.filters = [activeFilter];
+      this.filters = [Filters.DOWN_SHADOW];
     }
     protected function mouseUpHandler(event:MouseEvent):void {
       this.filters = null;

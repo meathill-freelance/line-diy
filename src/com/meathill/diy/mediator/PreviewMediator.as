@@ -5,7 +5,6 @@ package com.meathill.diy.mediator
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.service.AssetsManager;
-  import com.meathill.diy.utils.ColorMaker;
   import com.meathill.diy.view.Preview;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
@@ -44,7 +43,7 @@ package com.meathill.diy.mediator
         var config:SingleStepConfig = steps[i];
         if (config.type === 'color') {
           trace('use color: ', config.color.toString(16));
-          view.setColor(ColorMaker.color2rgb(config.color, 255), i);
+          view.setColor(config.color, i);
           continue;
         }
         if (config.type === 'number') {
@@ -70,7 +69,7 @@ package com.meathill.diy.mediator
     }
     // DesignEvent
     private function color_changeHandler(e:DesignEvent):void {
-      view.setColor(ColorMaker.color2rgb(e.color, 255), e.piece);
+      view.setColor(e.color, e.piece);
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.steps[cloth.step];

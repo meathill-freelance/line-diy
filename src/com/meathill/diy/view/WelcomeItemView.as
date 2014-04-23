@@ -1,5 +1,6 @@
 package com.meathill.diy.view 
 {
+  import com.greensock.TweenLite;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.utils.Scaler;
@@ -46,6 +47,11 @@ package com.meathill.diy.view
       
       useHandCursor = buttonMode = true;
 			mouseChildren = false;
+      alpha = 0;
+    }
+    
+    public function fadeInUp(index:uint):void {
+      TweenLite.to(this, 0.6, { alpha: 100, y: 100, delay: index * 0.4 } );
     }
     
     private function createLabel(name:String):void {

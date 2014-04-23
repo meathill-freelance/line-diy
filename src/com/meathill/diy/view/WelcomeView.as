@@ -23,9 +23,10 @@ package com.meathill.diy.view
       for (var i:uint = 0, len:uint = welcome.length; i < len; i++) {
         var mc:WelcomeItemView = new WelcomeItemView(welcome[i], names[i]);
         mc.x = 100 + WelcomeItemView.GAP * i;
-        mc.y = 100;
+        mc.y = 120;
         mc.enable = i === 0;
         mc.selected = i === 0;
+        mc.fadeInUp(i);
         addChild(mc);
       }
     }

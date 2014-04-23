@@ -9,7 +9,6 @@ package com.meathill.diy.popup
 	import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
-  import flash.filters.DropShadowFilter;
   import flash.text.TextField;
   import flash.text.TextFieldAutoSize;
 	
@@ -17,9 +16,7 @@ package com.meathill.diy.popup
    * ...
    * @author Meathill
    */
-  public class AbstractPopup extends Sprite implements IPopup 
-  {
-    public static const FILTER:DropShadowFilter = new DropShadowFilter(8, 90, 0.4, 4, 4);
+  public class AbstractPopup extends Sprite implements IPopup {
     protected var hasConfirm:Boolean;
     protected var confirmLable:String = '确定';
     protected var hasCancel:Boolean;
@@ -36,7 +33,6 @@ package com.meathill.diy.popup
       resetAttr();
 			layout();
       draw();
-      this.filters = [FILTER];
       
       addEventListener(Event.ADDED_TO_STAGE, addedHandler);
     }
