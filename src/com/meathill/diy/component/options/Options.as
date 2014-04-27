@@ -1,13 +1,17 @@
 package com.meathill.diy.component.options 
 {
   import com.meathill.diy.component.Button;
-  import com.meathill.diy.component.colorCard.ColorCard;
-  import com.meathill.diy.component.number.SquadNumber;
+  import com.meathill.diy.component.options.ColorCard;
+  import com.meathill.diy.component.options.ColorCardItem;
+  import com.meathill.diy.component.options.SquadNumber;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
+  import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
+  import com.meathill.diy.service.AssetsManager;
   import flash.display.Sprite;
+  import flash.events.Event;
   import flash.events.MouseEvent;
   import flash.text.TextField;
   import flash.text.TextFormatAlign;
@@ -37,7 +41,10 @@ package com.meathill.diy.component.options
     
     public function clear():void {
       while (components.length) {
-        removeChild(components.pop());
+        var component:Sprite = components.pop();
+        component.removeEventListener(MouseEvent.CLICK, colorCard_clickHandler);
+        component.removeEventListener(DesignEvent.SET_SQUAD_NUMBER, dispatchEvent);
+        removeChild(component);
       }
       if (prevButton && contains(prevButton)) {
         removeChild(prevButton);
@@ -50,10 +57,7 @@ package com.meathill.diy.component.options
       label.text = config.title;
       var all:Array = config.type.split('|');
       for (var i:uint = 0, len:uint = all.length; i < len; i++) {
-        var component:Sprite = createComponent(all[i], config);
-        component.y = height + 10;
-        addChild(component);
-        components.push(component);
+        createComponent(all[i], config);
       }
     }
     public function showStepButtons(hasPrev:Boolean, hasNext:Boolean):void {
@@ -77,19 +81,34 @@ package com.meathill.diy.component.options
       }
     }
     
-    private function createComponent(type:String, config:SingleStepConfig):Sprite {
+    private function createComponent(type:String, config:SingleStepConfig):void {
       switch(type) {
         case 'color':
-          return new ColorCard(config);
+          createColorCard(config, 50);
           break;
           
         case 'number':
-          return new SquadNumber(config);
+          createSquadNumber(config, 50);
+          createColorCard(config, 250, colorCardForSquadNumber_clickHandler);
           break;
-          
-        default:
-          return null;
       }
+    }
+    private function createColorCard(config:SingleStepConfig, offset:uint = 50, handler:Function = null):ColorCard {
+      handler = handler || colorCard_clickHandler;
+      var colorCard:ColorCard = new ColorCard(config);
+      colorCard.addEventListener(MouseEvent.CLICK, handler);
+      colorCard.y = offset;
+      components.push(colorCard);
+      addChild(colorCard);
+      return colorCard;
+    }
+    private function createSquadNumber(config:SingleStepConfig, offset:uint = 50):SquadNumber {
+      var number:SquadNumber = new SquadNumber(config, Sprite(AssetsManager.instance.getAsset(config.asset)));
+      number.addEventListener(Event.CHANGE, number_changeHandler);
+      number.y = 50;
+      components.push(number);
+      addChild(number);
+      return number;
     }
     private function createTextField():void {
       label = new TextField();
@@ -107,6 +126,32 @@ package com.meathill.diy.component.options
       graphics.endFill();
     }
     
+    
+    private function colorCard_clickHandler(e:MouseEvent):void {
+      var colorCard:ColorCard = ColorCard(e.currentTarget)
+        , curr:ColorCardItem = ColorCardItem(colorCard.getChildByName('active'));
+      if (curr) {
+        curr.deactive();
+      }
+      var item:ColorCardItem = ColorCardItem(e.target);
+      item.active();
+      var event:DesignEvent = new DesignEvent(DesignEvent.SELECT_COLOR);
+      event.color = item.color;
+      dispatchEvent(event);
+    }
+    private function colorCardForSquadNumber_clickHandler(event:MouseEvent):void {
+      var number:SquadNumber = SquadNumber(components[0]);
+      var item:ColorCardItem = ColorCardItem(event.target);
+      item.active();
+      number.color = item.color;
+    }
+    private function number_changeHandler(e:Event):void {
+      var number:SquadNumber = SquadNumber(e.currentTarget);
+      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
+      event.number = number.number;
+      event.style = number.style;
+      dispatchEvent(event);
+    }
     private function prevButton_clickHandler(e:MouseEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.PREV_STEP);
       dispatchEvent(event);

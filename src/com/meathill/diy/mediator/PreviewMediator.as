@@ -69,7 +69,7 @@ package com.meathill.diy.mediator
     }
     // DesignEvent
     private function color_changeHandler(e:DesignEvent):void {
-      view.setColor(e.color, e.piece);
+      view.setColor(e.color, cloth.step);
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.steps[cloth.step];

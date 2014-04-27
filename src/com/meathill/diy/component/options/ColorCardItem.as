@@ -1,4 +1,4 @@
-package com.meathill.diy.component.colorCard 
+package com.meathill.diy.component.options 
 {
   import com.greensock.TweenLite;
   import com.meathill.diy.filter.Filters;
@@ -11,13 +11,13 @@ package com.meathill.diy.component.colorCard
    * ...
    * @author Meathill
    */
-  public class Item extends Sprite 
+  public class ColorCardItem extends Sprite 
   {
     private var _color:uint;
     private var tween:TweenLite;
     private var icon:Bitmap;
     
-    public function Item(color:uint) {
+    public function ColorCardItem(color:uint) {
       _color = color;
 			
       buttonMode = useHandCursor = true;

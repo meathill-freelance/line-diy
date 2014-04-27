@@ -1,22 +1,28 @@
 package com.meathill.diy.component.options 
 {
+  import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
+  import com.meathill.diy.service.AssetsManager;
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class OptionsMediator extends Mediator 
-  {
+  public class OptionsMediator extends Mediator {
     [Inject]
     public var view:Options;
     
     [Inject]
     public var cloth:ClothModel;
     
+    [Inject]
+    public var assets:AssetsManager;
+    
     override public function initialize():void {
+      addViewListener(DesignEvent.SELECT_COLOR, dispatch);
+      addViewListener(DesignEvent.SET_SQUAD_NUMBER, dispatch);
       addViewListener(UserEvent.PREV_STEP, view_gotoPrevHandler);
       addViewListener(UserEvent.NEXT_STEP, view_gotoNextHandler);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);

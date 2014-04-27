@@ -1,9 +1,10 @@
-package com.meathill.diy.component.number 
+package com.meathill.diy.component.options 
 {
   import com.meathill.diy.component.Button;
   import com.meathill.diy.component.Input;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.DesignEvent;
+  import com.meathill.diy.filter.Filters;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
@@ -12,6 +13,9 @@ package com.meathill.diy.component.number
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
+  import flash.geom.Matrix;
+  import flash.sampler.getSize;
+  import flash.sampler.getSize;
   import flash.text.TextFormatAlign;
 	
 	/**
@@ -26,25 +30,35 @@ package com.meathill.diy.component.number
     private var preview:Sprite;
     private var prevButton:Button;
     private var nextButton:Button;
-    private var style:uint;
+    private var _style:uint;
     private var totalStyle:uint;
+    private var _color:uint;
     
-    public function SquadNumber(config:SingleStepConfig) {
+    public function SquadNumber(config:SingleStepConfig, asset:Sprite) {
       _config = config;
-      layout();
-    }
-    
-    public function get config():SingleStepConfig {
-      return _config;
-    }
-    public function set asset(value:Sprite):void {
-      _asset = value;
+      _asset = asset;
       totalStyle = _asset.numChildren;
+      layout();
       draw();
     }
+    public function get number():uint {
+      return uint(numberInput.value);
+    }
+    public function get style():uint {
+      return _style;
+    }
     
+    
+    public function setColor(value:uint, index:uint = 0):void {
+      addFilter(value, index);
+    }
+    
+    
+    private function addFilter(color:uint, index:uint):void {
+      preview.getChildAt(index).filters = [Filters.getColorFilter(color, 0)];
+    }
     private function draw():void {
-      var numberAsset:Sprite = Sprite(_asset.getChildAt(style));
+      var numberAsset:Sprite = Sprite(_asset.getChildAt(_style));
       while (preview.numChildren) {
         preview.removeChildAt(0);
       }
@@ -52,10 +66,10 @@ package com.meathill.diy.component.number
         var index:uint = parseInt(numberInput.value.charAt(i));
         index = index === 0 ? 10 : index;
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
-        var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
-        bmpd.draw(mc);
+        var size:Object = Scaler.getSize(mc, 50, 100);
+        var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
+        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height));
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        Scaler.resize(bmp, 50, 100);
         bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
         preview.addChild(bmp);
       }
@@ -90,23 +104,20 @@ package com.meathill.diy.component.number
       addChild(preview);
     }
     private function dispatchChangeEvent():void {
-      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
-      event.number = uint(numberInput.value);
-      event.style = style;
-      event
+      var event:Event = new Event(Event.CHANGE);
       dispatchEvent(event);
     }
     
     
     private function prevButton_clickHandler(e:MouseEvent):void {
-      style = style === 0 ? totalStyle - 1 : (style - 1);
+      _style = _style === 0 ? totalStyle - 1 : (_style - 1);
       draw();
       dispatchChangeEvent();
     }
     
     private function nextButton_clickHandler(e:MouseEvent):void {
-      style++;
-      style = style > totalStyle - 1 ? totalStyle - 1: style;
+      _style++;
+      _style = _style > totalStyle - 1 ? totalStyle - 1: _style;
       draw();
       dispatchChangeEvent();
     }

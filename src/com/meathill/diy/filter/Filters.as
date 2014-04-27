@@ -33,11 +33,11 @@ package com.meathill.diy.filter
     public static const BLUR:BlurFilter = new BlurFilter();
     public static const GLOW_RED:GlowFilter = new GlowFilter(Colors.ALIZARIN, 0.5, 16, 16, 4, BitmapFilterQuality.MEDIUM);
     
-    public static function getColorFilter(color:uint):ColorMatrixFilter {
+    public static function getColorFilter(color:uint, base:uint = 1):ColorMatrixFilter {
       var rgb:Object = ColorMaker.color2rgb(color, 255);
-      var matrix:Array = [rgb.r, 0, 0, 0, 1];
-      matrix = matrix.concat([0, rgb.g, 0, 0, 1]);
-      matrix = matrix.concat([0, 0, rgb.b, 0, 1]);
+      var matrix:Array = [rgb.r, 0, 0, 0, base];
+      matrix = matrix.concat([0, rgb.g, 0, 0, base]);
+      matrix = matrix.concat([0, 0, rgb.b, 0, base]);
       matrix = matrix.concat([0, 0, 0, 1, 0]);
       return new ColorMatrixFilter(matrix);
     }

@@ -6,20 +6,26 @@ package com.meathill.diy.utils
    * ...
    * @author Meathill
    */
-  public class Scaler 
-  {
-    public static function resize(mc:DisplayObject, w:uint, h:uint, isContain:Boolean = true):void {
+  public class Scaler {
+    public static function getSize(mc:DisplayObject, w:uint, h:uint, isContain:Boolean = true):Object {
       var width:uint = mc.width;
       var height:uint = mc.height;
+      var size:Object = { };
       if (width > w || height > h) {
         if (w / h > width / height) {
-          mc.height = h;
-          mc.width = width / height * h;
+          size.height = h;
+          size.width = width / height * h;
         } else {
-          mc.width = w;
-          mc.height = height / width * w;
+          size.width = w;
+          size.height = height / width * w;
         }
       }
+      return size;
+    }
+    public static function resize(mc:DisplayObject, w:uint, h:uint, isContain:Boolean = true):void {
+      var size:Object = getSize(mc, w, h, isContain);
+      mc.width = size.width;
+      mc.height = size.height;
       mc.x = w - mc.width >> 1;
       mc.y = h - mc.height >> 1;
     }

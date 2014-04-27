@@ -8,6 +8,7 @@ package com.meathill.diy.view
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.Sprite;
+  import flash.geom.Matrix;
 	
 	/**
    * ...
@@ -48,10 +49,10 @@ package com.meathill.diy.view
         var index:uint = parseInt(str.charAt(i));
         index = index === 0 ? 10 : index;
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
-        var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
-        bmpd.draw(mc);
+        var size:Object = Scaler.getSize(mc, width / len, height);
+        var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
+        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height));
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        Scaler.resize(bmp, width / len, height);
         bmp.x += i * width / len; 
         piece.addChild(bmp);
       }
