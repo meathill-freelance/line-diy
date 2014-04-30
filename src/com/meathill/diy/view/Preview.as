@@ -51,7 +51,7 @@ package com.meathill.diy.view
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
         var size:Object = Scaler.getSize(mc, width / len, height);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
-        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height));
+        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
         bmp.x += i * width / len; 
         piece.addChild(bmp);

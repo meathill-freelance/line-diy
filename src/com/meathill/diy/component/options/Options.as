@@ -105,6 +105,7 @@ package com.meathill.diy.component.options
     private function createSquadNumber(config:SingleStepConfig, offset:uint = 50):SquadNumber {
       var number:SquadNumber = new SquadNumber(config, Sprite(AssetsManager.instance.getAsset(config.asset)));
       number.addEventListener(Event.CHANGE, number_changeHandler);
+      number.addEventListener(DesignEvent.DOUBLE_COLOR, number_doubleColorEvent);
       number.y = 50;
       components.push(number);
       addChild(number);
@@ -141,9 +142,14 @@ package com.meathill.diy.component.options
     }
     private function colorCardForSquadNumber_clickHandler(event:MouseEvent):void {
       var number:SquadNumber = SquadNumber(components[0]);
+      var colorCard:ColorCard = ColorCard(event.currentTarget);
       var item:ColorCardItem = ColorCardItem(event.target);
+      var curr:ColorCardItem = ColorCardItem(colorCard.getChildByName('active'));
+      if (curr) {
+        curr.deactive();
+      }
       item.active();
-      number.color = item.color;
+      number.setColor(item.color);
     }
     private function number_changeHandler(e:Event):void {
       var number:SquadNumber = SquadNumber(e.currentTarget);
@@ -151,6 +157,9 @@ package com.meathill.diy.component.options
       event.number = number.number;
       event.style = number.style;
       dispatchEvent(event);
+    }
+    private function number_doubleColorEvent(e:DesignEvent):void {
+      
     }
     private function prevButton_clickHandler(e:MouseEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.PREV_STEP);

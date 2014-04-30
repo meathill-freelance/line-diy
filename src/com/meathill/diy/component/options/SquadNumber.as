@@ -6,6 +6,7 @@ package com.meathill.diy.component.options
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.model.vo.SingleStepConfig;
+  import com.meathill.diy.utils.ColorMaker;
   import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
   import flash.display.BitmapData;
@@ -13,6 +14,7 @@ package com.meathill.diy.component.options
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
+  import flash.geom.ColorTransform;
   import flash.geom.Matrix;
   import flash.sampler.getSize;
   import flash.sampler.getSize;
@@ -33,11 +35,13 @@ package com.meathill.diy.component.options
     private var _style:uint;
     private var totalStyle:uint;
     private var _color:uint;
+    private var colorTransforms:Vector.<ColorTransform>;
     
     public function SquadNumber(config:SingleStepConfig, asset:Sprite) {
       _config = config;
       _asset = asset;
       totalStyle = _asset.numChildren;
+      colorTransforms = new Vector.<ColorTransform>;
       layout();
       draw();
     }
@@ -55,7 +59,9 @@ package com.meathill.diy.component.options
     
     
     private function addFilter(color:uint, index:uint):void {
-      preview.getChildAt(index).filters = [Filters.getColorFilter(color, 0)];
+      var rgb:Object = ColorMaker.color2rgb(color);
+      colorTransforms[index] = new ColorTransform(0, 0, 0, 1, rgb.r, rgb.g, rgb.b);
+      draw();
     }
     private function draw():void {
       var numberAsset:Sprite = Sprite(_asset.getChildAt(_style));
@@ -68,7 +74,7 @@ package com.meathill.diy.component.options
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
         var size:Object = Scaler.getSize(mc, 50, 100);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
-        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height));
+        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), colorTransforms.length > 0 ? colorTransforms[0] : null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
         bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
         preview.addChild(bmp);
