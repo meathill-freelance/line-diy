@@ -11,6 +11,7 @@ package com.meathill.diy.event
   {
     public static const SELECT_COLOR:String = "select_color";
     static public const SET_SQUAD_NUMBER:String = "setSquadNumber";
+    static public const DOUBLE_COLOR:String = "doubleColor";
     
     private var _piece:uint;
     private var _color:uint;

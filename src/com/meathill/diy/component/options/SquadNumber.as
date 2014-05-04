@@ -71,7 +71,12 @@ package com.meathill.diy.component.options
       for (var i:uint = 0, len:uint = numberInput.value.length; i < len; i++) {
         var index:uint = parseInt(numberInput.value.charAt(i));
         index = index === 0 ? 10 : index;
-        var mc:DisplayObject = numberAsset.getChildAt(index - 1);
+        var mc:Sprite = Sprite(numberAsset.getChildAt(index - 1));
+        if (mc.numChildren > 1) {
+          var event:DesignEvent = new DesignEvent(DesignEvent.DOUBLE_COLOR);
+          dispatchEvent(event);
+          
+        }
         var size:Object = Scaler.getSize(mc, 50, 100);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
         bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), colorTransforms.length > 0 ? colorTransforms[0] : null, null, null, true);

@@ -5,9 +5,9 @@ package com.meathill.diy.model.vo
    * ...
    * @author Meathill
    */
-  public class SingleStepConfig 
-  {
+  public class SingleStepConfig {
     private var _color:uint;
+    private var _color2:uint;
     private var _number:uint;
     private var _type:String;
     private var _title:String;
@@ -21,6 +21,7 @@ package com.meathill.diy.model.vo
       _type = src.type;
       _title = src.title;
       _color = parseInt(src.color, 16);
+      _color2 = parseInt(src.color2, 16);
       _colors = src.colors;
       _asset = src.asset;
       _length = src.length;
@@ -50,6 +51,13 @@ package com.meathill.diy.model.vo
     public function set color(value:uint):void {
       _color = value;
     }
+    
+    public function get color2():uint {
+      return _color2;
+    }
+    public function set color2(value:uint):void {
+      _color2 = value;
+    }
     public function get number():uint {
       return _number;
     }
@@ -62,7 +70,5 @@ package com.meathill.diy.model.vo
     public function set style(value:uint):void {
       _style = value;
     }
-    
   }
-
 }
