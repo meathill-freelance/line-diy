@@ -4,6 +4,7 @@ package com.meathill.diy.component.options
   import com.meathill.diy.component.Input;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.DesignEvent;
+  import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.utils.ColorMaker;
@@ -35,13 +36,11 @@ package com.meathill.diy.component.options
     private var _style:uint;
     private var totalStyle:uint;
     private var _color:uint;
-    private var colorTransforms:Vector.<ColorTransform>;
     
     public function SquadNumber(config:SingleStepConfig, asset:Sprite) {
       _config = config;
       _asset = asset;
       totalStyle = _asset.numChildren;
-      colorTransforms = new Vector.<ColorTransform>;
       layout();
       draw();
     }
@@ -53,18 +52,13 @@ package com.meathill.diy.component.options
     }
     
     
-    public function setColor(value:uint, index:uint = 0):void {
-      addFilter(value, index);
-    }
-    
-    
-    private function addFilter(color:uint, index:uint):void {
-      var rgb:Object = ColorMaker.color2rgb(color);
-      colorTransforms[index] = new ColorTransform(0, 0, 0, 1, rgb.r, rgb.g, rgb.b);
+    public function setColor():void {
       draw();
     }
+    
     private function draw():void {
       var numberAsset:Sprite = Sprite(_asset.getChildAt(_style));
+      var event:SystemEvent;
       while (preview.numChildren) {
         preview.removeChildAt(0);
       }
@@ -73,13 +67,19 @@ package com.meathill.diy.component.options
         index = index === 0 ? 10 : index;
         var mc:Sprite = Sprite(numberAsset.getChildAt(index - 1));
         if (mc.numChildren > 1) {
-          var event:DesignEvent = new DesignEvent(DesignEvent.DOUBLE_COLOR);
+          event = new SystemEvent(SystemEvent.DOUBLE_COLOR);
           dispatchEvent(event);
-          
+          for (var j:uint = 0, jlen:uint = mc.numChildren; j < jlen; j++) {
+            ColorMaker.colorMC(j & 1 ? _config.color2 : _config.color, mc.getChildAt(j));
+          }
+        } else {
+          event = new SystemEvent(SystemEvent.SINGLE_COLOR);
+          dispatchEvent(event);
+          ColorMaker.colorMC(_config.color, mc.getChildAt(0));
         }
         var size:Object = Scaler.getSize(mc, 50, 100);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
-        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), colorTransforms.length > 0 ? colorTransforms[0] : null, null, null, true);
+        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
         bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
         preview.addChild(bmp);
@@ -128,7 +128,7 @@ package com.meathill.diy.component.options
     
     private function nextButton_clickHandler(e:MouseEvent):void {
       _style++;
-      _style = _style > totalStyle - 1 ? totalStyle - 1: _style;
+      _style = _style > totalStyle - 1 ? 0 : _style;
       draw();
       dispatchChangeEvent();
     }

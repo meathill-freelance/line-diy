@@ -32,6 +32,7 @@ package com.meathill.diy.filter
     
     public static const BLUR:BlurFilter = new BlurFilter();
     public static const GLOW_RED:GlowFilter = new GlowFilter(Colors.ALIZARIN, 0.5, 16, 16, 4, BitmapFilterQuality.MEDIUM);
+    static public const DISABLED:Array = [BLUR];
     
     public static function getColorFilter(color:uint, base:uint = 1):ColorMatrixFilter {
       var rgb:Object = ColorMaker.color2rgb(color, 255);

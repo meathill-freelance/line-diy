@@ -58,6 +58,17 @@ package com.meathill.diy.component
       addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
     }
     
+    public function disable():void {
+      mouseEnabled = buttonMode = useHandCursor = false;
+      filters = Filters.DISABLED;
+      alpha = 0.8;
+    }
+    public function enable():void {
+      mouseEnabled = buttonMode = useHandCursor = true;
+      filters = null;
+      alpha = 1;
+    }
+    
     protected function createIcon():void {
       if (!iconAsset) {
         return;

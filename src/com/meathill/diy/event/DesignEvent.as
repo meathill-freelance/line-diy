@@ -10,8 +10,7 @@ package com.meathill.diy.event
   public class DesignEvent extends Event 
   {
     public static const SELECT_COLOR:String = "select_color";
-    static public const SET_SQUAD_NUMBER:String = "setSquadNumber";
-    static public const DOUBLE_COLOR:String = "doubleColor";
+    static public const SET_SQUAD_NUMBER:String = "set_squad_number";
     
     private var _piece:uint;
     private var _color:uint;

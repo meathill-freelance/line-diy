@@ -4,9 +4,11 @@ package com.meathill.diy.component.options
   import com.meathill.diy.component.options.ColorCard;
   import com.meathill.diy.component.options.ColorCardItem;
   import com.meathill.diy.component.options.SquadNumber;
+  import com.meathill.diy.component.tab.Tab;
   import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.DesignEvent;
+  import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.service.AssetsManager;
@@ -28,6 +30,10 @@ package com.meathill.diy.component.options
     private var components:Vector.<Sprite>
     private var prevButton:Button;
     private var nextButton:Button;
+    private var tab:Tab;
+    private var colorCard:ColorCard;
+    private var config:SingleStepConfig;
+    private var number:SquadNumber;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -42,8 +48,12 @@ package com.meathill.diy.component.options
     public function clear():void {
       while (components.length) {
         var component:Sprite = components.pop();
-        component.removeEventListener(MouseEvent.CLICK, colorCard_clickHandler);
+        component.removeEventListener(Event.CHANGE, colorCard_changeHandler);
+        component.removeEventListener(Event.CHANGE, colorCardForSquadNumber_changeHandler);
+        component.removeEventListener(Event.CHANGE, tab_changeHandler);
         component.removeEventListener(DesignEvent.SET_SQUAD_NUMBER, dispatchEvent);
+        component.removeEventListener(SystemEvent.SINGLE_COLOR, number_singleColorEvent);
+        component.removeEventListener(SystemEvent.DOUBLE_COLOR, number_doubleColorEvent);
         removeChild(component);
       }
       if (prevButton && contains(prevButton)) {
@@ -54,6 +64,7 @@ package com.meathill.diy.component.options
       }
     }
     public function show(config:SingleStepConfig):void {
+      this.config = config;
       label.text = config.title;
       var all:Array = config.type.split('|');
       for (var i:uint = 0, len:uint = all.length; i < len; i++) {
@@ -89,28 +100,42 @@ package com.meathill.diy.component.options
           
         case 'number':
           createSquadNumber(config, 50);
-          createColorCard(config, 250, colorCardForSquadNumber_clickHandler);
+          createTab(250);
+          createColorCard(config, 300, colorCardForSquadNumber_changeHandler);
           break;
       }
     }
+    
     private function createColorCard(config:SingleStepConfig, offset:uint = 50, handler:Function = null):ColorCard {
-      handler = handler || colorCard_clickHandler;
-      var colorCard:ColorCard = new ColorCard(config);
-      colorCard.addEventListener(MouseEvent.CLICK, handler);
+      handler = handler || colorCard_changeHandler;
+      colorCard = new ColorCard(config);
+      colorCard.addEventListener(Event.CHANGE, handler);
       colorCard.y = offset;
       components.push(colorCard);
       addChild(colorCard);
       return colorCard;
     }
     private function createSquadNumber(config:SingleStepConfig, offset:uint = 50):SquadNumber {
-      var number:SquadNumber = new SquadNumber(config, Sprite(AssetsManager.instance.getAsset(config.asset)));
+      number = new SquadNumber(config, Sprite(AssetsManager.instance.getAsset(config.asset)));
       number.addEventListener(Event.CHANGE, number_changeHandler);
-      number.addEventListener(DesignEvent.DOUBLE_COLOR, number_doubleColorEvent);
-      number.y = 50;
+      number.addEventListener(SystemEvent.SINGLE_COLOR, number_singleColorEvent);
+      number.addEventListener(SystemEvent.DOUBLE_COLOR, number_doubleColorEvent);
+      number.y = offset;
       components.push(number);
       addChild(number);
       return number;
     }
+    private function createTab(offset:uint = 50):Tab {
+      tab = new Tab();
+      tab.addTab('颜色1', null);
+      tab.addTab('颜色2', null);
+      tab.addEventListener(Event.CHANGE, tab_changeHandler);
+      tab.y = offset;
+      components.push(tab);
+      addChild(tab);
+      return tab;
+    }
+    
     private function createTextField():void {
       label = new TextField();
       label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff, align: TextFormatAlign.CENTER, bold: true } );
@@ -127,39 +152,35 @@ package com.meathill.diy.component.options
       graphics.endFill();
     }
     
-    
-    private function colorCard_clickHandler(e:MouseEvent):void {
-      var colorCard:ColorCard = ColorCard(e.currentTarget)
-        , curr:ColorCardItem = ColorCardItem(colorCard.getChildByName('active'));
-      if (curr) {
-        curr.deactive();
-      }
-      var item:ColorCardItem = ColorCardItem(e.target);
-      item.active();
+    private function colorCard_changeHandler(e:Event):void {
       var event:DesignEvent = new DesignEvent(DesignEvent.SELECT_COLOR);
-      event.color = item.color;
+      event.color = colorCard.color;
       dispatchEvent(event);
     }
-    private function colorCardForSquadNumber_clickHandler(event:MouseEvent):void {
-      var number:SquadNumber = SquadNumber(components[0]);
-      var colorCard:ColorCard = ColorCard(event.currentTarget);
-      var item:ColorCardItem = ColorCardItem(event.target);
-      var curr:ColorCardItem = ColorCardItem(colorCard.getChildByName('active'));
-      if (curr) {
-        curr.deactive();
-      }
-      item.active();
-      number.setColor(item.color);
-    }
-    private function number_changeHandler(e:Event):void {
-      var number:SquadNumber = SquadNumber(e.currentTarget);
+    private function colorCardForSquadNumber_changeHandler(e:Event):void {
+      config[tab.value ? 'color2' : 'color'] = colorCard.color;
+      number.setColor();
+      
       var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
       event.number = number.number;
       event.style = number.style;
       dispatchEvent(event);
     }
-    private function number_doubleColorEvent(e:DesignEvent):void {
-      
+    private function number_changeHandler(e:Event):void {
+      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
+      event.number = number.number;
+      event.style = number.style;
+      dispatchEvent(event);
+    }
+    private function number_singleColorEvent(e:SystemEvent):void {
+      tab.active(0);
+      tab.disable(1);
+    }
+    private function number_doubleColorEvent(e:SystemEvent):void {
+      tab.enable(1);
+    }
+    private function tab_changeHandler(e:Event):void {
+      colorCard.color = tab.value ? config.color2 : config.color;
     }
     private function prevButton_clickHandler(e:MouseEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.PREV_STEP);
