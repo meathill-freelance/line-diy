@@ -60,6 +60,7 @@ package com.meathill.diy.config {
       commandMap.map(UserEvent.BUY).toCommand(BuyCommand);
       commandMap.map(DesignEvent.SELECT_COLOR).toCommand(SelectColorCommand);
       commandMap.map(DesignEvent.SET_SQUAD_NUMBER).toCommand(SetSquadNumberCommand);
+      commandMap.map(DesignEvent.SET_TEAM_NAME).toCommand(SetTeamNameCommand);
       
       loadConfig();
     }

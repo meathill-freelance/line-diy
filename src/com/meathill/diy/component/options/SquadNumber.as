@@ -125,7 +125,6 @@ package com.meathill.diy.component.options
       draw();
       dispatchChangeEvent();
     }
-    
     private function nextButton_clickHandler(e:MouseEvent):void {
       _style++;
       _style = _style > totalStyle - 1 ? 0 : _style;

@@ -15,6 +15,8 @@ package com.meathill.diy.model.vo
     private var _asset:String;
     private var _length:uint;
     private var _style:uint;
+    private var _teamname:String;
+    private var _font:String;
     
     public function SingleStepConfig(src:Object) {
       trace(JSON.stringify(src));
@@ -27,6 +29,8 @@ package com.meathill.diy.model.vo
       _length = src.length;
       _number = src.number;
       _style = src.style;
+      _teamname = src.teamname;
+      _font = src.font;
     }
     
     public function get type():String {
@@ -69,6 +73,18 @@ package com.meathill.diy.model.vo
     }
     public function set style(value:uint):void {
       _style = value;
+    }
+    public function get teamname():String {
+      return _teamname;
+    }
+    public function set teamname(value:String):void {
+      _teamname = value;
+    }
+    public function get font():String {
+      return _font;
+    }
+    public function set font(value:String):void {
+      _font = value;
     }
   }
 }

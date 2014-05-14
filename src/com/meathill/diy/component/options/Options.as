@@ -34,6 +34,7 @@ package com.meathill.diy.component.options
     private var colorCard:ColorCard;
     private var config:SingleStepConfig;
     private var number:SquadNumber;
+    private var teamName:TeamName;
     
     public function Options() {
       components = new Vector.<Sprite>();
@@ -52,6 +53,7 @@ package com.meathill.diy.component.options
         component.removeEventListener(Event.CHANGE, colorCardForSquadNumber_changeHandler);
         component.removeEventListener(Event.CHANGE, tab_changeHandler);
         component.removeEventListener(DesignEvent.SET_SQUAD_NUMBER, dispatchEvent);
+        component.removeEventListener(DesignEvent.SET_TEAM_NAME, dispatchEvent);
         component.removeEventListener(SystemEvent.SINGLE_COLOR, number_singleColorEvent);
         component.removeEventListener(SystemEvent.DOUBLE_COLOR, number_doubleColorEvent);
         removeChild(component);
@@ -103,9 +105,13 @@ package com.meathill.diy.component.options
           createTab(250);
           createColorCard(config, 300, colorCardForSquadNumber_changeHandler);
           break;
+          
+        case 'teamname':
+          createTeamName(config, 50);
+          createColorCard(config, 170, colorCardForTeamName_changeHandler);
+          break;
       }
     }
-    
     private function createColorCard(config:SingleStepConfig, offset:uint = 50, handler:Function = null):ColorCard {
       handler = handler || colorCard_changeHandler;
       colorCard = new ColorCard(config);
@@ -125,6 +131,14 @@ package com.meathill.diy.component.options
       addChild(number);
       return number;
     }
+    private function createTeamName(config:SingleStepConfig, offset:uint):TeamName {
+      teamName = new TeamName(config);
+      teamName.addEventListener(Event.CHANGE, teamName_changeHandler);
+      teamName.y = offset;
+      components.push(teamName);
+      addChild(teamName);
+      return teamName;
+    }
     private function createTab(offset:uint = 50):Tab {
       tab = new Tab();
       tab.addTab('颜色1', null);
@@ -135,7 +149,6 @@ package com.meathill.diy.component.options
       addChild(tab);
       return tab;
     }
-    
     private function createTextField():void {
       label = new TextField();
       label.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: 0xffffff, align: TextFormatAlign.CENTER, bold: true } );
@@ -151,6 +164,19 @@ package com.meathill.diy.component.options
       graphics.drawRoundRect(0, 0, 200, 40, 4, 4);
       graphics.endFill();
     }
+    private function dispatchNumberChange():void {
+      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
+      event.number = number.number;
+      event.style = number.style;
+      dispatchEvent(event);
+    }
+    private function dispatchTeamNameChange():void {
+      var event:DesignEvent = new DesignEvent(DesignEvent.SET_TEAM_NAME);
+      event.teamname = teamName.teamName;
+      event.font = teamName.font;
+      event.color = colorCard.color;
+      dispatchEvent(event);
+    }
     
     private function colorCard_changeHandler(e:Event):void {
       var event:DesignEvent = new DesignEvent(DesignEvent.SELECT_COLOR);
@@ -161,16 +187,16 @@ package com.meathill.diy.component.options
       config[tab.value ? 'color2' : 'color'] = colorCard.color;
       number.setColor();
       
-      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
-      event.number = number.number;
-      event.style = number.style;
-      dispatchEvent(event);
+      dispatchNumberChange();
     }
     private function number_changeHandler(e:Event):void {
-      var event:DesignEvent = new DesignEvent(DesignEvent.SET_SQUAD_NUMBER);
-      event.number = number.number;
-      event.style = number.style;
-      dispatchEvent(event);
+      dispatchNumberChange();
+    }
+    private function colorCardForTeamName_changeHandler():void {
+      dispatchTeamNameChange();
+    }
+    private function teamName_changeHandler(e:Event):void {
+      dispatchTeamNameChange() 
     }
     private function number_singleColorEvent(e:SystemEvent):void {
       tab.active(0);

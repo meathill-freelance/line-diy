@@ -1,0 +1,63 @@
+{
+  "id": 1,
+  "name": "篮球背心",
+  "shareText": "哇，真的",
+  "baseURL": "http://www.xline.com.cn",
+  "templates": [
+    "../mocks/cloth4.swf",
+    "../mocks/cloth5.swf",
+    "../mocks/cloth6.swf",
+    "../mocks/cloth3.swf"
+  ],
+  "assets": {
+    "number": "../mocks/number.swf",
+    "char": "../mocks/char.swf",
+    "bg": "../assets/bg.jpg",
+    "assets": "../assets/assets.swf"
+  },
+  "welcome": [
+    "../assets/basketball.png",
+    "../assets/football.png",
+    "../assets/golf.png"
+  ],
+  "steps": [
+    {
+      "title": "正面",
+      "type": "color",
+      "colors": ["f0ba2b", "bababa", "1a9116", "ed642c", "6f7070", "3b86d0", "df1586", "cb0814", "374075", "ffffff"],
+      "color": "ffffff"
+    },
+    {
+      "title": "侧面",
+      "type": "color",
+      "colors": ["f0ba2b", "bababa", "1a9116", "ed642c", "6f7070", "3b86d0", "df1586", "cb0814", "374075", "ffffff"],
+      "color": "ffffff"
+    },
+    {
+      "title": "肩部",
+      "type": "color",
+      "colors": ["f0ba2b", "bababa", "1a9116", "ed642c", "6f7070", "3b86d0", "df1586", "cb0814", "374075", "ffffff"],
+      "color": "ffffff"
+    },
+    {
+      "title": "号码",
+      "type": "number",
+      "asset": "number",
+      "length": 2,
+      "number": 23,
+      "colors": ["001232", "008688", "105c38", "242424", "3d96a4", "41276e", "6d6e6e", "73dd35", "b6b6b6", "c80813", "d64c25", "e0bb37", "e29214", "e5487f", "ffffff"],
+      "color": "FFFFFF",
+      "color2": "001232",
+      "style": 0
+    },
+    {
+      "title": "队名",
+      "type": "teamname",
+      "length": 10,
+      "teamname": "湖人队",
+      "font": "宋体",
+      "colors": ["001232", "008688", "105c38", "242424", "3d96a4", "41276e", "6d6e6e", "73dd35", "b6b6b6", "c80813", "d64c25", "e0bb37", "e29214", "e5487f", "ffffff"],
+      "color": "008688"
+    }
+  ]
+}

@@ -1,16 +1,16 @@
-package com.meathill.diy.controller 
+package com.meathill.diy.config 
 {
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.model.vo.SingleStepConfig;
-  import robotlegs.bender.bundles.mvcs.Command;
+	import robotlegs.bender.bundles.mvcs.Command;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class SetSquadNumberCommand extends Command 
-  {
+  public class SetTeamNameCommand extends Command {
+    
     [Inject]
     public var cloth:ClothModel;
     
@@ -19,10 +19,9 @@ package com.meathill.diy.controller
     
     override public function execute():void {
       var step:SingleStepConfig = cloth.steps[cloth.step];
-      step.number = event.number;
-      step.style = event.style;
+      step.font = event.font;
       step.color = event.color;
-      step.color2 = event.color2;
+      step.teamname = event.teamname;
     }
     
   }

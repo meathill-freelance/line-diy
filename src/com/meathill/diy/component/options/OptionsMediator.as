@@ -23,6 +23,7 @@ package com.meathill.diy.component.options
     override public function initialize():void {
       addViewListener(DesignEvent.SELECT_COLOR, dispatch);
       addViewListener(DesignEvent.SET_SQUAD_NUMBER, dispatch);
+      addViewListener(DesignEvent.SET_TEAM_NAME, dispatch);
       addViewListener(UserEvent.PREV_STEP, view_gotoPrevHandler);
       addViewListener(UserEvent.NEXT_STEP, view_gotoNextHandler);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
