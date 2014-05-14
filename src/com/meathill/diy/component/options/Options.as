@@ -189,11 +189,11 @@ package com.meathill.diy.component.options
       
       dispatchNumberChange();
     }
+    private function colorCardForTeamName_changeHandler(e:Event):void {
+      dispatchTeamNameChange();
+    }
     private function number_changeHandler(e:Event):void {
       dispatchNumberChange();
-    }
-    private function colorCardForTeamName_changeHandler():void {
-      dispatchTeamNameChange();
     }
     private function teamName_changeHandler(e:Event):void {
       dispatchTeamNameChange() 

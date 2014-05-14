@@ -67,7 +67,7 @@ package com.meathill.diy.component.options
       nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
       addChild(nextButton);
       fontText = new TextField();
-      fontText.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, {align: TextFormatAlign.CENTER, color: _config.color});
+      fontText.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, {align: TextFormatAlign.CENTER, color: 0xFFFFFF});
       fontText.x = prevButton.width + 10;
       fontText.y = 60;
       fontText.width = nextButton.x - 10 - fontText.x;

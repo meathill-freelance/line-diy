@@ -1,6 +1,7 @@
 package com.meathill.diy.view 
 {
   import com.greensock.TweenMax;
+  import com.meathill.diy.config.Typography;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
@@ -9,6 +10,9 @@ package com.meathill.diy.view
   import flash.display.Loader;
   import flash.display.Sprite;
   import flash.geom.Matrix;
+  import flash.text.TextField;
+  import flash.text.TextFormat;
+  import flash.text.TextFormatAlign;
 	
 	/**
    * ...
@@ -56,7 +60,26 @@ package com.meathill.diy.view
         bmp.x += i * width / len; 
         piece.addChild(bmp);
       }
-      
+    }
+    
+    public function setTeamName(teamname:String, font:String, color:uint, step:uint):void {
+      var piece:Sprite = Sprite(cloth.getChildAt(step));
+      var tf:TextField;
+      if (piece.getChildAt(0) is TextField) {
+        tf = TextField(piece.getChildAt(0));
+        var textFormat:TextFormat = tf.defaultTextFormat;
+        textFormat.font = font;
+        textFormat.color = color;
+        tf.defaultTextFormat = textFormat;
+      } else {
+        tf = new TextField();
+        tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.height * 0.8 >> 0} );
+        tf.width = piece.width;
+        tf.height = piece.height;
+        piece.removeChildAt(0);
+        piece.addChild(tf);
+      }
+      tf.text = teamname;
     }
     public function highlight(step:uint):void {
       var tween:TweenMax = TweenMax.to(cloth.getChildAt(step), 0.3, {

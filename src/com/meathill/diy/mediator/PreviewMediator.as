@@ -33,9 +33,11 @@ package com.meathill.diy.mediator
       
       addContextListener(DesignEvent.SELECT_COLOR, color_changeHandler, DesignEvent);
       addContextListener(DesignEvent.SET_SQUAD_NUMBER, squadNumber_changeHandler, DesignEvent);
+      addContextListener(DesignEvent.SET_TEAM_NAME, teamName_changeHandler, DesignEvent);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
       addContextListener(UserEvent.SELECT_TPL, user_selectTemplateHandler);
     }
+    
     
     private function useUserDesign():void {
       // 是否需要设置号码
@@ -48,6 +50,9 @@ package com.meathill.diy.mediator
         }
         if (config.type === 'number') {
           view.setNumber(config.number, config.style, i, config.length, Sprite(assets.getAsset(config.asset)));
+        }
+        if (config.type === 'teamname') {
+          view.setTeamName(config.teamname, config.font, config.color, i);
         }
       }
     }
@@ -74,6 +79,9 @@ package com.meathill.diy.mediator
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.steps[cloth.step];
       view.setNumber(e.number, e.style, cloth.step, config.length, Sprite(assets.getAsset(config.asset)));
+    }
+    private function teamName_changeHandler(e:DesignEvent):void {
+      view.setTeamName(e.teamname, e.font, e.color, cloth.step);
     }
   }
 

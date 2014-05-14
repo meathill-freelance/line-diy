@@ -73,9 +73,12 @@ package com.meathill.diy.event
     public override function clone():Event {
       var event:DesignEvent = new DesignEvent(type, bubbles, cancelable);
       event.color = _color;
+      event.color2 = _color2;
       event.piece = _piece;
       event.number = _number;
       event.style = _style;
+      event.teamname = _teamname;
+      event.font = _font;
       return event;
     } 
     
