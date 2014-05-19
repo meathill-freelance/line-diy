@@ -73,9 +73,10 @@ package com.meathill.diy.view
         tf.defaultTextFormat = textFormat;
       } else {
         tf = new TextField();
-        tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.height * 0.8 >> 0} );
+        tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.height - 4, leading: 0} );
         tf.width = piece.width;
         tf.height = piece.height;
+        tf.mouseEnabled = false;
         piece.removeChildAt(0);
         piece.addChild(tf);
       }

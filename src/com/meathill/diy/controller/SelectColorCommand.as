@@ -18,7 +18,7 @@ package com.meathill.diy.controller
     
     override public function execute():void {
       trace('set color: ', event.piece, event.color.toString(16));
-      cloth.steps[event.piece].color = event.color;
+      cloth.steps[cloth.step].color = event.color;
     }
   }
 

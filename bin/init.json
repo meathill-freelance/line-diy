@@ -54,8 +54,17 @@
       "title": "队名",
       "type": "teamname",
       "length": 10,
-      "teamname": "湖人队",
-      "font": "宋体",
+      "teamname": "BULL",
+      "font": "Arial",
+      "colors": ["001232", "008688", "105c38", "242424", "3d96a4", "41276e", "6d6e6e", "73dd35", "b6b6b6", "c80813", "d64c25", "e0bb37", "e29214", "e5487f", "ffffff"],
+      "color": "008688"
+    },
+    {
+      "title": "姓名",
+      "type": "teamname",
+      "length": 10,
+      "teamname": "乔丹",
+      "font": "幼圆",
       "colors": ["001232", "008688", "105c38", "242424", "3d96a4", "41276e", "6d6e6e", "73dd35", "b6b6b6", "c80813", "d64c25", "e0bb37", "e29214", "e5487f", "ffffff"],
       "color": "008688"
     }
