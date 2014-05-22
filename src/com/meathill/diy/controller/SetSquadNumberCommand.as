@@ -21,8 +21,6 @@ package com.meathill.diy.controller
       var step:SingleStepConfig = cloth.steps[cloth.step];
       step.number = event.number;
       step.style = event.style;
-      step.color = event.color;
-      step.color2 = event.color2;
     }
     
   }

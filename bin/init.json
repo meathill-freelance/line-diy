@@ -15,6 +15,12 @@
     "bg": "../assets/bg.jpg",
     "assets": "../assets/assets.swf"
   },
+  "suit": {
+    "top": {
+      "name": "背心"
+      "steps": [0, 1, 2]
+    }
+  },
   "welcome": [
     "../assets/basketball.png",
     "../assets/football.png",

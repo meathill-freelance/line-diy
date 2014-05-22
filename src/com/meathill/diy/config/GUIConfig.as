@@ -5,6 +5,8 @@ package com.meathill.diy.config {
   import com.meathill.diy.component.footer.FooterMediator;
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.options.OptionsMediator;
+  import com.meathill.diy.component.rightBar.Receipt;
+  import com.meathill.diy.component.rightBar.ReceiptMediator;
   import com.meathill.diy.component.rightBar.RightBar;
   import com.meathill.diy.component.rightBar.RightBarMediator;
   import com.meathill.diy.component.wizard.Wizard;
@@ -52,6 +54,7 @@ package com.meathill.diy.config {
       mediatorMap.map(BottomButtonGroup).toMediator(BottomButtonGroupMediator);
       mediatorMap.map(RightBar).toMediator(RightBarMediator);
       mediatorMap.map(Footer).toMediator(FooterMediator);
+      mediatorMap.map(Receipt).toMediator(ReceiptMediator);
       
       mediatorMap.map(SavePopup).toMediator(SaveMediator);
       mediatorMap.map(BuyPopup).toMediator(BuyMediator);

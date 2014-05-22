@@ -59,7 +59,7 @@ package com.meathill.diy.view
       addChild(bottom);
       
       rightBar = new RightBar();
-      rightBar.x = stage.stageWidth - 120;
+      rightBar.x = stage.stageWidth - 140;
       rightBar.y = 80;
       addChild(rightBar);
       

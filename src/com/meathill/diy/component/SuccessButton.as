@@ -8,7 +8,9 @@ package com.meathill.diy.component
    */
   public class SuccessButton extends Button {
     
-    public function SuccessButton(label:String = 'Success', icon:String = '') {
+    public function SuccessButton(label:String = 'Success', icon:String = '', w:uint = 0, h:uint = 0) {
+      buttonWidth = w;
+      buttonHeight = h;
       super(label, icon);
     }
     
