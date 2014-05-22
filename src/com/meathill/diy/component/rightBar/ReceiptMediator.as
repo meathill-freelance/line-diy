@@ -18,8 +18,8 @@ package com.meathill.diy.component.rightBar
     override public function initialize():void {
       var suit:Object = cloth.suit;
       var pieces:Array = [];
-      for (var prop in suit) {
-        pieces.push(suit[prop]['name']);
+      for (var prop:String in suit) {
+        pieces.push(suit[prop]);
       }
       view.draw(pieces);
     }

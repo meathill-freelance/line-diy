@@ -14,7 +14,7 @@ package com.meathill.diy.component.rightBar
   public class RightBar extends Sprite {
     private var saveButton:Button;
     private var buyButton:Button;
-    private var recipt:Receipt;
+    private var receipt:Receipt;
     
     public function RightBar() {
       layout();
@@ -31,8 +31,8 @@ package com.meathill.diy.component.rightBar
       addChild(buyButton);
       
       receipt = new Receipt(120);
-      receipt.y = 100;
-      addChild(recipt);
+      receipt.y = 95;
+      addChild(receipt);
     }
     
     private function buyButton_clickHandler(e:MouseEvent):void {

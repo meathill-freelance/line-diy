@@ -10,6 +10,8 @@ package com.meathill.diy.config
   {
     public static const BODY:String = 'body';
     public static const LEAD:String = 'lead';
+    public static const H3:String = 'h3';
+    public static const SMALL:String = 'small';
     private static var defaults:Object = {
       body: {
         font: '宋体',
@@ -23,6 +25,24 @@ package com.meathill.diy.config
         color: 0x333333,
         leading: 6,
         bold: true
+      },
+      h1: {
+        
+      },
+      h2: {
+        
+      },
+      h3: {
+        font: '宋体',
+        size: 14,
+        color: 0x333333,
+        leading: 4,
+        bold: true
+      },
+      small: {
+        font: '宋体',
+        size: 12,
+        color: 0x333333
       }
     };
     public static function getTextFormat(type:String, init:Object = null):TextFormat {
