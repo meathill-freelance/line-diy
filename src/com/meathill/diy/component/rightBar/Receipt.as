@@ -11,6 +11,7 @@ package com.meathill.diy.component.rightBar
    */
   public class Receipt extends Sprite {
     private var w:uint;
+    private var total:TextField;
     
     public function Receipt(w:uint) {
       this.w = w;
@@ -21,24 +22,17 @@ package com.meathill.diy.component.rightBar
     public function draw(pieces:Array):void {
       drawBg(pieces.length);
       drawHeader();
+      var total:uint = 0;
       for (var i:uint = 0, len:uint = pieces.length; i < len; i++) {
-        var text:TextField = new TextField();
-        text.defaultTextFormat = Typography.getTextFormat(Typography.SMALL);
-        text.mouseEnabled = false;
+        var text:TextField = createLabel(45 + 30 * i);
         text.text = pieces[i].name;
-        addChild(text);
         
-        var price:TextField = new TextField();
-        price.defaultTextFormat = Typography.getTextFormat(Typography.SMALL, { align: TextFormatAlign.RIGHT } );
-        price.mouseEnabled = false;
+        var price:TextField = createLabel(45 + 30 * i, TextFormatAlign.RIGHT);
         price.text = pieces[i].price;
-        addChild(price);
         
-        price.x = text.x = 10;
-        price.y = text.y = 45 + 30 * i;
-        price.height = text.height = 20;
+        total += pieces[i].price;
       }
-      drawFooter();
+      drawFooter(pieces.length * 30 + 60, total);
     }
     
     private function drawBg(length:uint):void {
@@ -59,8 +53,12 @@ package com.meathill.diy.component.rightBar
       graphics.moveTo(10, h - 40);
       graphics.lineTo(w - 10, h - 40);
     }
-    private function drawFooter():void {
+    private function drawFooter(y:uint, money:uint):void {
+      var summary:TextField = createLabel(y);
+      summary.text = '总计';
       
+      total = createLabel(y, TextFormatAlign.RIGHT);
+      total.text = money.toString();
     }
     private function drawHeader():void {
       var header:TextField = new TextField();
@@ -69,8 +67,20 @@ package com.meathill.diy.component.rightBar
       header.x = 0;
       header.y = 6;
       header.width = w;
-      header.text = '费用小计';
+      header.text = '本次定制';
       addChild(header);
+    }
+    
+    private function createLabel(y:uint = 10, align:String = TextFormatAlign.LEFT):TextField {
+      var label:TextField = new TextField();
+      label.mouseEnabled = false;
+      label.x = 10;
+      label.y = y;
+      label.width = w - 20;
+      label.height = 20;
+      label.defaultTextFormat = Typography.getTextFormat(Typography.SMALL, { align: align });
+      addChild(label);
+      return label;
     }
   }
 }

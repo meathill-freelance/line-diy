@@ -68,13 +68,11 @@ package com.meathill.diy.component.options
         var mc:Sprite = Sprite(numberAsset.getChildAt(index - 1));
         if (mc.numChildren > 1) {
           event = new SystemEvent(SystemEvent.DOUBLE_COLOR);
-          dispatchEvent(event);
           for (var j:uint = 0, jlen:uint = mc.numChildren; j < jlen; j++) {
             ColorMaker.colorMC(j & 1 ? _config.color2 : _config.color, mc.getChildAt(j));
           }
         } else {
           event = new SystemEvent(SystemEvent.SINGLE_COLOR);
-          dispatchEvent(event);
           ColorMaker.colorMC(_config.color, mc.getChildAt(0));
         }
         var size:Object = Scaler.getSize(mc, 50, 100);
@@ -84,6 +82,7 @@ package com.meathill.diy.component.options
         bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
         preview.addChild(bmp);
       }
+      dispatchEvent(event);
     }
     private function layout():void {
       // 输入队服号码

@@ -15,10 +15,8 @@ package com.meathill.diy.event
     static public const DOUBLE_COLOR:String = "double_color";
     static public const SINGLE_COLOR:String = "single_color";
     
-    public function SystemEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
-    {
+    public function SystemEvent(type:String, bubbles:Boolean = true, cancelable:Boolean = false) {
       super(type, bubbles, cancelable);
-			
     }
     
   }

@@ -1,6 +1,7 @@
 package com.meathill.diy.component.options 
 {
   import com.meathill.diy.event.DesignEvent;
+  import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.service.AssetsManager;
@@ -26,6 +27,8 @@ package com.meathill.diy.component.options
       addViewListener(DesignEvent.SET_TEAM_NAME, dispatch);
       addViewListener(UserEvent.PREV_STEP, view_gotoPrevHandler);
       addViewListener(UserEvent.NEXT_STEP, view_gotoNextHandler);
+      addViewListener(SystemEvent.SINGLE_COLOR, handler);
+      addViewListener(SystemEvent.DOUBLE_COLOR, handler);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
     }
     
@@ -50,6 +53,9 @@ package com.meathill.diy.component.options
       view.showStepButtons(e.step > 0, e.step < cloth.steps.length - 1);
     }
     
+    private function handler(event:SystemEvent):void {
+      trace(event.type, event.target, event.currentTarget);
+    }
   }
 
 }
