@@ -37,16 +37,22 @@ package com.meathill.diy.view
       filters = getFilters();
     }
     
+    private var _label:String;
+    public function get label():String {
+      return _label;
+    }
     
-    public function WelcomeItemView(bmp:Bitmap, name:String) {
+    
+    public function WelcomeItemView(bmp:Bitmap, label:String) {
       Scaler.resize(bmp, WIDTH, HEIGHT);
       bmp.smoothing = true;
       addChild(bmp);
       
-      createLabel(name);
+      _label = label;
+      createLabel(label);
       
-      useHandCursor = buttonMode = true;
-			mouseChildren = false;
+      //useHandCursor = buttonMode = true;
+			//mouseChildren = false;
       alpha = 0;
     }
     
@@ -54,7 +60,7 @@ package com.meathill.diy.view
       TweenLite.to(this, 0.6, { alpha: 100, y: 100, delay: index * 0.4 } );
     }
     
-    private function createLabel(name:String):void {
+    private function createLabel(label:String):void {
       var bg:Shape = new Shape();
       bg.y = 340;
       bg.graphics.beginFill(0xFFFFFF, 0.8);
@@ -67,7 +73,7 @@ package com.meathill.diy.view
       text.width = WIDTH;
       text.height = 40;
       text.y = 15 + bg.y;
-      text.text = name;
+      text.text = label;
       addChild(text);
     }
     private function getFilters():Array {

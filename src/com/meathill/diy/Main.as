@@ -3,6 +3,7 @@ package com.meathill.diy
   import com.meathill.diy.config.AppConfig;
   import com.meathill.diy.config.GUIConfig;
 	import flash.display.Sprite;
+  import flash.display.StageScaleMode;
 	import flash.events.Event;
   import flash.system.Security;
   import robotlegs.bender.bundles.mvcs.MVCSBundle;
@@ -27,6 +28,7 @@ package com.meathill.diy
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+      stage.scaleMode = StageScaleMode.NO_SCALE;
 			// entry point
       Security.allowDomain('*');
       _context = new Context();

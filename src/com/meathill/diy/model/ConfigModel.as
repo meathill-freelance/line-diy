@@ -9,6 +9,8 @@ package com.meathill.diy.model
     private var _baseURL:String;
     private var _shareText:String;
     private var _welcome:Array;
+    private var _prices:Object;
+    private var _assets:Object;
     
     public function get baseURL():String {
       return _baseURL;
@@ -19,11 +21,19 @@ package com.meathill.diy.model
     public function get welcome():Array {
       return _welcome;
     }
+    public function get assets():Object {
+      return _assets;
+    }
+    public function get prices():Object {
+      return _prices;
+    }
     
-    public function parse(all:Object):void {
-      _baseURL = all.baseURL;
-      _shareText = all.shareText;
-      _welcome = all.welcome;
+    public function parse(init:Object):void {
+      _baseURL = init.baseURL;
+      _shareText = init.shareText;
+      _welcome = init.welcome;
+      _prices = init.prices;
+      _assets = init.assets;
     }
     
   }

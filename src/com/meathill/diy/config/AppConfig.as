@@ -71,7 +71,6 @@ package com.meathill.diy.config {
     
     private function config_loadCompleteHandler(data:String):void {
       var all:Object = JSON.parse(data);
-      cloth.parse(all);
       config.parse(all);
       
       eventDispatcher.dispatchEvent(new SystemEvent(SystemEvent.DATA_READY));

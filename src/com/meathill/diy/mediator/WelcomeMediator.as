@@ -16,10 +16,13 @@ package com.meathill.diy.mediator
     public var view:WelcomeView;
     
     [Inject]
+    public var config:ConfigModel;
+    
+    [Inject]
     public var assets:AssetsManager;
     
     override public function initialize(): void {
-      view.show(assets.welcome);
+      view.show(config.welcome, assets.welcome);
       addViewListener(UserEvent.START_DIY, dispatch);
     }
   }

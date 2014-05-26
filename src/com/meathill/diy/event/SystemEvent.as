@@ -19,6 +19,9 @@ package com.meathill.diy.event
       super(type, bubbles, cancelable);
     }
     
+    override public function clone():Event {
+      return new SystemEvent(type, bubbles, cancelable);
+    }
   }
 
 }

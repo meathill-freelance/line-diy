@@ -40,6 +40,7 @@ package com.meathill.diy.component.options
     public function SquadNumber(config:SingleStepConfig, asset:Sprite) {
       _config = config;
       _asset = asset;
+      _style = _config.style;
       totalStyle = _asset.numChildren;
       layout();
       draw();

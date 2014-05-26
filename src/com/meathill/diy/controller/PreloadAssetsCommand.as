@@ -1,12 +1,11 @@
 package com.meathill.diy.controller 
 {
   import com.meathill.diy.event.SystemEvent;
-  import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.model.ConfigModel;
   import com.meathill.diy.service.AssetsManager;
   import flash.events.Event;
   import flash.events.IEventDispatcher;
-	import robotlegs.bender.bundles.mvcs.Command;
+  import robotlegs.bender.bundles.mvcs.Command;
 	
 	/**
    * ...
@@ -18,9 +17,6 @@ package com.meathill.diy.controller
     public var assets:AssetsManager;
     
     [Inject]
-    public var cloth:ClothModel;
-    
-    [Inject]
     public var config:ConfigModel;
     
     [Inject]
@@ -28,15 +24,11 @@ package com.meathill.diy.controller
     
     override public function execute():void {
       assets.addEventListener(Event.COMPLETE, completeHandler);
-      
-      for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
-        assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);
+      for (var key:String in config.assets) {
+        assets.add(key, config.assets[key]);
       }
-      for (var key:String in cloth.assets) {
-        assets.add(key, cloth.assets[key]);
-      }
-      for (i = 0, len = config.welcome.length; i < len; i++) {
-        assets.add(AssetsManager.WELCOME, config.welcome[i]);
+      for (var i:uint = 0, len:uint = config.welcome.length; i < len; i++) {
+        assets.add(AssetsManager.WELCOME, config.welcome[i].icon);
       }
       assets.load();
     }

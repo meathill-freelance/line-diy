@@ -12,6 +12,7 @@ package com.meathill.diy.component.rightBar
   public class Receipt extends Sprite {
     private var w:uint;
     private var total:TextField;
+    private var pieces:Array;
     
     public function Receipt(w:uint) {
       this.w = w;
@@ -19,7 +20,25 @@ package com.meathill.diy.component.rightBar
     }
     
     
+    public function addItem(label:String, price:uint):Array {
+      drawBg(pieces.length + 1);
+      
+      for (var i:uint = 0, len:uint = 2; i < len; i++) {
+        getChildAt(numChildren - i - 1).y += 30;
+      }
+      
+      var text:TextField = createLabel(45 + 30 * pieces.length);
+      text.text = label;
+      
+      var priceTag:TextField = createLabel(45 + 30 * pieces.length, TextFormatAlign.RIGHT);
+      priceTag.text = price.toString();
+      
+      total.text = (uint(total.text) + price).toString();
+      
+      return [text, priceTag];
+    }
     public function draw(pieces:Array):void {
+      this.pieces = pieces;
       drawBg(pieces.length);
       drawHeader();
       var total:uint = 0;
@@ -33,6 +52,19 @@ package com.meathill.diy.component.rightBar
         total += pieces[i].price;
       }
       drawFooter(pieces.length * 30 + 60, total);
+    }
+    public function removeItem(items:Array):void {
+      if (!items || items.length === 0) {
+        return;
+      }
+      drawBg(pieces.length);
+      total.text = (uint(total.text) - uint(TextField(items[1]).text)).toString();
+      for (var i:uint = 0, len:uint = items.length; i < len; i++) {
+        removeChild(items[i]);
+      }
+      for (i = 0; i < len; i++) {
+        getChildAt(numChildren - i - 1).y -= 30;
+      }
     }
     
     private function drawBg(length:uint):void {
