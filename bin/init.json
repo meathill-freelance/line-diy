@@ -13,15 +13,90 @@
   "welcome": [
     {
       "name": "篮球服",
-      "icon": "../assets/basketball.png"
+      "templates": [
+        {
+          "name": "款式一",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式二",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式三",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式四",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式五",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        }
+      ]
     },
     {
       "name": "足球服",
-      "icon": "../assets/football.png"
+      "templates": [
+        {
+          "name": "款式一",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式二",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式三",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式四",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式五",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        }
+      ]
     },
     {
       "name": "高尔夫球服",
-      "icon": "../assets/golf.png"
+      "templates": [
+        {
+          "name": "款式一",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        },
+        {
+          "name": "款式二",
+          "thumbnail": "../assets/cloth1.jpg",
+          "prices": 100,
+          "available": true
+        }
+      ]
     }
   ]
 }
