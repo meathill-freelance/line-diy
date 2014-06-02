@@ -47,6 +47,7 @@ package com.meathill.diy.service
     }
     
     public function add(type:String, url:String):void {
+      trace('add assets: ', type, url);
       queue.push({
         type: type,
         url: url

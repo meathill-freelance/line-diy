@@ -16,6 +16,7 @@ package com.meathill.diy.service
   {
     public static const API:String = 'api.html';
     static public const INIT:String = "init.json";
+    static public const CLOTH:String = 'cloth.json';
     
     public static const COMPLETE:String = 'complete';
     public static const COMPLETE_ALL:String = 'complete_all';

@@ -1,4 +1,4 @@
-package com.meathill.diy.config 
+package com.meathill.diy.controller 
 {
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.model.ClothModel;

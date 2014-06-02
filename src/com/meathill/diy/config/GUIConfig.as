@@ -12,7 +12,6 @@ package com.meathill.diy.config {
   import com.meathill.diy.component.wizard.Wizard;
   import com.meathill.diy.component.wizard.WizardMediator;
   import com.meathill.diy.mediator.PreviewMediator;
-  import com.meathill.diy.mediator.WelcomeMediator;
   import com.meathill.diy.popup.mediator.BuyMediator;
   import com.meathill.diy.popup.mediator.HaibaoMediator;
   import com.meathill.diy.popup.mediator.SaveMediator;
@@ -24,7 +23,7 @@ package com.meathill.diy.config {
   import com.meathill.diy.view.DIYView;
   import com.meathill.diy.view.Preview;
   import com.meathill.diy.view.Spinner;
-  import com.meathill.diy.view.WelcomeView;
+  import com.meathill.diy.view.welcome.WelcomeView;
   import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
   import robotlegs.bender.framework.api.IConfig;
@@ -46,7 +45,7 @@ package com.meathill.diy.config {
     public var contextView:ContextView;
     
     public function configure():void {
-      mediatorMap.map(WelcomeView).toMediator(WelcomeMediator);
+      var spinner:Spinner = new Spinner();
       
       mediatorMap.map(Wizard).toMediator(WizardMediator);
       mediatorMap.map(Options).toMediator(OptionsMediator);
@@ -62,8 +61,10 @@ package com.meathill.diy.config {
       mediatorMap.map(HaibaoPopup).toMediator(HaibaoMediator);
       
       injector.map(DIYView).asSingleton();
+      injector.map(WelcomeView).asSingleton();
+      injector.map(Spinner).toValue(spinner);
       
-      contextView.view.addChild(new Spinner());
+      contextView.view.addChild(spinner);
     }
     
   }

@@ -6,8 +6,8 @@ package com.meathill.diy.event
    * ...
    * @author Meathill
    */
-  public class UserEvent extends Event 
-  {
+  public class UserEvent extends Event {
+    static public const SELECT_CLOTH:String = "select_cloth";
     public static const START_DIY:String = "start_diy";
     
     public static const GO_TO_STEP:String = "go_to_step";

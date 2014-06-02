@@ -40,6 +40,10 @@ package com.meathill.diy.component
     protected var hasHoverBorder:Boolean = true;
     protected var textFormat:TextFormat = Typography.getTextFormat(Typography.BODY);
     
+    public function set text(value:String):void {
+      label.text = value;
+    }
+    
     public function Button(label:String = 'button', icon:String = '', iconPos:uint = 1) {
       this.iconPos = iconPos;
       iconAsset = icon;

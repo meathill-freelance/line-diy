@@ -23,8 +23,7 @@ package com.meathill.diy.config
         font: '微软雅黑',
         size: 20,
         color: 0x333333,
-        leading: 6,
-        bold: true
+        leading: 6
       },
       h1: {
         
