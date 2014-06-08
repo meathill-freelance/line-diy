@@ -18,6 +18,8 @@ package com.meathill.diy.view.welcome
   public class WelcomeTab extends Sprite {
     public static const WIDTH:uint = 150;
     
+    private var text:TextField;
+    
     private var _selected:Boolean = false;
     public function get selected():Boolean {
       return _selected;
@@ -29,7 +31,6 @@ package com.meathill.diy.view.welcome
     }
     
     private var _label:String;
-    private var text:TextField;
     public function get label():String {
       return _label;
     }

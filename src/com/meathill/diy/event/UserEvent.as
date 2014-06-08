@@ -24,23 +24,15 @@ package com.meathill.diy.event
     static public const HAIBAO:String = "haibao";
     static public const CONTRIBUTE:String = "contribute";
     
+    private var _cloth:String;
+    public function get cloth():String {
+      return _cloth;
+    }
+    public function set cloth(value:String):void {
+      _cloth = value;
+    }
+    
     private var _template:uint;
-    private var _step:uint = 0;
-    private var _name:String = '';
-    
-    public function UserEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
-    {
-      super(type, bubbles, cancelable);
-			
-    }
-    
-    public function get step():uint {
-      return _step;
-    }
-    public function set step(value:uint):void {
-      _step = value;
-    }
-    
     public function get template():uint {
       return _template;
     }
@@ -48,12 +40,37 @@ package com.meathill.diy.event
       _template = value;
     }
     
+    private var _step:uint = 0;
+    public function get step():uint {
+      return _step;
+    }
+    public function set step(value:uint):void {
+      _step = value;
+    }
+    
+    private var _name:String = '';
     public function get name():String {
       return _name;
     }
     public function set name(value:String):void {
       _name = value;
     }
+    
+    
+    public function UserEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) {
+      super(type, bubbles, cancelable);
+			
+    }
+    
+    override public function clone():Event {
+      var event:UserEvent = new UserEvent(type, bubbles, cancelable);
+      event.cloth = _cloth;
+      event.template = _template;
+      event.step = _step;
+      event.name = _name;
+      return event;
+    }
+    
   }
 
 }

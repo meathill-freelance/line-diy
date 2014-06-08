@@ -20,7 +20,6 @@ package com.meathill.diy.view.welcome
     public static const HEIGHT:uint = 200;
     public static const GAP:uint = 20;
     
-    private var _label:String;
     private var _price:uint;
     private var _enable:Boolean = true;
     public function get enable():Boolean {
@@ -41,10 +40,18 @@ package com.meathill.diy.view.welcome
       filters = getFilters();
     }
     
+    private var _label:String;
     public function get label():String {
       return _label;
     }
     
+    private var _id:String;
+    public function get id():String {
+      return _id;
+    }
+    public function set id(value:String):void {
+      _id = value;
+    }
     
     public function WelcomeItem(thumbnail:Bitmap, config:Object) {
       Scaler.resize(thumbnail, WIDTH, HEIGHT);

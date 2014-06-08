@@ -26,8 +26,12 @@ package com.meathill.diy.controller
     [Inject]
     public var eventDispatcher:IEventDispatcher;
     
+    [Inject]
+    public var event:UserEvent;
+    
     override public function execute():void {
-      server.add(ServerManager.CLOTH, null, cloth_loadCompleteHandler);
+      trace(ServerManager.CLOTH + event.cloth + '.json');
+      server.add(ServerManager.CLOTH + event.cloth + '.json', null, cloth_loadCompleteHandler);
     }
     
     private function cloth_loadCompleteHandler(data:String):void {

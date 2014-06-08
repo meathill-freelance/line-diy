@@ -1,7 +1,7 @@
 {
   "shareText": "哇，真的",
   "baseURL": "http://www.xline.com.cn",
-  "price": {
+  "prices": {
     "doubleColor": 12
   },
   "assets": {
@@ -15,39 +15,44 @@
       "name": "篮球服",
       "templates": [
         {
-          "pid": 1,
+          "tid": 32,
+          "bid": 40,
           "name": "款式一",
           "thumbnail": "../assets/basketball1.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 2,
+          "tid": 51,
+          "bid": 56,
           "name": "款式二",
           "thumbnail": "../assets/basketball2.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 3,
+          "tid": 61,
+          "bid": 66,
           "name": "款式三",
           "thumbnail": "../assets/basketball3.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 4,
+          "tid": 72,
+          "bid": 74,
           "name": "款式四",
           "thumbnail": "../assets/basketball4.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 5,
+          "tid": 79,
+          "bid": 84,
           "name": "款式五",
           "thumbnail": "../assets/basketball5.png",
           "price": 100,
-          "available": true
+          "available": false
         }
       ]
     },
@@ -55,39 +60,44 @@
       "name": "足球服",
       "templates": [
         {
-          "pid": 6,
+          "tid": 89,
+          "bid": 94,
           "name": "款式一",
           "thumbnail": "../assets/football1.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 7,
+          "tid": 99,
+          "bid": 104,
           "name": "款式二",
           "thumbnail": "../assets/football2.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 8,
+          "tid": 109,
+          "bid": 114,
           "name": "款式三",
           "thumbnail": "../assets/football3.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 9,
+          "tid": 119,
+          "bid": 124,
           "name": "款式四",
           "thumbnail": "../assets/football4.png",
           "price": 100,
-          "available": true
+          "available": false
         },
         {
-          "pid": 10,
+          "tid": 129,
+          "bid": 137,
           "name": "款式五",
           "thumbnail": "../assets/football5.png",
           "price": 100,
-          "available": true
+          "available": false
         }
       ]
     },
@@ -95,20 +105,21 @@
       "name": "高尔夫球服",
       "templates": [
         {
-          "pid": 11,
+          "id": "golf-1",
           "name": "款式一",
           "thumbnail": "../assets/golf1.png",
           "price": 100,
           "available": true
         },
         {
-          "pid": 12,
+          "id": "golf-2",
           "name": "款式二",
           "thumbnail": "../assets/golf2.png",
           "price": 100,
           "available": true
         } 
-      ]
+      ],
+      "selected": true
     }
   ]
 }

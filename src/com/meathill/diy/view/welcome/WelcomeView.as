@@ -35,11 +35,12 @@ package com.meathill.diy.view.welcome
     public function show(welcome:Array, assets:Vector.<Bitmap>):void {
       var activePane:WelcomePane;
       var count:uint = 0;
+      var hasSelected:Boolean = false;
       for (var i:uint = 0, len:uint = welcome.length; i < len; i++) {
         var tab:WelcomeTab = new WelcomeTab(welcome[i].name);
         tab.x = (WelcomeTab.WIDTH + WelcomeItem.GAP) * i;
         tab.y = h - 110;
-        tab.selected = i === 0;
+        tab.selected = welcome[i].selected;
         addChild(tab);
         
         var pane:WelcomePane = new WelcomePane();
@@ -48,14 +49,20 @@ package com.meathill.diy.view.welcome
           item.x = j % 3 * (WelcomeItem.WIDTH + WelcomeItem.GAP);
           item.y = (j / 3 >> 0) * (WelcomeItem.HEIGHT + WelcomeItem.GAP);
           item.selected = j === 0;
+          item.id = welcome[i].templates[j].id;
           pane.addChild(item);
           count++;
         }
         pane.y = 30;
         panes.push(pane);
-        if (i === 0) {
+        if (welcome[i].selected) {
           activePane = pane;
         }
+        hasSelected = hasSelected || welcome[i].selected;
+      }
+      // 没有默认tab则显示第一组
+      if (!hasSelected) {
+        activePane = panes[0];
       }
       addChild(activePane);
       activePane.show(0);
@@ -96,7 +103,10 @@ package com.meathill.diy.view.welcome
       if (tab is PrimaryButton) {
         PrimaryButton(tab).disable();
         PrimaryButton(tab).text = '加载所需素材，请稍候';
-        dispatchEvent(new UserEvent(UserEvent.SELECT_CLOTH));
+        
+        var event:UserEvent = new UserEvent(UserEvent.SELECT_CLOTH);
+        event.cloth = WelcomePane(getChildAt(numChildren - 1)).value;
+        dispatchEvent(event);
       }
     }
   }

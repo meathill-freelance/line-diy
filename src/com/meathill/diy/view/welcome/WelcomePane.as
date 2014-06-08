@@ -11,9 +11,11 @@ package com.meathill.diy.view.welcome
    */
   public class WelcomePane extends Sprite {
     
+    public function get value():String {
+      return WelcomeItem(getChildByName('active')).id;
+    }
+    
     public function WelcomePane() {
-      super();
-			
       alpha = 0;
       
       addEventListener(MouseEvent.CLICK, clickHandler);
@@ -29,8 +31,8 @@ package com.meathill.diy.view.welcome
     
     private function removeSelf():void {
       if (this.parent) {
-          this.parent.removeChild(this);
-        }
+        this.parent.removeChild(this);
+      }
     }
     
     private function clickHandler(e:MouseEvent):void {
