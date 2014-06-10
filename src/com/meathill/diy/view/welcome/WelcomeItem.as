@@ -109,6 +109,9 @@ package com.meathill.diy.view.welcome
       draw(true);
     }
     private function rollOverHandler(e:MouseEvent):void {
+      if (!_enable) {
+        return;
+      }
       draw();
     }
   }

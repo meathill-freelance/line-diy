@@ -3,6 +3,7 @@ package com.meathill.diy.view.welcome
   import com.greensock.TweenLite;
   import flash.display.DisplayObject;
 	import flash.display.Sprite;
+  import flash.events.Event;
   import flash.events.MouseEvent;
 	
 	/**
@@ -11,8 +12,8 @@ package com.meathill.diy.view.welcome
    */
   public class WelcomePane extends Sprite {
     
-    public function get value():String {
-      return WelcomeItem(getChildByName('active')).id;
+    public function get selectedItem():WelcomeItem {
+      return WelcomeItem(getChildByName('active'));
     }
     
     public function WelcomePane() {
@@ -37,6 +38,9 @@ package com.meathill.diy.view.welcome
     
     private function clickHandler(e:MouseEvent):void {
       var item:WelcomeItem = WelcomeItem(e.target);
+      if (!item.enable) {
+        return;
+      }
       var curr:WelcomeItem = WelcomeItem(getChildByName('active'));
       if (item === curr) {
         return;
@@ -45,6 +49,7 @@ package com.meathill.diy.view.welcome
         curr.selected = false;
       }
       item.selected = true;
+      dispatchEvent(new Event(Event.CHANGE));
     }
   }
 

@@ -18,6 +18,7 @@ package com.meathill.diy.view.welcome
     private var panes:Vector.<WelcomePane>;
     private var w:uint;
     private var h:uint;
+    private var selectedItem:WelcomeItem;
     
     
     public function WelcomeView() {
@@ -44,11 +45,12 @@ package com.meathill.diy.view.welcome
         addChild(tab);
         
         var pane:WelcomePane = new WelcomePane();
+        pane.addEventListener(Event.CHANGE, pane_changeHandler);
         for (var j:uint = 0, jlen:uint = welcome[i].templates.length; j < jlen; j++) {
           var item:WelcomeItem = new WelcomeItem(assets[count], welcome[i].templates[j]);
           item.x = j % 3 * (WelcomeItem.WIDTH + WelcomeItem.GAP);
           item.y = (j / 3 >> 0) * (WelcomeItem.HEIGHT + WelcomeItem.GAP);
-          item.selected = j === 0;
+          item.enable = welcome[i].templates[j].available;
           item.id = welcome[i].templates[j].id;
           pane.addChild(item);
           count++;
@@ -57,6 +59,8 @@ package com.meathill.diy.view.welcome
         panes.push(pane);
         if (welcome[i].selected) {
           activePane = pane;
+          selectedItem = WelcomeItem(activePane.getChildAt(0));
+          selectedItem.selected = true;
         }
         hasSelected = hasSelected || welcome[i].selected;
       }
@@ -79,6 +83,9 @@ package com.meathill.diy.view.welcome
       addChild(startButton);
     }
     
+    private function pane_changeHandler(event:Event):void {
+      selectedItem = WelcomePane(event.target).selectedItem;
+    }
     private function addedHandler(e:Event):void {
       removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
       
@@ -105,7 +112,7 @@ package com.meathill.diy.view.welcome
         PrimaryButton(tab).text = '加载所需素材，请稍候';
         
         var event:UserEvent = new UserEvent(UserEvent.SELECT_CLOTH);
-        event.cloth = WelcomePane(getChildAt(numChildren - 1)).value;
+        event.cloth = selectedItem.id;
         dispatchEvent(event);
       }
     }
