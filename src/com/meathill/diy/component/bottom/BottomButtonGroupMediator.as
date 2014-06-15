@@ -24,12 +24,12 @@ package com.meathill.diy.component.bottom
     
     private function user_prevTemplateHandler(e:UserEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.SELECT_TPL);
-      event.template = cloth.template - 1 >= 0 ? cloth.template - 1 : cloth.templates.length - 1;
+      event.template = cloth.template - 1 >= 0 ? cloth.template - 1 : cloth.sights - 1;
       dispatch(event);
     }
     private function user_nextTemplateHandler(e:UserEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.SELECT_TPL);
-      event.template = cloth.template + 1 < cloth.templates.length ? cloth.template + 1 : 0;
+      event.template = cloth.template + 1 < cloth.sights ? cloth.template + 1 : 0;
       dispatch(event);
     }
     

@@ -9,6 +9,8 @@ package com.meathill.diy.view
   import flash.display.DisplayObject;
   import flash.display.Loader;
   import flash.display.Sprite;
+  import flash.events.Event;
+  import flash.events.MouseEvent;
   import flash.geom.Matrix;
   import flash.text.TextField;
   import flash.text.TextFormat;
@@ -21,25 +23,48 @@ package com.meathill.diy.view
   public class Preview extends Sprite {
     private var loader:Loader;
     private var cloth:Sprite;
+    private var cloth1:Sprite;
+    private var cloth2:Sprite;
+    private var seperator:uint;
+    private var _y:int;
+    
+    private var _isReady:Boolean;
+    public function set isReady(value:Boolean):void {
+      _isReady = value;
+    }
     
     public function Preview() {
       buttonMode = useHandCursor = true;
+      
+      addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+      //addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
     }
     
-    public function show(mc:Sprite):void {
-      if (numChildren > 0) {
+    public function show(mc:Sprite, mc2:Sprite = null, seperator:uint = 0):void {
+      this.seperator = this.seperator || seperator;
+      while (numChildren > 0) {
         removeChildAt(0);
       }
-      cloth = mc;
-      Scaler.resize(cloth, 300, 500);
-      cloth.x = - cloth.width >> 1;
-      cloth.y = - cloth.height >> 1;
-      addChild(cloth);
+      cloth1 = mc;
+      Scaler.resize(cloth1, 300, 500);
+      cloth1.x = - cloth1.width >> 1;
+      cloth1.y = - cloth1.height >> 1;
+      addChild(cloth1);
+      
+      if (mc2) {
+        cloth2 = mc2;
+        Scaler.resize(cloth2, 300, 400);
+        cloth2.x = -cloth2.width >> 1;
+        cloth2.y = cloth1. y + 500;
+        addChild(cloth2);
+      }
     }
     public function setColor(color:uint, step:uint):void {
+      step = checkStep(step);
       cloth.getChildAt(step).filters = [Filters.getColorFilter(color)];
     }
     public function setNumber(number:uint, style:uint, step:uint, length:uint, asset:Sprite):void {
+      step = checkStep(step);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
       var numberAsset:Sprite = Sprite(asset.getChildAt(style));
       while (piece.numChildren > 1) {
@@ -63,6 +88,7 @@ package com.meathill.diy.view
     }
     
     public function setTeamName(teamname:String, font:String, color:uint, step:uint):void {
+      step = checkStep(step);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
       var tf:TextField;
       if (piece.getChildAt(0) is TextField) {
@@ -83,6 +109,7 @@ package com.meathill.diy.view
       tf.text = teamname;
     }
     public function highlight(step:uint):void {
+      step = checkStep(step);
       var tween:TweenMax = TweenMax.to(cloth.getChildAt(step), 0.3, {
         glowFilter: {
           color: 0xFFFFFF,
@@ -98,6 +125,30 @@ package com.meathill.diy.view
       });
     }
     
+    private function checkStep(step:uint):uint {
+      cloth = step > seperator ? cloth2 : cloth1;
+      step = step > seperator ? step - seperator - 1 : step;
+      scrollTo(cloth);
+      return step;
+    }
+    private function scrollTo(cloth:Sprite):void {
+      if (_isReady) {
+        TweenMax.to(this, 0.3, { y: cloth === cloth1 ? _y : _y - 400 } ); 
+      }
+    }
+    
+    private function addedHandler(e:Event):void {
+      removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
+      _y = y;
+    }
+    private function mouseDownHandler(e:MouseEvent):void {
+      startDrag(false);
+      stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+    }
+    private function mouseUpHandler(e:MouseEvent):void {
+      stopDrag();
+      stage.removeEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+    }
     
   }
 

@@ -40,6 +40,11 @@ package com.meathill.diy.view
     }
     
     private function layout():void {
+      preview = new Preview();
+      preview.x = stage.stageWidth >> 1;
+      preview.y = stage.stageHeight - 120 >> 1;
+      addChild(preview);
+      
       wizard = new Wizard();
       addChild(wizard);
       
@@ -47,11 +52,6 @@ package com.meathill.diy.view
       options.x = 10;
       options.y = 70;
       addChild(options);
-      
-      preview = new Preview();
-      preview.x = stage.stageWidth >> 1;
-      preview.y = stage.stageHeight - 120 >> 1;
-      addChild(preview);
       
       bottom = new BottomButtonGroup();
       bottom.x = stage.stageWidth - bottom.width >> 1;

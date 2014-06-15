@@ -26,7 +26,7 @@ package com.meathill.diy.mediator
     public var assets:AssetsManager;
     
     override public function initialize():void {
-      view.show(assets.templates[cloth.template]);
+      view.show(assets.templates[cloth.template], assets.templates[cloth.template + cloth.sights], cloth.seperator);
       useUserDesign();
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
@@ -41,6 +41,7 @@ package com.meathill.diy.mediator
     
     private function useUserDesign():void {
       // 是否需要设置号码
+      view.isReady = false;
       for (var i:uint = 0, steps:Vector.<SingleStepConfig> = cloth.steps, len:uint = steps.length; i < len; i++) {
         var config:SingleStepConfig = steps[i];
         if (config.type === 'color') {
@@ -55,6 +56,7 @@ package com.meathill.diy.mediator
           view.setTeamName(config.teamname, config.font, config.color, i);
         }
       }
+      view.isReady = true;
     }
     
     // View Event
@@ -66,10 +68,14 @@ package com.meathill.diy.mediator
     }
     // UserEvent
     private function user_gotoStepHandler(e:UserEvent):void {
+      if (cloth.steps[e.step] !== undefined) {
+        view.show(assets.templates[cloth.steps[e.step].sight], assets.templates[cloth.steps[e.step].sight + cloth.sights], cloth.seperator);
+        useUserDesign();
+      }
       view.highlight(e.step);
     }
     private function user_selectTemplateHandler(e:UserEvent):void {
-      view.show(assets.templates[e.template]);
+      view.show(assets.templates[e.template], assets.templates[e.template + cloth.sights], cloth.seperator);
       useUserDesign();
     }
     // DesignEvent

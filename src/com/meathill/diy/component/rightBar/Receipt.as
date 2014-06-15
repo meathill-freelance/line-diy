@@ -12,7 +12,7 @@ package com.meathill.diy.component.rightBar
   public class Receipt extends Sprite {
     private var w:uint;
     private var total:TextField;
-    private var pieces:Array;
+    private var pieces:Vector.<Object>;
     
     public function Receipt(w:uint) {
       this.w = w;
@@ -37,7 +37,7 @@ package com.meathill.diy.component.rightBar
       
       return [text, priceTag];
     }
-    public function draw(pieces:Array):void {
+    public function draw(pieces:Vector.<Object>):void {
       this.pieces = pieces;
       drawBg(pieces.length);
       drawHeader();

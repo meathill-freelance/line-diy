@@ -7,6 +7,7 @@ package com.meathill.diy.controller
   import flash.events.Event;
   import flash.events.IEventDispatcher;
 	import robotlegs.bender.bundles.mvcs.Command;
+  import robotlegs.bender.extensions.contextView.ContextView;
 	
 	/**
    * ...
@@ -27,28 +28,38 @@ package com.meathill.diy.controller
     public var eventDispatcher:IEventDispatcher;
     
     [Inject]
-    public var event:UserEvent;
+    public var view:ContextView;
     
     override public function execute():void {
-      trace(ServerManager.CLOTH + event.cloth + '.json');
-      server.add(ServerManager.CLOTH + event.cloth + '.json', null, cloth_loadCompleteHandler);
+      var cloth:Array;
+      if ('cloth' in view.view.loaderInfo.parameters) {
+        cloth = view.view.loaderInfo.parameters.cloth.split(',');
+      } else {
+        cloth = ['basketball1-t1', 'basketball1-pants1'];
+      }
+      for (var i:uint = 0, len:uint = cloth.length; i < len; i++) {
+        server.add(ServerManager.CLOTH + cloth[i] + '.json', null, cloth_loadCompleteHandler);
+      }
+      server.addEventListener(ServerManager.COMPLETE_ALL, completeAllHandler);
     }
     
     private function cloth_loadCompleteHandler(data:String):void {
       var clothData:Object = JSON.parse(data);
       cloth.parse(clothData);
-      trace('cloth data loaded');
-      
-      assets.addEventListener(Event.COMPLETE, assets_completeHandler);
-      for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
-        assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);
-      }
-      assets.load();
+      cloth.sights = clothData.templates.length;
+      cloth.seperator = cloth.seperator || clothData.steps.length - 1;
     }
     private function assets_completeHandler(e:Event):void {
       assets.removeEventListener(Event.COMPLETE, assets_completeHandler);
       
       eventDispatcher.dispatchEvent(new UserEvent(UserEvent.START_DIY));
+    }
+    private function completeAllHandler(e:Event):void {
+      assets.addEventListener(Event.COMPLETE, assets_completeHandler);
+      for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
+        assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);
+      }
+      assets.load();
     }
     
   }

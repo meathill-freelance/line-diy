@@ -8,7 +8,6 @@ package com.meathill.diy.config {
   import com.meathill.diy.controller.SelectTemplateCommand;
   import com.meathill.diy.controller.SetSquadNumberCommand;
   import com.meathill.diy.controller.SetTeamNameCommand;
-  import com.meathill.diy.controller.ShowWelcomeCommand;
   import com.meathill.diy.controller.StartDiyCommand;
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.SystemEvent;
@@ -54,8 +53,7 @@ package com.meathill.diy.config {
       injector.map(AssetsManager).asSingleton();
       
       commandMap.map(SystemEvent.DATA_READY).toCommand(PreloadAssetsCommand);
-      commandMap.map(SystemEvent.ASSETS_READY).toCommand(ShowWelcomeCommand);
-      commandMap.map(UserEvent.SELECT_CLOTH).toCommand(LoadClothDataCommand);
+      commandMap.map(SystemEvent.ASSETS_READY).toCommand(LoadClothDataCommand);
       commandMap.map(UserEvent.START_DIY).toCommand(StartDiyCommand);
       commandMap.map(UserEvent.GO_TO_STEP).toCommand(GotoStepCommand);
       commandMap.map(UserEvent.SELECT_TPL).toCommand(SelectTemplateCommand);

@@ -24,7 +24,7 @@ package com.meathill.diy.component.wizard
     }
     
     public function draw(steps:Vector.<SingleStepConfig>):void {
-      var stepWidth:uint = stage.stageWidth / (steps.length + 1);
+      var stepWidth:uint = stage.stageWidth / steps.length;
       stepWidth = stepWidth < MAX_WIDTH ? stepWidth : MAX_WIDTH;
       Item.stepWidth = stepWidth - 10;
       

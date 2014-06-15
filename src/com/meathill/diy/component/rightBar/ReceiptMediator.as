@@ -20,28 +20,23 @@ package com.meathill.diy.component.rightBar
     [Inject]
     public var config:ConfigModel;
     
-    private var items:Array;
+    private var plusItems:Array;
     
     override public function initialize():void {
-      var suit:Object = cloth.suit;
-      var pieces:Array = [];
-      for (var prop:String in suit) {
-        pieces.push(suit[prop]);
-      }
-      view.draw(pieces);
+      view.draw(cloth.clothes);
       
       addContextListener(SystemEvent.SINGLE_COLOR, singleColorHandler);
       addContextListener(SystemEvent.DOUBLE_COLOR, doubleColorHandler);
     }
     private function doubleColorHandler(e:SystemEvent):void {
-      if (items) {
+      if (plusItems) {
         return;
       }
-      items = view.addItem('双色', config.prices.doubleColor);
+      plusItems = view.addItem('双色', config.prices.doubleColor);
     }
     private function singleColorHandler(e:SystemEvent):void {
-      view.removeItem(items);
-      items = null;
+      view.removeItem(plusItems);
+      plusItems = null;
     }
     
   }

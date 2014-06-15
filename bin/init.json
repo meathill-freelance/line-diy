@@ -20,7 +20,7 @@
           "name": "款式一",
           "thumbnail": "../assets/basketball1.png",
           "price": 100,
-          "available": false
+          "available": true
         },
         {
           "tid": 51,
