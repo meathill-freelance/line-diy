@@ -26,7 +26,11 @@ package com.meathill.diy.mediator
     public var assets:AssetsManager;
     
     override public function initialize():void {
-      view.show(assets.templates[cloth.template], assets.templates[cloth.template + cloth.sights], cloth.seperator);
+      if (cloth.numParts > 1) {
+        view.show(assets.templates[cloth.template], assets.templates[cloth.template + cloth.sights], cloth.seperator);
+      } else {
+        view.show(assets.templates[cloth.template], null, cloth.seperator);
+      }
       useUserDesign();
       
       addViewListener(MouseEvent.CLICK, view_clickHanaler);
@@ -69,13 +73,21 @@ package com.meathill.diy.mediator
     // UserEvent
     private function user_gotoStepHandler(e:UserEvent):void {
       if (cloth.steps[e.step] !== undefined) {
-        view.show(assets.templates[cloth.steps[e.step].sight], assets.templates[cloth.steps[e.step].sight + cloth.sights], cloth.seperator);
+        if (cloth.numParts > 1) {
+          view.show(assets.templates[cloth.steps[e.step].sight], assets.templates[cloth.steps[e.step].sight + cloth.sights], cloth.seperator);
+        } else {
+          view.show(assets.templates[cloth.steps[e.step].sight], null, cloth.seperator);
+        }
         useUserDesign();
       }
       view.highlight(e.step);
     }
     private function user_selectTemplateHandler(e:UserEvent):void {
-      view.show(assets.templates[e.template], assets.templates[e.template + cloth.sights], cloth.seperator);
+      if (cloth.numParts > 1) {
+        view.show(assets.templates[e.template], assets.templates[e.template + cloth.sights], cloth.seperator);
+      } else {
+        view.show(assets.templates[e.template], null, cloth.seperator);
+      }
       useUserDesign();
     }
     // DesignEvent

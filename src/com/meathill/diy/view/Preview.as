@@ -70,19 +70,20 @@ package com.meathill.diy.view
       while (piece.numChildren > 1) {
         piece.removeChildAt(1);
       }
-      var width:uint = piece.width;
-      var height:uint = piece.height;
+      var width:uint = piece.getChildAt(0).width;
+      var height:uint = piece.getChildAt(0).height;
       piece.getChildAt(0).visible = false;
       var str:String = number.toString();
+      var gap:uint = 10;
       for (var i:uint = 0, len:uint = str.length; i < len; i++) {
         var index:uint = parseInt(str.charAt(i));
         index = index === 0 ? 10 : index;
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
-        var size:Object = Scaler.getSize(mc, width / len, height);
+        var size:Object = Scaler.getSize(mc, (width - gap * (len - 1)) / len, height);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
         bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x += i * width / len; 
+        bmp.x += i * (size.width + 10); 
         piece.addChild(bmp);
       }
     }

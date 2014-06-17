@@ -31,14 +31,15 @@ package com.meathill.diy.controller
     public var view:ContextView;
     
     override public function execute():void {
-      var cloth:Array;
+      var clothes:Array;
       if ('cloth' in view.view.loaderInfo.parameters) {
-        cloth = view.view.loaderInfo.parameters.cloth.split(',');
+        clothes = view.view.loaderInfo.parameters.cloth.split(',');
       } else {
-        cloth = ['basketball1-t1', 'basketball1-pants1'];
+        clothes = ['basketball-t1', 'basketball-pants1'];
       }
-      for (var i:uint = 0, len:uint = cloth.length; i < len; i++) {
-        server.add(ServerManager.CLOTH + cloth[i] + '.json', null, cloth_loadCompleteHandler);
+      cloth.numParts = clothes.length;
+      for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
+        server.add(ServerManager.CLOTH + clothes[i] + '.json', null, cloth_loadCompleteHandler);
       }
       server.addEventListener(ServerManager.COMPLETE_ALL, completeAllHandler);
     }

@@ -54,6 +54,14 @@ package com.meathill.diy.model
       _seperator = value;
     }
     
+    private var _numParts:uint;
+    public function get numParts():uint {
+      return _numParts;
+    }
+    public function set numParts(value:uint):void {
+      _numParts = value;
+    }
+    
     
     public function ClothModel() {
       _steps = new Vector.<SingleStepConfig>();
