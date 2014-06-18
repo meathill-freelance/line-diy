@@ -49,7 +49,7 @@ package com.meathill.diy.view
       addChild(wizard);
       
       options = new Options();
-      options.x = 10;
+      options.x = stage.stageWidth - 1200 >> 1;
       options.y = 70;
       addChild(options);
       
@@ -59,12 +59,13 @@ package com.meathill.diy.view
       addChild(bottom);
       
       rightBar = new RightBar();
-      rightBar.x = stage.stageWidth - 140;
+      rightBar.x = stage.stageWidth - (stage.stageWidth - 1200 >> 1) - 120;
       rightBar.y = 80;
       addChild(rightBar);
       
-      footer = new Footer(stage.stageWidth);
-      footer.y = stage.stageHeight - Footer.HEIGHT;
+      footer = new Footer(stage.stageWidth > 1200 ? 1200 : stage.stageWidth);
+      footer.x = stage.stageWidth - footer.width >> 1;
+      footer.y = stage.stageHeight - Footer.HEIGHT + 2;
       addChild(footer);
     }
     

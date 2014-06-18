@@ -24,13 +24,14 @@ package com.meathill.diy.component.wizard
     }
     
     public function draw(steps:Vector.<SingleStepConfig>):void {
-      var stepWidth:uint = stage.stageWidth / steps.length;
+      var width:uint = stage.stageWidth > 1200 ? 1200 : stage.stageWidth;
+      var stepWidth:uint = width / steps.length;
       stepWidth = stepWidth < MAX_WIDTH ? stepWidth : MAX_WIDTH;
       Item.stepWidth = stepWidth - 10;
       
       // 背景
       graphics.beginFill(Colors.HEADER_BG);
-      graphics.drawRect(0, 0, stage.stageWidth, 60);
+      graphics.drawRect(0, 0, width, 60);
       graphics.endFill();
       
       // 计步器
@@ -41,6 +42,8 @@ package com.meathill.diy.component.wizard
         addChild(item);
         _items.push(item);
       }
+      
+      x = stage.stageWidth - width >> 1;
     }
     public function highhight(step:uint):void {
       for (var i:uint = 0, len:uint = _items.length; i < len; i++) {

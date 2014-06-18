@@ -3,6 +3,7 @@ package com.meathill.diy
   import com.meathill.diy.config.AppConfig;
   import com.meathill.diy.config.GUIConfig;
 	import flash.display.Sprite;
+  import flash.display.StageAlign;
   import flash.display.StageScaleMode;
 	import flash.events.Event;
   import flash.system.Security;
@@ -29,6 +30,8 @@ package com.meathill.diy
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
       stage.scaleMode = StageScaleMode.NO_SCALE;
+      stage.align = StageAlign.TOP_LEFT;
+      
 			// entry point
       Security.allowDomain('*');
       _context = new Context();
