@@ -1,17 +1,17 @@
 package com.meathill.diy.component.bottom 
 {
   import com.meathill.diy.component.BottomButton;
-  import com.meathill.diy.event.UserEvent;
   import flash.display.Sprite;
-  import flash.events.MouseEvent;
 	/**
    * ...
    * @author Meathill
    */
   public class BottomButtonGroup extends Sprite
   {
-    private var prevButton:BottomButton;
-    private var nextButton:BottomButton;
+    public var prevButton:BottomButton;
+    public var nextButton:BottomButton;
+    public var upButton:BottomButton;
+    public var downButton:BottomButton;
     
     public function BottomButtonGroup() {
       draw();
@@ -19,23 +19,19 @@ package com.meathill.diy.component.bottom
     
     private function draw():void {
       prevButton = new BottomButton('', 'arrowLeft', true);
-      prevButton.addEventListener(MouseEvent.CLICK, prevButton_clickHandler);
       addChild(prevButton);
       
+      upButton = new BottomButton('', 'arrowUp', false, false);
+      upButton.x = prevButton.width;
+      addChild(upButton);
+      
+      downButton = new BottomButton('', 'arrowDown', false, false);
+      downButton.x = upButton.x + upButton.width;
+      addChild(downButton);
+      
       nextButton = new BottomButton('', 'arrowRight', false, true);
-      nextButton.x = prevButton.width;
-      nextButton.addEventListener(MouseEvent.CLICK, nextButton_clickHandler);
+      nextButton.x = downButton.x + downButton.width;
       addChild(nextButton);
-    }
-    
-    
-    private function prevButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.PREV_TPL);
-      dispatchEvent(event);
-    }
-    private function nextButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.NEXT_TPL);
-      dispatchEvent(event);
     }
     
   }

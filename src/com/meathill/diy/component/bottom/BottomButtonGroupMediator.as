@@ -2,6 +2,7 @@ package com.meathill.diy.component.bottom
 {
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
+  import flash.events.MouseEvent;
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
@@ -17,23 +18,32 @@ package com.meathill.diy.component.bottom
     public var cloth:ClothModel;
     
     override public function initialize():void {
-      addViewListener(UserEvent.PREV_TPL, user_prevTemplateHandler);
-      addViewListener(UserEvent.NEXT_TPL, user_nextTemplateHandler);
+      addViewListener(MouseEvent.CLICK, view_clickHandler);
     }
     
-    
-    private function user_prevTemplateHandler(e:UserEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.SELECT_TPL);
-      event.template = cloth.template - 1 >= 0 ? cloth.template - 1 : cloth.sights - 1;
+    private function view_clickHandler(e:MouseEvent):void {
+      var event:UserEvent;
+      switch (e.target) {
+        case view.prevButton:
+          event = new UserEvent(UserEvent.SELECT_TPL);
+          event.template = cloth.template - 1 >= 0 ? cloth.template - 1 : cloth.sights - 1;
+          break;
+          
+        case view.nextButton:
+          event = new UserEvent(UserEvent.SELECT_TPL);
+          event.template = cloth.template + 1 < cloth.sights ? cloth.template + 1 : 0;
+          break;
+          
+        case view.upButton:
+          event = new UserEvent(UserEvent.SHOW_TOP);
+          break;
+          
+        case view.downButton:
+          event = new UserEvent(UserEvent.SHOW_PANTS);
+          break;
+      }
       dispatch(event);
     }
-    private function user_nextTemplateHandler(e:UserEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.SELECT_TPL);
-      event.template = cloth.template + 1 < cloth.sights ? cloth.template + 1 : 0;
-      dispatch(event);
-    }
-    
-    
   }
 
 }

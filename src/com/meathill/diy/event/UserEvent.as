@@ -15,8 +15,9 @@ package com.meathill.diy.event
     static public const PREV_STEP:String = "prev_step";
     
     public static const SELECT_TPL:String = 'select_tpl';
-    static public const NEXT_TPL:String = "nextTpl";
-    static public const PREV_TPL:String = "prevTpl";
+    
+    static public const SHOW_TOP:String = "show_top";
+    static public const SHOW_PANTS:String = "show_pants";
     
     static public const CONFIRM:String = "confirm";
     static public const BUY:String = "buy";

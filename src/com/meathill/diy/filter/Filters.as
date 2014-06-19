@@ -18,7 +18,7 @@ package com.meathill.diy.filter
     public static const INPUT_FOCUS_IN:DropShadowFilter = new DropShadowFilter(2, 45, 0, 0.25, 4, 4, 1, 1, true);
     public static const INPUT_GLOW:GlowFilter = new GlowFilter(Colors.PETER_RIVER, 0.6, 8, 8);
     
-    public static const TUQI:DropShadowFilter = new DropShadowFilter(1, 45, 0xFFFFFF, 0.4, 2, 2, 1, 1, true);
+    public static const TUQI:DropShadowFilter = new DropShadowFilter(2, 90, 0xFFFFFF, 0.4, 4, 4, 1, 1, true);
     public static const SUNKEN:DropShadowFilter = new DropShadowFilter(2, 45, 0, 0.4, 2, 2, 2, 1, true);
     public static const DOWN_SHADOW:DropShadowFilter = new DropShadowFilter(4, 90, 0, 0.125, 4, 4, 2, BitmapFilterQuality.MEDIUM, true);
     public static const BEVEL:BevelFilter = new BevelFilter(2, 45, 0xFFFFFF, 0.25, 0, 0.25, 2, 2);

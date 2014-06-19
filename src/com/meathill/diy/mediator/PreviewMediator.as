@@ -40,7 +40,10 @@ package com.meathill.diy.mediator
       addContextListener(DesignEvent.SET_TEAM_NAME, teamName_changeHandler, DesignEvent);
       addContextListener(UserEvent.GO_TO_STEP, user_gotoStepHandler);
       addContextListener(UserEvent.SELECT_TPL, user_selectTemplateHandler);
+      addContextListener(UserEvent.SHOW_TOP, user_showTopHandler);
+      addContextListener(UserEvent.SHOW_PANTS, user_showPantsHandler);
     }
+    
     
     
     private function useUserDesign():void {
@@ -89,6 +92,12 @@ package com.meathill.diy.mediator
         view.show(assets.templates[e.template], null, cloth.seperator);
       }
       useUserDesign();
+    }
+    private function user_showPantsHandler(e:UserEvent):void {
+      view.scrollToPart(1);
+    }
+    private function user_showTopHandler(e:UserEvent):void {
+      view.scrollToPart(0);
     }
     // DesignEvent
     private function color_changeHandler(e:DesignEvent):void {

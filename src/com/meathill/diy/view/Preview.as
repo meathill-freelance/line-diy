@@ -91,23 +91,20 @@ package com.meathill.diy.view
     public function setTeamName(teamname:String, font:String, color:uint, step:uint):void {
       step = checkStep(step);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
-      var tf:TextField;
-      if (piece.getChildAt(0) is TextField) {
-        tf = TextField(piece.getChildAt(0));
-        var textFormat:TextFormat = tf.defaultTextFormat;
-        textFormat.font = font;
-        textFormat.color = color;
-        tf.defaultTextFormat = textFormat;
-      } else {
-        tf = new TextField();
-        tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.height - 4, leading: 0} );
-        tf.width = piece.width;
-        tf.height = piece.height;
-        tf.mouseEnabled = false;
-        piece.removeChildAt(0);
-        piece.addChild(tf);
+      piece.getChildAt(0).visible = false;
+      if (piece.numChildren > 1) {
+        piece.removeChildAt(1);
       }
+      var tf:TextField = new TextField();
+      tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.getChildAt(0).height - 6, leading: 0} );
+      tf.width = piece.getChildAt(0).width;
+      tf.height = piece.getChildAt(0).height;
+      tf.mouseEnabled = false;
       tf.text = teamname;
+      var bmpd:BitmapData = new BitmapData(piece.getChildAt(0).width, piece.getChildAt(0).height, true, 0);
+      bmpd.draw(tf);
+      var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
+      piece.addChild(bmp);
     }
     public function highlight(step:uint):void {
       step = checkStep(step);
@@ -125,6 +122,12 @@ package com.meathill.diy.view
         }
       });
     }
+    public function scrollToPart(part:uint):void {
+      if (part >= numChildren) {
+        return;
+      }
+      scrollTo(getChildAt(part));
+    }
     
     private function checkStep(step:uint):uint {
       cloth = step > seperator ? cloth2 : cloth1;
@@ -132,7 +135,7 @@ package com.meathill.diy.view
       scrollTo(cloth);
       return step;
     }
-    private function scrollTo(cloth:Sprite):void {
+    private function scrollTo(cloth:DisplayObject):void {
       if (_isReady) {
         TweenMax.to(this, 0.3, { y: cloth === cloth1 ? _y : _y - 400 } ); 
       }
