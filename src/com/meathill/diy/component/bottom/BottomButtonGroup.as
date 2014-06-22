@@ -6,32 +6,37 @@ package com.meathill.diy.component.bottom
    * ...
    * @author Meathill
    */
-  public class BottomButtonGroup extends Sprite
-  {
+  public class BottomButtonGroup extends Sprite {
     public var prevButton:BottomButton;
     public var nextButton:BottomButton;
     public var upButton:BottomButton;
     public var downButton:BottomButton;
     
-    public function BottomButtonGroup() {
-      draw();
-    }
-    
-    private function draw():void {
+    public function draw(hasTwo:Boolean = false):void {
+      var offset:uint = 0;
+      
       prevButton = new BottomButton('', 'arrowLeft', true);
       addChild(prevButton);
+      offset = prevButton.width;
       
-      upButton = new BottomButton('', 'arrowUp', false, false);
-      upButton.x = prevButton.width;
-      addChild(upButton);
-      
-      downButton = new BottomButton('', 'arrowDown', false, false);
-      downButton.x = upButton.x + upButton.width;
-      addChild(downButton);
+      if (hasTwo) {
+        upButton = new BottomButton('', 'arrowUp', false, false);
+        upButton.x = prevButton.width;
+        addChild(upButton);
+        
+        downButton = new BottomButton('', 'arrowDown', false, false);
+        downButton.x = upButton.x + upButton.width;
+        addChild(downButton);
+        
+        offset = downButton.x + upButton.width;
+      }
       
       nextButton = new BottomButton('', 'arrowRight', false, true);
-      nextButton.x = downButton.x + downButton.width;
+      nextButton.x = offset;
       addChild(nextButton);
+      
+      x = stage.stageWidth - width >> 1;
+      y -= height + 20;
     }
     
   }

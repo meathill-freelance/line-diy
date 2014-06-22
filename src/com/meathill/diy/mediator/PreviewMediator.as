@@ -57,7 +57,7 @@ package com.meathill.diy.mediator
           continue;
         }
         if (config.type === 'number') {
-          view.setNumber(config.number, config.style, i, config.length, Sprite(assets.getAsset(config.asset)));
+          view.setNumber(config.number, config.style, i, Sprite(assets.getAsset(config.asset)));
         }
         if (config.type === 'teamname') {
           view.setTeamName(config.teamname, config.font, config.color, i);
@@ -105,7 +105,7 @@ package com.meathill.diy.mediator
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.steps[cloth.step];
-      view.setNumber(e.number, e.style, cloth.step, config.length, Sprite(assets.getAsset(config.asset)));
+      view.setNumber(e.number, e.style, cloth.step, Sprite(assets.getAsset(config.asset)));
     }
     private function teamName_changeHandler(e:DesignEvent):void {
       view.setTeamName(e.teamname, e.font, e.color, cloth.step);

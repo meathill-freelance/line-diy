@@ -113,7 +113,10 @@ package com.meathill.diy.component
           icon.y += 8;
         }
         if (label) {
-          label.x = 12 + (icon ? icon.width + 10 : 0);
+          if (icon) {
+            icon.x += 2;
+          }
+          label.x = 12 + (icon ? icon.width + 6 : 0);
           label.y = 8;
         }
       } else if (iconPos === ICON_RIGHT) {
@@ -130,7 +133,7 @@ package com.meathill.diy.component
       if (buttonWidth || buttonHeight) {
         buttonWidth = buttonWidth || 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
         buttonHeight = buttonHeight || 11 + Math.max(label ? label.height : 0, icon ? icon.height : 0);
-        Scaler.recenter(buttonWidth, buttonHeight, icon, label);
+        //Scaler.recenter(buttonWidth, buttonHeight, icon, label);
       } else {
         buttonWidth = 24 + (label ? label.width : 0) + (icon ? icon.width : 0) + (label && icon ? 10 : 0);
         buttonHeight = 11 + Math.max(label ? label.height : 0, icon ? icon.height : 0);

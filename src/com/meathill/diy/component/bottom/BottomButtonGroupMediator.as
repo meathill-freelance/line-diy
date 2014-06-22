@@ -18,6 +18,7 @@ package com.meathill.diy.component.bottom
     public var cloth:ClothModel;
     
     override public function initialize():void {
+      view.draw(cloth.numParts > 1);
       addViewListener(MouseEvent.CLICK, view_clickHandler);
     }
     

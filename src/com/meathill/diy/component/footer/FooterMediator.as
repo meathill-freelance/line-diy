@@ -22,7 +22,12 @@ package com.meathill.diy.component.footer
     [Inject]
     public var config:ConfigModel;
     
+    [Inject]
+    public var view:Footer;
+    
     override public function initialize():void {
+      view.addText(config.more);
+      
       addViewListener(MouseEvent.CLICK, view_clickHandler);
       addViewListener(UserEvent.HAIBAO, user_haibaoHandler);
       addViewListener(UserEvent.CONTRIBUTE, user_contributeHandler);

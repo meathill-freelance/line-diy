@@ -12,8 +12,10 @@ package com.meathill.diy.component.rightBar
    * @author Meathill
    */
   public class RightBar extends Sprite {
-    private var saveButton:Button;
-    private var buyButton:Button;
+    public var saveButton:PrimaryButton;
+    public var buyButton:SuccessButton;
+    public var backButton:PrimaryButton;
+    
     private var receipt:Receipt;
     
     public function RightBar() {
@@ -21,27 +23,20 @@ package com.meathill.diy.component.rightBar
     }
     
     private function layout():void {
+      backButton = new PrimaryButton('重选款式', 'reply', 120);
+      addChild(backButton);
+      
       saveButton = new PrimaryButton('保存', 'save', 120);
-      saveButton.addEventListener(MouseEvent.CLICK, saveButton_clickHandler);
+      saveButton.y = 50;
       addChild(saveButton);
       
       buyButton = new SuccessButton('购买', 'shoppingCart', 120);
-      buyButton.y = 50;
-      buyButton.addEventListener(MouseEvent.CLICK, buyButton_clickHandler);
+      buyButton.y = 100;
       addChild(buyButton);
       
       receipt = new Receipt(120);
-      receipt.y = 95;
+      receipt.y = 145;
       addChild(receipt);
-    }
-    
-    private function buyButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.BUY);
-      dispatchEvent(event);
-    }
-    private function saveButton_clickHandler(e:MouseEvent):void {
-      var event:UserEvent = new UserEvent(UserEvent.SAVE);
-      dispatchEvent(event);
     }
     
   }

@@ -54,8 +54,7 @@ package com.meathill.diy.view
       addChild(options);
       
       bottom = new BottomButtonGroup();
-      bottom.x = stage.stageWidth - bottom.width >> 1;
-      bottom.y = stage.stageHeight - Footer.HEIGHT - bottom.height - 20;
+      bottom.y = stage.stageHeight - Footer.HEIGHT;
       addChild(bottom);
       
       rightBar = new RightBar();

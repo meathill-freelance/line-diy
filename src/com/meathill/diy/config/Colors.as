@@ -31,6 +31,9 @@ package com.meathill.diy.config
     
     public static const HEADER_BG:uint = 0x27282a;
     public static const FOOTER_BG:uint = 0x2b323a;
+    
+    public static const INFO_BG:uint = 0xd9edf7;
+    public static const INFO_FONT:uint = 0x31708f;
   }
 
 }

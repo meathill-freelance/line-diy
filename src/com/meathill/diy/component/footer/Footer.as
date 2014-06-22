@@ -23,21 +23,28 @@ package com.meathill.diy.component.footer
     
     private var haibaoButton:Button;
     private var shareButton:Button;
+    private var serviceTxt:TextField;
     
     public function Footer(w:uint) {
       draw(w);
-			layout();
+			layout(w);
+    }
+    
+    public function addText(more:String):void {
+      serviceTxt.text = more;
     }
     
     
     private function draw(w:uint):void {
       graphics.beginFill(Colors.FOOTER_BG);
-      graphics.drawRect(2, 0, w - 4, HEIGHT - 2);
+      graphics.drawRoundRectComplex(2, 0, w - 4, HEIGHT - 2, 6, 6, 0, 0);
+      graphics.beginFill(Colors.INFO_BG);
+      graphics.drawRoundRect(w - 220, 20, 200, HEIGHT - 40, 6);
       graphics.endFill();
       
       filters = [Filters.TUQI];
     }
-    private function layout():void {
+    private function layout(w:uint):void {
       var socialTxt:TextField = new TextField();
       socialTxt.defaultTextFormat = Typography.getTextFormat(Typography.BODY, {color: 0xFFFFFF});
       socialTxt.x = 30;
@@ -67,6 +74,15 @@ package com.meathill.diy.component.footer
       shareButton.x = 600;
       shareButton.addEventListener(MouseEvent.CLICK, shareButton_clickHandler);
       addChild(shareButton);
+      
+      serviceTxt = new TextField();
+      serviceTxt.x = w - 210;
+      serviceTxt.y = 30;
+      serviceTxt.width = 180;
+      serviceTxt.height = HEIGHT - 30;
+      serviceTxt.wordWrap = true;
+      serviceTxt.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: Colors.INFO_FONT, size: 12, leading: 6 } );
+      addChild(serviceTxt);
       
       socialTxt.y = haibaoTxt.y = shareTxt.y = 20;
       socialTxt.mouseEnabled = haibaoTxt.mouseEnabled = shareTxt.mouseEnabled = false;

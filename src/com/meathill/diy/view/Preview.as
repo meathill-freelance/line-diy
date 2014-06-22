@@ -63,7 +63,7 @@ package com.meathill.diy.view
       step = checkStep(step);
       cloth.getChildAt(step).filters = [Filters.getColorFilter(color)];
     }
-    public function setNumber(number:uint, style:uint, step:uint, length:uint, asset:Sprite):void {
+    public function setNumber(number:uint, style:uint, step:uint, asset:Sprite):void {
       step = checkStep(step);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
       var numberAsset:Sprite = Sprite(asset.getChildAt(style));
@@ -74,16 +74,19 @@ package com.meathill.diy.view
       var height:uint = piece.getChildAt(0).height;
       piece.getChildAt(0).visible = false;
       var str:String = number.toString();
+      var length:uint = str.length;
       var gap:uint = 10;
-      for (var i:uint = 0, len:uint = str.length; i < len; i++) {
+      var singleWidth:uint = (width - gap * (length - 1)) / length;
+      for (var i:uint = 0; i < length; i++) {
         var index:uint = parseInt(str.charAt(i));
         index = index === 0 ? 10 : index;
         var mc:DisplayObject = numberAsset.getChildAt(index - 1);
-        var size:Object = Scaler.getSize(mc, (width - gap * (len - 1)) / len, height);
+        var size:Object = Scaler.getSize(mc, singleWidth, height);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
         bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x += i * (size.width + 10); 
+        bmp.x = (singleWidth - size.width >> 1) + i * (singleWidth + 10);
+        bmp.y = height - size.height >> 1;
         piece.addChild(bmp);
       }
     }

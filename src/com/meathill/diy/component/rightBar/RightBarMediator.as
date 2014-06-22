@@ -4,27 +4,39 @@ package com.meathill.diy.component.rightBar
   import com.meathill.diy.popup.PopupManager;
   import com.meathill.diy.popup.view.BuyPopup;
   import com.meathill.diy.popup.view.SavePopup;
+  import flash.events.MouseEvent;
+  import flash.external.ExternalInterface;
 	import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class RightBarMediator extends Mediator 
-  {
+  public class RightBarMediator extends Mediator {
     [Inject]
     public var popupManager:PopupManager;
     
+    [Inject]
+    public var view:RightBar;
+    
     override public function initialize():void {
-      addViewListener(UserEvent.BUY, user_buyHandler);
-      addViewListener(UserEvent.SAVE, user_saveHandler);
+      addViewListener(MouseEvent.CLICK, view_clickHandler);
     }
     
-    private function user_buyHandler(e:UserEvent):void {
-      popupManager.popup(new BuyPopup());
-    }
-    private function user_saveHandler(e:UserEvent):void {
-      popupManager.popup(new SavePopup());
+    private function view_clickHandler(e:MouseEvent):void {
+      switch (e.target) {
+        case view.backButton:
+          ExternalInterface.call('backToForm');
+          break;
+          
+        case view.saveButton:
+          popupManager.popup(new SavePopup());
+          break;
+          
+        case view.buyButton:
+          popupManager.popup(new BuyPopup());
+          break;
+      }
     }
     
   }
