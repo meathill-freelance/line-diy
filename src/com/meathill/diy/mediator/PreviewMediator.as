@@ -68,8 +68,13 @@ package com.meathill.diy.mediator
     
     // View Event
     private function view_clickHanaler(e:MouseEvent):void {
-      var index:uint = Sprite(e.target).parent.getChildIndex(Sprite(e.target)),
-          event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
+      var mc:Sprite = Sprite(e.target);
+      var parent:Sprite = Sprite(mc.parent);
+      var index:uint = parent.getChildIndex(mc);
+      var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
+      if (view.getChildIndex(parent) > 0) {
+        index += Sprite(view.getChildAt(0)).numChildren;
+      }
       event.step = index;
       dispatch(event);
     }

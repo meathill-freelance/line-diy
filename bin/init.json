@@ -6,8 +6,7 @@
     "doubleColor": 12
   },
   "assets": {
-    "number": "../mocks/number.swf",
-    "char": "../mocks/char.swf",
+    "number": "../assets/number.swf",
     "bg": "../assets/bg.jpg",
     "assets": "../assets/assets.swf"
   },

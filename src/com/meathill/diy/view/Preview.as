@@ -46,14 +46,14 @@ package com.meathill.diy.view
         removeChildAt(0);
       }
       cloth1 = mc;
-      Scaler.resize(cloth1, 300, 500);
+      Scaler.resize(cloth1, 500, 500);
       cloth1.x = - cloth1.width >> 1;
       cloth1.y = - cloth1.height >> 1;
       addChild(cloth1);
       
       if (mc2) {
         cloth2 = mc2;
-        Scaler.resize(cloth2, 300, 400);
+        Scaler.resize(cloth2, 400, 400);
         cloth2.x = -cloth2.width >> 1;
         cloth2.y = cloth1. y + 500;
         addChild(cloth2);
@@ -99,7 +99,7 @@ package com.meathill.diy.view
         piece.removeChildAt(1);
       }
       var tf:TextField = new TextField();
-      tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.getChildAt(0).height - 6, leading: 0} );
+      tf.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, { font: font, color: color, align: TextFormatAlign.CENTER, size: piece.getChildAt(0).height - 6, leading: 0, bold: true} );
       tf.width = piece.getChildAt(0).width;
       tf.height = piece.getChildAt(0).height;
       tf.mouseEnabled = false;

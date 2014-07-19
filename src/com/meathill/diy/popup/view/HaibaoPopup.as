@@ -16,6 +16,10 @@ package com.meathill.diy.popup.view
     override protected function resetAttr():void {
       title = '制作海报';
     }
+    
+    public function preview():void {
+      
+    }
   }
 
 }

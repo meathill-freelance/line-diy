@@ -22,7 +22,6 @@ package com.meathill.diy.component.footer
     public static const HEIGHT:uint = 130;
     
     private var haibaoButton:Button;
-    private var shareButton:Button;
     private var serviceTxt:TextField;
     
     public function Footer(w:uint) {
@@ -64,17 +63,6 @@ package com.meathill.diy.component.footer
       haibaoButton.addEventListener(MouseEvent.CLICK, haibaoBtn_clickHandler);
       addChild(haibaoButton);
       
-      var shareTxt:TextField = new TextField();
-      shareTxt.x = 600;
-      shareTxt.autoSize = TextFieldAutoSize.LEFT;
-      shareTxt.defaultTextFormat = socialTxt.defaultTextFormat;
-      shareTxt.text = '贡献到XLine设计库';
-      addChild(shareTxt);
-      shareButton = new Button('开始');
-      shareButton.x = 600;
-      shareButton.addEventListener(MouseEvent.CLICK, shareButton_clickHandler);
-      addChild(shareButton);
-      
       serviceTxt = new TextField();
       serviceTxt.x = w - 210;
       serviceTxt.y = 30;
@@ -84,10 +72,10 @@ package com.meathill.diy.component.footer
       serviceTxt.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { color: Colors.INFO_FONT, size: 12, leading: 6 } );
       addChild(serviceTxt);
       
-      socialTxt.y = haibaoTxt.y = shareTxt.y = 20;
-      socialTxt.mouseEnabled = haibaoTxt.mouseEnabled = shareTxt.mouseEnabled = false;
+      socialTxt.y = haibaoTxt.y = 20;
+      socialTxt.mouseEnabled = haibaoTxt.mouseEnabled = false;
       
-      haibaoButton.y = shareButton.y = 50;
+      haibaoButton.y = 50;
     }
     
     private function createSocialButtons():void {

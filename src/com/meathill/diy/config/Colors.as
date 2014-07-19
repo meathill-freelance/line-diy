@@ -34,6 +34,9 @@ package com.meathill.diy.config
     
     public static const INFO_BG:uint = 0xd9edf7;
     public static const INFO_FONT:uint = 0x31708f;
+    
+    public static var clothColors:Array = ["黑色", "灰色", "松绿", "白色", "皇家蓝", "大学红", "郁金色", "淡粉", "橘红", "校园蓝"];
+    public static var charColors:Array = ["黑色", "大学红", "郁金色", "宝蓝色", "灰色", "松绿", "皇家蓝", "橘色", "宫廷紫", "金属黄", "荧光粉", "青色", "校园蓝", "白色"];
   }
 
 }

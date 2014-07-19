@@ -1,6 +1,7 @@
 package com.meathill.diy.component.options 
 {
   import com.greensock.TweenLite;
+  import com.meathill.diy.component.Tooltip;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.service.AssetsManager;
   import flash.display.Bitmap;
@@ -16,8 +17,10 @@ package com.meathill.diy.component.options
     private var _color:uint;
     private var tween:TweenLite;
     private var icon:Bitmap;
+    private var label:String;
     
-    public function ColorCardItem(color:uint) {
+    public function ColorCardItem(color:uint, label:String) {
+      this.label = label;
       _color = color;
 			
       buttonMode = useHandCursor = true;
@@ -61,12 +64,14 @@ package com.meathill.diy.component.options
         tween.kill();
       }
       scaleX = scaleY = 1.2;
+      Tooltip.create(label, this, 0);
     }
     private function rollOutHandler(e:MouseEvent):void {
       tween = TweenLite.to(this, .3, {
         scaleX: 1,
         scaleY: 1
       });
+      Tooltip.remove(this);
     }
   }
 

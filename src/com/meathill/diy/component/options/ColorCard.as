@@ -1,5 +1,6 @@
 package com.meathill.diy.component.options 
 {
+  import com.meathill.diy.config.Colors;
   import com.meathill.diy.model.vo.SingleStepConfig;
 	import flash.display.Sprite;
   import flash.events.Event;
@@ -40,8 +41,10 @@ package com.meathill.diy.component.options
     
     
     private function draw():void {
-      for (var i:uint = 0, len:uint = colors.length; i < len; i++) {
-        var mc:ColorCardItem = new ColorCardItem(parseInt(colors[i], 16));
+      var len:uint = colors.length;
+      var labels:Array = len > 10 ? Colors.charColors : Colors.clothColors;
+      for (var i:uint = 0; i < len; i++) {
+        var mc:ColorCardItem = new ColorCardItem(parseInt(colors[i], 16), labels[i]);
         mc.x = i % 5 * 41 + 19;
         mc.y = (i / 5 >> 0) * 41 + 12;
         addChild(mc);
