@@ -33,7 +33,7 @@ package com.meathill.diy.mediator
       }
       useUserDesign();
       
-      addViewListener(MouseEvent.CLICK, view_clickHanaler);
+      addViewListener(UserEvent.GO_TO_STEP, dispatch);
       
       addContextListener(DesignEvent.SELECT_COLOR, color_changeHandler, DesignEvent);
       addContextListener(DesignEvent.SET_SQUAD_NUMBER, squadNumber_changeHandler, DesignEvent);
@@ -66,18 +66,6 @@ package com.meathill.diy.mediator
       view.isReady = true;
     }
     
-    // View Event
-    private function view_clickHanaler(e:MouseEvent):void {
-      var mc:Sprite = Sprite(e.target);
-      var parent:Sprite = Sprite(mc.parent);
-      var index:uint = parent.getChildIndex(mc);
-      var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
-      if (view.getChildIndex(parent) > 0) {
-        index += Sprite(view.getChildAt(0)).numChildren;
-      }
-      event.step = index;
-      dispatch(event);
-    }
     // UserEvent
     private function user_gotoStepHandler(e:UserEvent):void {
       if (cloth.steps[e.step] !== undefined) {

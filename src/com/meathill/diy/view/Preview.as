@@ -2,6 +2,7 @@ package com.meathill.diy.view
 {
   import com.greensock.TweenMax;
   import com.meathill.diy.config.Typography;
+  import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.filter.Filters;
   import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
@@ -12,6 +13,7 @@ package com.meathill.diy.view
   import flash.events.Event;
   import flash.events.MouseEvent;
   import flash.geom.Matrix;
+  import flash.geom.Point;
   import flash.text.TextField;
   import flash.text.TextFormat;
   import flash.text.TextFormatAlign;
@@ -21,6 +23,8 @@ package com.meathill.diy.view
    * @author Meathill
    */
   public class Preview extends Sprite {
+    private const THRESHOLD:uint = 0;
+    
     private var loader:Loader;
     private var cloth:Sprite;
     private var cloth1:Sprite;
@@ -37,6 +41,7 @@ package com.meathill.diy.view
       buttonMode = useHandCursor = true;
       
       addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+      addEventListener(MouseEvent.CLICK, clickHanaler);
       //addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
     }
     
@@ -138,6 +143,34 @@ package com.meathill.diy.view
       scrollTo(cloth);
       return step;
     }
+    private function findRealMc(parent:Sprite, mc:Sprite, stageX:Number, stageY:Number):Sprite {
+      for (var i:uint = 0, len:uint = parent.numChildren; i < len; i ++) {
+        var layer:Sprite = Sprite(parent.getChildAt(i));
+        if (isRealClick(layer, stageX, stageY)) {
+          return layer;
+        }
+      }
+      return null;
+    }
+    private function isRealClick(mc:Sprite, stageX:Number, stageY:Number):Boolean {
+      var point:Point = mc.globalToLocal(new Point(stageX, stageY));
+      for (var i:uint = 0, len:uint = mc.numChildren; i < len; i++) {
+        var layer:DisplayObject = mc.getChildAt(i);
+        if (layer.visible) {
+          var bmpd:BitmapData;
+          if (layer is Bitmap) {
+            bmpd = Bitmap(layer).bitmapData;
+          } else {
+            bmpd = new BitmapData(layer.width, layer.height, true, 0);
+            bmpd.draw(layer);
+          }
+          if (bmpd.getPixel32(point.x - layer.x, point.y - layer.y) >>> 24 > THRESHOLD) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
     private function scrollTo(cloth:DisplayObject):void {
       if (_isReady) {
         TweenMax.to(this, 0.3, { y: cloth === cloth1 ? _y : _y - 400 } ); 
@@ -147,6 +180,24 @@ package com.meathill.diy.view
     private function addedHandler(e:Event):void {
       removeEventListener(Event.ADDED_TO_STAGE, addedHandler);
       _y = y;
+    }
+    private function clickHanaler(e:MouseEvent):void {
+      var mc:Sprite = Sprite(e.target);
+      var parent:Sprite = Sprite(mc.parent);
+      // 因为使用了位图，所以可能点击的图层判断不准，所以需要逐层判断下
+      if (!isRealClick(mc, e.stageX, e.stageY)) {
+        mc = findRealMc(parent, mc, e.stageX, e.stageY);
+      }
+      if (!mc) {
+        return;
+      }
+      var index:uint = parent.getChildIndex(mc);
+      var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
+      if (parent === cloth2) {
+        index += cloth1.numChildren;
+      }
+      event.step = index;
+      dispatchEvent(event);
     }
     private function mouseDownHandler(e:MouseEvent):void {
       startDrag(false);

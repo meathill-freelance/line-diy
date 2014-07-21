@@ -89,7 +89,11 @@ package com.meathill.diy.service
       var mc:DisplayObject = LoaderInfo(e.target).content;
       switch(queue[0].type) {
         case TEMPLATE:
-          _templates.push(Sprite(mc));
+          var template:Sprite = Sprite(mc);
+          for (var i:uint = 0, len:uint = template.numChildren; i < len; i++) {
+            Sprite(template.getChildAt(i)).mouseChildren = false;
+          }
+          _templates.push(template);
           break;
           
         case WELCOME:

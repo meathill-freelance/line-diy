@@ -7,28 +7,31 @@ package com.meathill.diy.view
    * 加载进度
    * @author Meathill
    */
-  public class Spinner extends Sprite 
-  {
+  public class Spinner extends Sprite {
     private var r:uint = 20;
     private var color:uint = 0x2ECC71;
     private var gap:uint = 20;
     private var count:uint = 0;
     
-    public function Spinner() 
-    {
+    [Embed(source="../../../../../assets/xlinecom.swf")]
+    private var Logo:Class;
+    private var logo:Sprite;
+    
+    public function Spinner() {
       super();
+      logo = new Logo() as Sprite;
+      logo.x = -logo.width >> 1;
+      logo.y = -logo.height >> 1;
+      addChild(logo);
 			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
     }
     
     private function draw():void {
-      graphics.clear();
-      for (var i:uint = 0; i < 3; i++) {
-        graphics.beginFill(color, 1 - (count % 30 + i * 5) * 0.02);
-        graphics.drawCircle((i - 1) * r << 2, 0, r);
-        graphics.endFill();
-      }
-      count ++;
+      count++;
+      count = count >> 4;
+      
     }
+    
     
     private function addedHandler(e:Event):void {
       x = stage.stageWidth >> 1;

@@ -7,6 +7,7 @@ package com.meathill.diy.component.options
   import flash.display.Bitmap;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
+  import flash.geom.ColorTransform;
 	
 	/**
    * ...
@@ -42,6 +43,9 @@ package com.meathill.diy.component.options
       }
       icon.x = - icon.width >> 1;
       icon.y = - icon.height >> 1;
+      if (_color === 0xFFFFFF || _color === 0xFCFCFC) {
+        icon.transform.colorTransform = new ColorTransform(0.8, 0.8, 0.8, 1);
+      }
       addChild(icon);
       name = 'active';
     }
