@@ -10,116 +10,17 @@
     "bg": "../assets/bg.jpg",
     "assets": "../assets/assets.swf"
   },
-  "welcome": [
-    {
-      "name": "篮球服",
-      "templates": [
-        {
-          "tid": 32,
-          "bid": 40,
-          "name": "款式一",
-          "thumbnail": "../assets/basketball1.png",
-          "price": 100,
-          "available": true
-        },
-        {
-          "tid": 51,
-          "bid": 56,
-          "name": "款式二",
-          "thumbnail": "../assets/basketball2.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 61,
-          "bid": 66,
-          "name": "款式三",
-          "thumbnail": "../assets/basketball3.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 72,
-          "bid": 74,
-          "name": "款式四",
-          "thumbnail": "../assets/basketball4.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 79,
-          "bid": 84,
-          "name": "款式五",
-          "thumbnail": "../assets/basketball5.png",
-          "price": 100,
-          "available": false
-        }
-      ]
-    },
-    {
-      "name": "足球服",
-      "templates": [
-        {
-          "tid": 89,
-          "bid": 94,
-          "name": "款式一",
-          "thumbnail": "../assets/football1.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 99,
-          "bid": 104,
-          "name": "款式二",
-          "thumbnail": "../assets/football2.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 109,
-          "bid": 114,
-          "name": "款式三",
-          "thumbnail": "../assets/football3.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 119,
-          "bid": 124,
-          "name": "款式四",
-          "thumbnail": "../assets/football4.png",
-          "price": 100,
-          "available": false
-        },
-        {
-          "tid": 129,
-          "bid": 137,
-          "name": "款式五",
-          "thumbnail": "../assets/football5.png",
-          "price": 100,
-          "available": false
-        }
-      ]
-    },
-    {
-      "name": "高尔夫球服",
-      "templates": [
-        {
-          "id": "golf-1",
-          "name": "款式一",
-          "thumbnail": "../assets/golf1.png",
-          "price": 100,
-          "available": true
-        },
-        {
-          "id": "golf-2",
-          "name": "款式二",
-          "thumbnail": "../assets/golf2.png",
-          "price": 100,
-          "available": true
-        } 
-      ],
-      "selected": true
-    }
+  "tips": [
+    "定制完成后可以制作你的球队名片",
+    "你也可以在XLINE的球队里联系球队约球哦",
+    "你也可以在XLINE的球队里选择你喜欢的设计进行购买",
+    "如果有自己的logo可以直接联系客服进行特殊定制",
+    "你定制的每一件队服都是独一无二的哦",
+    "所有的颜色都是国际标准保证颜色纯正",
+    "我们的面料要求国际标准永久性吸水排汗",
+    "如果单买一件上衣不但可以省钱也同样拥有个性",
+    "关注我们官方微信、微薄有更多信息和优惠",
+    "有上万种搭配等着你设计哦",
+    "我们的印号也采用与国际球队一样的品质"
   ]
 }

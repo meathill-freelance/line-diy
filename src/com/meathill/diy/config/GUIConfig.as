@@ -11,7 +11,9 @@ package com.meathill.diy.config {
   import com.meathill.diy.component.rightBar.RightBarMediator;
   import com.meathill.diy.component.wizard.Wizard;
   import com.meathill.diy.component.wizard.WizardMediator;
+  import com.meathill.diy.event.SystemEvent;
   import com.meathill.diy.mediator.PreviewMediator;
+  import com.meathill.diy.model.ConfigModel;
   import com.meathill.diy.popup.mediator.BuyMediator;
   import com.meathill.diy.popup.mediator.HaibaoMediator;
   import com.meathill.diy.popup.mediator.SaveMediator;
@@ -24,6 +26,7 @@ package com.meathill.diy.config {
   import com.meathill.diy.view.Preview;
   import com.meathill.diy.view.Spinner;
   import com.meathill.diy.view.welcome.WelcomeView;
+  import flash.events.IEventDispatcher;
   import robotlegs.bender.extensions.contextView.ContextView;
   import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
   import robotlegs.bender.framework.api.IConfig;
@@ -34,7 +37,6 @@ package com.meathill.diy.config {
    * @author Meathill
    */
   public class GUIConfig implements IConfig {
-    
     [Inject]
     public var injector:IInjector;
     
@@ -44,8 +46,16 @@ package com.meathill.diy.config {
     [Inject]
     public var contextView:ContextView;
     
+    [Inject]
+    public var eventDispatcher:IEventDispatcher;
+    
+    [Inject]
+    public var config:ConfigModel;
+    
+    private var spinner:Spinner;
+    
     public function configure():void {
-      var spinner:Spinner = new Spinner();
+      spinner = new Spinner();
       
       mediatorMap.map(Wizard).toMediator(WizardMediator);
       mediatorMap.map(Options).toMediator(OptionsMediator);
@@ -65,6 +75,12 @@ package com.meathill.diy.config {
       injector.map(Spinner).toValue(spinner);
       
       contextView.view.addChild(spinner);
+      
+      eventDispatcher.addEventListener(SystemEvent.DATA_READY, dataReadyHandler);
+    }
+    
+    private function dataReadyHandler(e:SystemEvent):void {
+      spinner.tip = config.tips[Math.random() * config.tips.length >> 0];
     }
     
   }

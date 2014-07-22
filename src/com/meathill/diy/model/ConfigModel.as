@@ -15,9 +15,9 @@ package com.meathill.diy.model
       return _shareText;
     }
     
-    private var _welcome:Array;
-    public function get welcome():Array {
-      return _welcome;
+    private var _tips:Array;
+    public function get tips():Array {
+      return _tips;
     }
     
     private var _assets:Object;
@@ -39,7 +39,7 @@ package com.meathill.diy.model
     public function parse(init:Object):void {
       _baseURL = init.baseURL;
       _shareText = init.shareText;
-      _welcome = init.welcome;
+      _tips = init.tips;
       _prices = init.prices;
       _assets = init.assets;
       _more = init.moreText;

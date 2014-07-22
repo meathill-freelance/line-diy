@@ -35,7 +35,7 @@ package com.meathill.diy.controller
       if ('cloth' in view.view.loaderInfo.parameters) {
         clothes = view.view.loaderInfo.parameters.cloth.split(',');
       } else {
-        clothes = ['basketball-t1', 'basketball-pants1'];
+        clothes = ['basketball-t3', 'basketball-pants3'];
       }
       cloth.numParts = clothes.length;
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
