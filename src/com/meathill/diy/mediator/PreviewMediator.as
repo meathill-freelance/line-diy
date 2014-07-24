@@ -6,6 +6,7 @@ package com.meathill.diy.mediator
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.view.Preview;
+  import com.meathill.diy.component.options.SquadNumberUtils;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
   import robotlegs.bender.bundles.mvcs.Mediator;
@@ -31,7 +32,7 @@ package com.meathill.diy.mediator
       } else {
         view.show(assets.templates[cloth.template], null, cloth.seperator);
       }
-      useUserDesign();
+      useUserDesign(true);
       
       addViewListener(UserEvent.GO_TO_STEP, dispatch);
       
@@ -46,7 +47,7 @@ package com.meathill.diy.mediator
     
     
     
-    private function useUserDesign():void {
+    private function useUserDesign(isFirst:Boolean = false):void {
       // 是否需要设置号码
       view.isReady = false;
       for (var i:uint = 0, steps:Vector.<SingleStepConfig> = cloth.steps, len:uint = steps.length; i < len; i++) {
@@ -57,6 +58,10 @@ package com.meathill.diy.mediator
           continue;
         }
         if (config.type === 'number') {
+          if (isFirst) {
+            var asset:Sprite = Sprite(Sprite(assets.getAsset(config.asset)).getChildAt(config.style));
+            SquadNumberUtils.useDesign(asset, config.number.toString(), config.color, config.color2, config.length);
+          }
           view.setNumber(config.number, config.style, i, Sprite(assets.getAsset(config.asset)));
         }
         if (config.type === 'teamname') {

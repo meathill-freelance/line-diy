@@ -59,30 +59,15 @@ package com.meathill.diy.component.options
     
     private function draw():void {
       var numberAsset:Sprite = Sprite(_asset.getChildAt(_style));
-      var event:SystemEvent;
       while (preview.numChildren) {
         preview.removeChildAt(0);
       }
-      for (var i:uint = 0, len:uint = numberInput.value.length; i < len; i++) {
-        var index:uint = parseInt(numberInput.value.charAt(i));
-        index = index === 0 ? 10 : index;
-        var mc:Sprite = Sprite(numberAsset.getChildAt(index - 1));
-        if (mc.numChildren > 1) {
-          event = new SystemEvent(SystemEvent.DOUBLE_COLOR);
-          for (var j:uint = 0, jlen:uint = mc.numChildren; j < jlen; j++) {
-            ColorMaker.colorMC(j & 1 ? _config.color2 : _config.color, mc.getChildAt(j));
-          }
-        } else {
-          event = new SystemEvent(SystemEvent.SINGLE_COLOR);
-          ColorMaker.colorMC(_config.color, mc.getChildAt(0));
-        }
-        var size:Object = Scaler.getSize(mc, 50, 100);
-        var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
-        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
-        var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
-        preview.addChild(bmp);
+      var bmps:Vector.<Bitmap> = SquadNumberUtils.useDesign(numberAsset, numberInput.value, _config.color, _config.color2, _config.length, true);
+      for (var i:uint = 0, len:uint = bmps.length; i < len; i++) {
+        bmps[i].x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
+        preview.addChild(bmps[i]);
       }
+      var event:SystemEvent = new SystemEvent(SquadNumberUtils.numColor > 1 ? SystemEvent.DOUBLE_COLOR : SystemEvent.SINGLE_COLOR);
       dispatchEvent(event);
     }
     private function layout():void {

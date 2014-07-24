@@ -27,11 +27,6 @@ package com.meathill.diy.controller
       for (var key:String in config.assets) {
         assets.add(key, config.assets[key]);
       }
-      for (var i:uint = 0, len:uint = config.welcome.length; i < len; i++) {
-        for (var j:uint = 0, jlen:uint = config.welcome[i].templates.length; j < jlen; j++) {
-          assets.add(AssetsManager.WELCOME, config.welcome[i].templates[j].thumbnail);
-        }
-      }
       assets.load();
     }
     
