@@ -8,8 +8,29 @@
   "assets": {
     "number": "../assets/number.swf",
     "bg": "../assets/bg.jpg",
-    "assets": "../assets/assets.swf"
+    "assets": "../assets/assets.swf",
+    "haibao": [
+      "../assets/1.jpg",
+      "../assets/2.jpg",
+      "../assets/3.jpg"
+    ]
   },
+  "colors": [
+    "001F3F",
+    "0074D9",
+    "7FDBFF",
+    "39CCCC",
+    "3D9970",
+    "2ECC40",
+    "01FF70",
+    "FFDC00",
+    "FF851B",
+    "FF4136",
+    "F012BE",
+    "B10DC9",
+    "85144B",
+    "111111"
+  ],
   "tips": [
     "定制完成后可以制作你的球队名片",
     "你也可以在XLINE的球队里联系球队约球哦",

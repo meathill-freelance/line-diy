@@ -20,7 +20,7 @@ package com.meathill.diy.component.options
     private var icon:Bitmap;
     private var label:String;
     
-    public function ColorCardItem(color:uint, label:String) {
+    public function ColorCardItem(color:uint, label:String = '') {
       this.label = label;
       _color = color;
 			
@@ -68,14 +68,18 @@ package com.meathill.diy.component.options
         tween.kill();
       }
       scaleX = scaleY = 1.2;
-      Tooltip.create(label, this, 0);
+      if (label) {
+        Tooltip.create(label, this, 0);
+      }
     }
     private function rollOutHandler(e:MouseEvent):void {
       tween = TweenLite.to(this, .3, {
         scaleX: 1,
         scaleY: 1
       });
-      Tooltip.remove(this);
+      if (label) {
+        Tooltip.remove(this);
+      }
     }
   }
 

@@ -33,7 +33,7 @@ package com.meathill.diy.controller
     public var eventDispatcher:IEventDispatcher;
     
     override public function execute():void {
-      var bmpd:BitmapData = view.image,
+      var bmpd:BitmapData = view.bmpd,
           coder:JPEGEncoder = new JPEGEncoder(80),
           bytes:ByteArray = coder.encode(bmpd);
       server.add(ServerManager.API, {

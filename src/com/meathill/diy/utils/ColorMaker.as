@@ -35,6 +35,7 @@ package com.meathill.diy.utils
       var rgb:Object = color2rgb(color);
       for (var prop:String in rgb) {
         rgb[prop] = rgb[prop] * (100 + percent) / 100;
+        rgb[prop] = rgb[prop] > 255 ? 255 : rgb[prop];
       }
       return rgb2color(rgb);
     }

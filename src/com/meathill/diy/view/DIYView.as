@@ -23,14 +23,29 @@ package com.meathill.diy.view
     private var rightBar:RightBar;
     private var footer:Footer;
     
-    public function DIYView() {
-			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
+    public function get bmpd():BitmapData {
+      var mc:Sprite = image;
+      var bmpd:BitmapData = new BitmapData(mc.width + 200, mc.height + 100, true, 0);
+      bmpd.draw(mc);
+      return bmpd;
+    }
+    public function get image():Sprite {
+      var vector:Vector.<BitmapData> = preview.bitmaps;
+      var mc:Sprite = new Sprite();
+      for (var i:uint = 0, len:uint = vector.length; i < len; i++) {
+        var bmp:Bitmap = new Bitmap(vector[i], "auto", true);
+        if (i === 0) {
+          bmp.x = 200;
+        } else if (i === 1) {
+          bmp.y = 100;
+        }
+        mc.addChildAt(bmp, 0);
+      }
+      return mc;
     }
     
-    public function get image():BitmapData {
-      bmpd.draw(preview);
-      var bmpd:BitmapData = new BitmapData(preview.width, preview.height);
-      return bmpd;
+    public function DIYView() {
+			addEventListener(Event.ADDED_TO_STAGE, addedHandler);
     }
     
     public function addBg(bmp:Bitmap):void {

@@ -20,13 +20,27 @@ package com.meathill.diy.service
   {
     public static const TEMPLATE:String = 'template';
     public static const WELCOME:String = 'welcome';
+    public static const HAIBAO:String = 'haibao';
     public static var instance:AssetsManager;
     
-    private var _templates:Vector.<Sprite>;
-    private var _welcome:Vector.<Bitmap>;
     private var queue:Array;
     private var isLoading:Boolean = false;
     private var assets:Object;
+    
+    private var _haibao:Vector.<Bitmap>;
+    public function get haibao():Vector.<Bitmap> {
+      return _haibao;
+    }
+    
+    private var _templates:Vector.<Sprite>;
+    public function get templates():Vector.<Sprite> {
+      return _templates;
+    }
+    
+    private var _welcome:Vector.<Bitmap>;
+    public function get welcome():Vector.<Bitmap> {
+      return _welcome;
+    }
     
     public function AssetsManager() {
       if (instance) {
@@ -35,15 +49,9 @@ package com.meathill.diy.service
       queue = [];
       _templates = new Vector.<Sprite>();
       _welcome = new Vector.<Bitmap>();
+      _haibao = new Vector.<Bitmap>();
       assets = { };
       instance = this;
-    }
-    
-    public function get templates():Vector.<Sprite> {
-      return _templates;
-    }
-    public function get welcome():Vector.<Bitmap> {
-      return _welcome;
     }
     
     public function add(type:String, url:String):void {
@@ -98,6 +106,10 @@ package com.meathill.diy.service
           
         case WELCOME:
           _welcome.push(Bitmap(mc));
+          break;
+          
+        case HAIBAO:
+          _haibao.push(Bitmap(mc));
           break;
           
         default:

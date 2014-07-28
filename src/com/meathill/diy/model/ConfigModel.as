@@ -36,6 +36,11 @@ package com.meathill.diy.model
       return _more;
     }
     
+    private var _colors:Array;
+    public function get colors():Array {
+      return _colors;
+    }
+    
     public function parse(init:Object):void {
       _baseURL = init.baseURL;
       _shareText = init.shareText;
@@ -43,6 +48,7 @@ package com.meathill.diy.model
       _prices = init.prices;
       _assets = init.assets;
       _more = init.moreText;
+      _colors = init.colors;
     }
     
   }

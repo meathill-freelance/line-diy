@@ -37,6 +37,17 @@ package com.meathill.diy.view
       _isReady = value;
     }
     
+    public function get bitmaps():Vector.<BitmapData> {
+      var result:Vector.<BitmapData> = new Vector.<BitmapData>();
+      for (var i:uint = 0; i < numChildren; i++) {
+        var mc:DisplayObject = getChildAt(i);
+        var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
+        bmpd.draw(mc, new Matrix(mc.scaleX, 0, 0, mc.scaleY, 0, 0), null, null, null, true);
+        result.push(bmpd);
+      }
+      return result;
+    }
+    
     public function Preview() {
       buttonMode = useHandCursor = true;
       

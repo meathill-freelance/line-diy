@@ -25,7 +25,13 @@ package com.meathill.diy.controller
     override public function execute():void {
       assets.addEventListener(Event.COMPLETE, completeHandler);
       for (var key:String in config.assets) {
-        assets.add(key, config.assets[key]);
+        if (config.assets[key] is Array) {
+          for (var i:uint = 0, len:uint = config.assets[key].length; i < len; i++) {
+            assets.add(key, config.assets[key][i]);
+          }
+        } else {
+          assets.add(key, config.assets[key]);
+        }
       }
       assets.load();
     }
