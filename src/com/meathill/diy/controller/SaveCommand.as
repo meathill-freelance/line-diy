@@ -7,6 +7,7 @@ package com.meathill.diy.controller
   import com.meathill.diy.view.DIYView;
   import flash.display.BitmapData;
   import flash.events.IEventDispatcher;
+  import flash.external.ExternalInterface;
   import flash.utils.ByteArray;
   import mx.graphics.codec.JPEGEncoder;
   import robotlegs.bender.bundles.mvcs.Command;
@@ -33,14 +34,31 @@ package com.meathill.diy.controller
     public var eventDispatcher:IEventDispatcher;
     
     override public function execute():void {
+      server.isLogin(saveThumbnail, showLoginModal);
+    }
+    
+    private function saveThumbnail():void {
       var bmpd:BitmapData = view.bmpd,
           coder:JPEGEncoder = new JPEGEncoder(80),
           bytes:ByteArray = coder.encode(bmpd);
+      server.upload(ServerManager.API, {
+        action: 'line_create_pic',
+        type: 'thumbnail'
+      }, bytes, saveDesgin, null, errorHandler);
+    }
+    private function saveDesgin(response:Object):void {
       server.add(ServerManager.API, {
-        pic: bytes,
-        name: event.name,
-        data: JSON.stringify(cloth.steps)
+        action: 'line_save',
+        desgin: cloth.toJSON(),
+        url: response.url,
+        name: event.name
       }, successHandler, null, errorHandler);
+    }
+    private function showLoginModal():void {
+      trace('not login');
+      if (ExternalInterface.available) {
+        ExternalInterface.call('showLoginModal');
+      }
     }
     
     private function successHandler():void {

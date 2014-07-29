@@ -70,9 +70,8 @@ package com.meathill.diy.config {
       server.add(ServerManager.INIT, null, config_loadCompleteHandler);
     }
     
-    private function config_loadCompleteHandler(data:String):void {
-      var all:Object = JSON.parse(data);
-      config.parse(all);
+    private function config_loadCompleteHandler(response:Object):void {
+      config.parse(response);
       
       eventDispatcher.dispatchEvent(new SystemEvent(SystemEvent.DATA_READY));
     }

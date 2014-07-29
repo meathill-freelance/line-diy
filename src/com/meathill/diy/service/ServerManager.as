@@ -7,14 +7,16 @@ package com.meathill.diy.service
   import flash.net.URLLoader;
   import flash.net.URLLoaderDataFormat;
   import flash.net.URLRequest;
+  import flash.net.URLRequestMethod;
   import flash.net.URLVariables;
+  import flash.utils.ByteArray;
 	/**
    * ...
    * @author Meathill
    */
   public class ServerManager extends EventDispatcher
   {
-    public static const API:String = 'api.html';
+    public static const API:String = 'http://www.xline.com.cn/wp-admin/admin-ajax.php';
     static public const INIT:String = "init.json";
     static public const CLOTH:String = 'cloth-';
     
@@ -25,8 +27,7 @@ package com.meathill.diy.service
     private var queue:Vector.<CallVO>;
     private var isLoading:Boolean = false;
     
-    public function ServerManager()
-    {
+    public function ServerManager() {
       queue = new Vector.<CallVO>;
       
       loader = new URLLoader();
@@ -36,16 +37,14 @@ package com.meathill.diy.service
       loader.addEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
     }
     
-    
-    
     public function add(url:String, data:Object, success:Function = null, progress:Function = null, error:Function = null):void {
       var req:URLRequest = new URLRequest(url),
           param:URLVariables = new URLVariables();
       for (var prop:String in data) {
         param[prop] = data[prop];
       }
-      req.method = 'post';
-      req.data = data;
+      req.method = URLRequestMethod.POST;
+      req.data = param;
       queue.push(new CallVO(req, success, progress, error));
       call();
     }
@@ -53,13 +52,51 @@ package com.meathill.diy.service
       if (isLoading) {
         return;
       }
+      if (queue[0].req.contentType === 'binary/octet-stream') {
+        loader.dataFormat = URLLoaderDataFormat.BINARY;
+      } else {
+        loader.dataFormat = URLLoaderDataFormat.TEXT;
+      }
       loader.load(queue[0].req);
       isLoading = true;
     }
+    public function upload(url:String, data:Object, contents:ByteArray, success:Function, progress:Function = null, error:Function = null):void {
+      var req:URLRequest = new URLRequest();
+      var param:URLVariables = new URLVariables();
+      for (var prop:String in data) {
+        param[prop] = data[prop];
+      }
+      req.url = url + '?' + param.toString();
+      req.method = URLRequestMethod.POST;
+      req.contentType = "binary/octet-stream";
+      req.data = contents;
+      queue.push(new CallVO(req, success, progress, error));
+      call();
+    }
+    
+    public function isLogin(success:Function, fail:Function):void {
+      add(API, {
+        action: 'line_is_login'
+      }, function (response:Object):void {
+        if (response.is_login) {
+          success();
+        } else {
+          fail();
+        }
+      }, null, fail);
+    }
+    
     
     private function loader_completeHandler(e:Event):void {
-      queue[0].success(loader.data);
-      queue.shift();
+      var response:Object;
+      try {
+        response = JSON.parse(loader.data);
+      } catch (e:Error) {
+        trace('something wrong');
+        response = loader.data;
+      }
+      var vo:CallVO = queue.shift();
+      vo.success(response);
       isLoading = false;
       if (queue.length === 0) {
         dispatchEvent(new Event(COMPLETE_ALL));

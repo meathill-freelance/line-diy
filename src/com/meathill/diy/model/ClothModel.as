@@ -79,6 +79,10 @@ package com.meathill.diy.model
       _clothes.push(store);
     }
     
+    public function toJSON():String {
+      return JSON.stringify(steps);
+    }
+    
     
   }
 

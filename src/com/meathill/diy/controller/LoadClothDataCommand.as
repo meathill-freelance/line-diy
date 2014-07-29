@@ -44,11 +44,10 @@ package com.meathill.diy.controller
       server.addEventListener(ServerManager.COMPLETE_ALL, completeAllHandler);
     }
     
-    private function cloth_loadCompleteHandler(data:String):void {
-      var clothData:Object = JSON.parse(data);
-      cloth.parse(clothData);
-      cloth.sights = clothData.templates.length;
-      cloth.seperator = cloth.seperator || clothData.steps.length - 1;
+    private function cloth_loadCompleteHandler(response:Object):void {
+      cloth.parse(response);
+      cloth.sights = response.templates.length;
+      cloth.seperator = cloth.seperator || response.steps.length - 1;
     }
     private function assets_completeHandler(e:Event):void {
       assets.removeEventListener(Event.COMPLETE, assets_completeHandler);
