@@ -6,6 +6,7 @@ package com.meathill.diy.model
    * @author Meathill
    */
   public class ClothModel {
+    public var id:uint;
     
     private var _step:uint;
     public function get step():uint {
@@ -80,7 +81,12 @@ package com.meathill.diy.model
     }
     
     public function toJSON():String {
-      return JSON.stringify(steps);
+      var obj:Object = {
+        top: _clothes[0].tid,
+        pants: _clothes.length > 0 ? _clothes[1].tid : null,
+        steps: steps
+      }
+      return JSON.stringify(obj);
     }
     
     

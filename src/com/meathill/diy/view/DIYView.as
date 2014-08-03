@@ -23,12 +23,6 @@ package com.meathill.diy.view
     private var rightBar:RightBar;
     private var footer:Footer;
     
-    public function get bmpd():BitmapData {
-      var mc:Sprite = image;
-      var bmpd:BitmapData = new BitmapData(mc.width + 200, mc.height + 100, true, 0);
-      bmpd.draw(mc);
-      return bmpd;
-    }
     public function get image():Sprite {
       var vector:Vector.<BitmapData> = preview.bitmaps;
       var mc:Sprite = new Sprite();
@@ -52,6 +46,19 @@ package com.meathill.diy.view
       bmp.x = stage.stageWidth - bmp.width >> 1;
       bmp.y = wizard.height;
       addChildAt(bmp, 0);
+    }
+    public function getBitmapData(bg:uint = 0):BitmapData {
+      var mc:Sprite = image;
+      var bmpd:BitmapData
+      if (bg) {
+        mc.graphics.beginFill(bg);
+        mc.graphics.drawRect(0, 0, mc.width + 200, mc.height + 100);
+        bmpd = new BitmapData(mc.width, mc.height, true, 0);
+      } else {
+        bmpd = new BitmapData(mc.width + 200, mc.height + 100, true, 0);
+      }
+      bmpd.draw(mc);
+      return bmpd;
     }
     
     private function layout():void {

@@ -29,10 +29,16 @@ package com.meathill.diy.filter
       0.8,0,0,0,0,  
       0,0,0,1,0  
     ]);
+    public static const GRAY:ColorMatrixFilter = new ColorMatrixFilter([
+      0.1,0,0,0,0,  
+      0.1,0,0,0,0,  
+      0.1,0,0,0,0,  
+      0,0,0,0.6,0  
+    ]);
     
     public static const BLUR:BlurFilter = new BlurFilter();
     public static const GLOW_RED:GlowFilter = new GlowFilter(Colors.ALIZARIN, 0.5, 16, 16, 4, BitmapFilterQuality.MEDIUM);
-    static public const DISABLED:Array = [BLUR];
+    static public const DISABLED:Array = [GRAY];
     
     public static function getColorFilter(color:uint, base:uint = 1):ColorMatrixFilter {
       var rgb:Object = ColorMaker.color2rgb(color, 255);

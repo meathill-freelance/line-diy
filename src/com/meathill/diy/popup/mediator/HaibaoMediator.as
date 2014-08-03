@@ -29,7 +29,7 @@ package com.meathill.diy.popup.mediator
     override public function initialize():void {
       view.colors = config.colors;
       view.haibao = assets.haibao;
-      view.cloth = diy.bmpd;
+      view.cloth = diy.getBitmapData();
     }
     
   }

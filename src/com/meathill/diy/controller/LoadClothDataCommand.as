@@ -55,6 +55,7 @@ package com.meathill.diy.controller
       eventDispatcher.dispatchEvent(new UserEvent(UserEvent.START_DIY));
     }
     private function completeAllHandler(e:Event):void {
+      server.removeEventListener(ServerManager.COMPLETE_ALL, completeAllHandler);
       assets.addEventListener(Event.COMPLETE, assets_completeHandler);
       for (var i:uint = 0, len:uint = cloth.templates.length; i < len; i++) {
         assets.add(AssetsManager.TEMPLATE, cloth.templates[i]);

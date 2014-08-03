@@ -68,7 +68,7 @@ package com.meathill.diy.service
       }
       req.url = url + '?' + param.toString();
       req.method = URLRequestMethod.POST;
-      req.contentType = "binary/octet-stream";
+      req.contentType = "application/octet-stream";
       req.data = contents;
       queue.push(new CallVO(req, success, progress, error));
       call();
