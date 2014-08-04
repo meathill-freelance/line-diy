@@ -41,12 +41,18 @@ package com.meathill.diy.model
       return _colors;
     }
     
+    private var _haibao:Array;
+    public function get haibao():Array {
+      return _haibao;
+    }
+    
     public function parse(init:Object):void {
       _baseURL = init.baseURL;
       _shareText = init.shareText;
       _tips = init.tips;
       _prices = init.prices;
       _assets = init.assets;
+      _haibao = init.haibao;
       _more = init.moreText;
       _colors = init.colors;
     }

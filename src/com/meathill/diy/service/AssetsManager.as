@@ -58,17 +58,13 @@ package com.meathill.diy.service
       trace('add assets: ', type, url);
       queue.push({
         type: type,
-        url: url
+        url: url,
+        loader: createLoader(url)
       });
     }
+    
     public function getAsset(key:String):DisplayObject {
       return assets[key];
-    }
-    public function load():void {
-      if (isLoading) {
-        return;
-      }
-      next();
     }
     public function clone(string:String, width:uint = 0, height:uint = 0):Bitmap {
       var asset:Sprite = Sprite(getAsset('assets'));
@@ -82,14 +78,15 @@ package com.meathill.diy.service
       return bmp;
     }
     
-    private function next():void {
+    private function createLoader(url:String):void {
       isLoading = true;
       var loader:Loader = new Loader();
       loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loader_completeHandler);
       loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
       loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
-      loader.load(new URLRequest(queue[0].url));
-      trace('load: ', queue[0].url);
+      loader.load(new URLRequest(url));
+      trace('load: ', url);
+      return loader;
     }
     
     

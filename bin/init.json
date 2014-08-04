@@ -8,13 +8,13 @@
   "assets": {
     "number": "../assets/number.swf",
     "bg": "../assets/bg.jpg",
-    "assets": "../assets/assets.swf",
-    "haibao": [
-      "../assets/1.jpg",
-      "../assets/2.jpg",
-      "../assets/3.jpg"
-    ]
+    "assets": "../assets/assets.swf"
   },
+  "haibao": [
+    "../assets/1.jpg",
+    "../assets/2.jpg",
+    "../assets/3.jpg"
+  ],
   "colors": [
     "001F3F",
     "0074D9",
