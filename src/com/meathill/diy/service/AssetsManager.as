@@ -24,7 +24,7 @@ package com.meathill.diy.service
     public static var instance:AssetsManager;
     
     private var queue:Array;
-    private var isLoading:Boolean = false;
+    private var count:uint = 0;
     private var assets:Object;
     
     private var _haibao:Vector.<Bitmap>;
@@ -59,10 +59,16 @@ package com.meathill.diy.service
       queue.push({
         type: type,
         url: url,
-        loader: createLoader(url)
+        loader: createLoader()
       });
     }
-    
+    public function load():void {
+      for (var i:uint = 0, len:uint = queue.length; i < len; i++) {
+        var item:Object = queue[i];
+        item.loader.load(new URLRequest(item.url));
+        trace('load: ', item.url);
+      }
+    }
     public function getAsset(key:String):DisplayObject {
       return assets[key];
     }
@@ -78,51 +84,52 @@ package com.meathill.diy.service
       return bmp;
     }
     
-    private function createLoader(url:String):void {
-      isLoading = true;
+    private function createLoader():Loader {
       var loader:Loader = new Loader();
       loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loader_completeHandler);
       loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, loader_progressHandler);
       loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loader_errorHandler);
-      loader.load(new URLRequest(url));
-      trace('load: ', url);
       return loader;
     }
-    
+    private function mapContent():void {
+      for (var i:uint = 0, len:uint = queue.length; i < len; i++) {
+        var item:Object = queue[i];
+        var mc:DisplayObject = item.loader.content;
+        switch(item.type) {
+          case TEMPLATE:
+            var template:Sprite = Sprite(mc);
+            for (var j:uint = 0, jlen:uint = template.numChildren; j < jlen; j++) {
+              Sprite(template.getChildAt(j)).mouseChildren = false;
+            }
+            _templates.push(template);
+            break;
+            
+          case WELCOME:
+            _welcome.push(Bitmap(mc));
+            break;
+            
+          case HAIBAO:
+            _haibao.push(Bitmap(mc));
+            break;
+            
+          default:
+            assets[item.type] = mc;
+            break;
+        }
+      }
+      queue = [];
+    }
     
     private function loader_completeHandler(e:Event):void {
-      var mc:DisplayObject = LoaderInfo(e.target).content;
-      switch(queue[0].type) {
-        case TEMPLATE:
-          var template:Sprite = Sprite(mc);
-          for (var i:uint = 0, len:uint = template.numChildren; i < len; i++) {
-            Sprite(template.getChildAt(i)).mouseChildren = false;
-          }
-          _templates.push(template);
-          break;
-          
-        case WELCOME:
-          _welcome.push(Bitmap(mc));
-          break;
-          
-        case HAIBAO:
-          _haibao.push(Bitmap(mc));
-          break;
-          
-        default:
-          assets[queue[0].type] = mc;
-          break;
-      }
-      queue.shift();
-      if (queue.length) {
-        next();
-      } else {
-        isLoading = false;
+      count++;
+      if (queue.length === count) {
+        count = 0;
+        mapContent();
         dispatchEvent(new Event(Event.COMPLETE));
       }
     }
     private function loader_progressHandler(e:ProgressEvent):void {
-      dispatchEvent(e.clone());
+      dispatchEvent(e);
     }
     private function loader_errorHandler(e:IOErrorEvent):void {
       trace(e);

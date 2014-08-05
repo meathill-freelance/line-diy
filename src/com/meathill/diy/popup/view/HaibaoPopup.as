@@ -1,15 +1,14 @@
 package com.meathill.diy.popup.view 
 {
+  import com.meathill.diy.component.GroupButton;
   import com.meathill.diy.component.options.ColorCardItem;
-  import com.meathill.diy.config.Colors;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.popup.AbstractPopup;
   import com.meathill.diy.utils.ColorMaker;
   import flash.display.Bitmap;
   import flash.display.BitmapData;
-  import flash.display.DisplayObject;
   import flash.display.GradientType;
-	import flash.display.Sprite;
+  import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.geom.Matrix;
   import flash.text.TextField;
@@ -20,8 +19,8 @@ package com.meathill.diy.popup.view
    */
   public class HaibaoPopup extends AbstractPopup {
     private var color:uint = 0;
-    private var w:uint = 240;
-    private var h:uint = 180;
+    private var w:uint = 368;
+    private var h:uint = 207;
     private var preview:Sprite;
     
     private var _cloth:Bitmap;
@@ -42,7 +41,7 @@ package com.meathill.diy.popup.view
       _colors = value;
       for (var i:uint = 0, len:uint = _colors.length; i < len; i++) {
         var item:ColorCardItem = new ColorCardItem(parseInt(_colors[i], 16));
-        item.x = 320 + 40 * (i % 7);
+        item.x = 424 + 40 * (i % 7);
         item.y = 65 + headerHeight + 41 * (i / 7 >> 0);
         item.addEventListener(MouseEvent.CLICK, colorCardItem_clickHandler);
         addChild(item);
@@ -56,8 +55,8 @@ package com.meathill.diy.popup.view
         _haibao[i].width = 90;
         _haibao[i].scaleY = _haibao[i].scaleX;
         var mc:Sprite = new Sprite();
-        mc.x = 300 + 95 * i;
-        mc.y = 190 + headerHeight;
+        mc.x = 404 + 95 * i;
+        mc.y = 176 + headerHeight;
         mc.addChild(_haibao[i]);
         mc.addEventListener(MouseEvent.CLICK, haibao_clickHandler);
         addChild(mc);
@@ -72,7 +71,7 @@ package com.meathill.diy.popup.view
       addChild(preview);
       
       var text1:TextField = new TextField();
-      text1.x = 300
+      text1.x = 404
       text1.y = 10 + headerHeight;
       text1.defaultTextFormat = Typography.getTextFormat(Typography.LEAD);
       text1.text = '纯色背景';
@@ -80,15 +79,32 @@ package com.meathill.diy.popup.view
       addChild(text1);
       
       var text2:TextField = new TextField();
-      text2.x = 300;
-      text2.y = 150 + headerHeight;
+      text2.x = 404;
+      text2.y = 140 + headerHeight;
       text2.defaultTextFormat = Typography.getTextFormat(Typography.LEAD);
       text2.text = 'XLINE背景';
       text2.mouseEnabled = false;
       addChild(text2);
+      
+      // 创建4个按钮用来选择尺寸
+      var labels:Array = ['桌面', 'iPhone', 'iPad', 'Android'];
+      var offset:uint = 20;
+      for (var i:uint = 0; i < 4; i++) {
+        var btn:GroupButton = new GroupButton(labels[i], '', 1, i === 0 ? 0 : (i === 3 ? 2 : 1));
+        btn.x = offset;
+        btn.y = contentHeight + 15 + headerHeight;
+        btn.addEventListener(MouseEvent.CLICK, sizeButton_clickHandler);
+        addChild(btn);
+        offset += btn.width;
+      }
     }
+    
     override protected function resetAttr():void {
       title = '制作海报';
+      hasCancel = false;
+      confirmLable = '保存海报';
+      contentHeight = 247;
+      popupWidth = 700;
     }
     
     private function createColorPreview():void {
@@ -118,7 +134,9 @@ package com.meathill.diy.popup.view
       var mc:Sprite = Sprite(e.target);
       createHaibaoPreview(Bitmap(mc.getChildAt(0)));
     }
-    
+    private function sizeButton_clickHandler(e:MouseEvent):void {
+      
+    }
   }
 
 }

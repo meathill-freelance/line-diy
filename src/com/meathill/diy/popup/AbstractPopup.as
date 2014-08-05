@@ -29,6 +29,7 @@ package com.meathill.diy.popup
     protected var hasCancel:Boolean;
     protected var cancelLable:String = '取消';
     protected var cancelButton:Button;
+    protected var hasClose:Boolean = true;
     protected var title:String = '窗体';
     protected var popupWidth:uint = 600;
     protected var headerHeight:uint = 50;
@@ -83,7 +84,7 @@ package com.meathill.diy.popup
       title.mouseEnabled = false;
       addChild(title);
       
-      if (hasCancel) {
+      if (hasClose) {
         closeButton = new CloseButton();
         closeButton.x = popupWidth - 12 - closeButton.width;
         closeButton.y = 12;

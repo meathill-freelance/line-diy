@@ -30,6 +30,8 @@ package com.meathill.diy.popup.mediator
     override public function initialize():void {
       if (assets.haibao.length === 0) {
         loadHaibaoAssets();
+      } else {
+        view.haibao = assets.haibao;
       }
       view.colors = config.colors;
       view.cloth = diy.getBitmapData();
@@ -37,18 +39,14 @@ package com.meathill.diy.popup.mediator
     
     private function loadHaibaoAssets():void {
       assets.addEventListener(Event.COMPLETE, haibao_loadHandler);
-      assets.addEventListener(Event.COMPLETE_ALL, haibao_allLoadHandler);
       for (var i:uint = 0, len:uint = config.haibao.length; i < len; i++) {
         assets.add(AssetsManager.HAIBAO, config.haibao[i]);
       }
+      assets.load();
     }
     
-    private function haibao_allLoadHandler(e:Event):void {
-      assets.removeEventListener(Event.COMPLETE, haibao_loadHandler);
-      assets.removeEventListener(Event.COMPLETE_ALL, haibao_allLoadHandler);
-    }
     private function haibao_loadHandler(e:Event):void {
-      
+      view.haibao = assets.haibao;
     }
     
   }
