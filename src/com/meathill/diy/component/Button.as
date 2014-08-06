@@ -144,10 +144,10 @@ package com.meathill.diy.component
       
     }
     protected function mouseDownHandler(event:MouseEvent):void {
-      this.filters = [Filters.DOWN_SHADOW];
+      filters = [Filters.DOWN_SHADOW];
     }
     protected function mouseUpHandler(event:MouseEvent):void {
-      this.filters = null;
+      filters = null;
     }
     protected function rollOutHandler(e:MouseEvent):void {
       draw(bgColor, borderColor, buttonWidth, buttonHeight, bgAlpha, hasBorder);

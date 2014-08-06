@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="DIY">
     <configurations>
-      <configuration name="DIY" output-file="DIY.swf" output-folder="$MODULE_DIR$/out/production/DIY" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
-        <dependencies target-player="12.0">
+      <configuration name="DIY" pure-as="true" main-class="com.meathill.diy.Main" output-file="DIY.swf" output-folder="$MODULE_DIR$/bin" wrapper-template-path="$MODULE_DIR$/html-template">
+        <dependencies target-player="11.0">
           <entries>
             <entry library-id="978f4a9e-7b8a-44f8-9187-e364548b3ac6">
               <dependency linkage="Merged" />
@@ -14,10 +14,17 @@
             <entry library-id="180a21c7-42f7-47f3-b65c-32c48cff4b9f">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-id="79021510-ed10-4bed-9ad3-c8acf559595e">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="apache-flex-4.12" />
         </dependencies>
-        <compiler-options />
+        <compiler-options>
+          <map>
+            <entry key="compiler.locale" value="en_US&#10;zh_CN" />
+          </map>
+        </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
@@ -57,6 +64,16 @@
         <properties id="180a21c7-42f7-47f3-b65c-32c48cff4b9f" />
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/framework.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="79021510-ed10-4bed-9ad3-c8acf559595e" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/robotlegs-framework-v2.2.1.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

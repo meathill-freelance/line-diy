@@ -11,7 +11,10 @@ package com.meathill.diy.popup.view
   import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.geom.Matrix;
+  import flash.net.FileReference;
   import flash.text.TextField;
+  import flash.utils.ByteArray;
+  import mx.graphics.codec.JPEGEncoder;
 	
 	/**
    * ...
@@ -22,6 +25,8 @@ package com.meathill.diy.popup.view
     private var w:uint = 368;
     private var h:uint = 207;
     private var preview:Sprite;
+    private var isSimpleColor:Boolean;
+    private var currBitmap:Bitmap;
     
     private var _cloth:Bitmap;
     public function set cloth(value:BitmapData):void {
@@ -62,7 +67,6 @@ package com.meathill.diy.popup.view
         addChild(mc);
       }
     }
-
     
     override protected function createContent():void {
       preview = new Sprite();
@@ -86,19 +90,28 @@ package com.meathill.diy.popup.view
       text2.mouseEnabled = false;
       addChild(text2);
       
+      // 暂时不做选择尺寸的功能
+      return;
+      
       // 创建4个按钮用来选择尺寸
       var labels:Array = ['桌面', 'iPhone', 'iPad', 'Android'];
+      var sizes:Array = [ { w:stage.stageWidth, h:stage.stageHeight }, { w: 640, h: 1136 }, { w:1024, h: 768 }, { w: 1280, h: 720 } ];
       var offset:uint = 20;
       for (var i:uint = 0; i < 4; i++) {
-        var btn:GroupButton = new GroupButton(labels[i], '', 1, i === 0 ? 0 : (i === 3 ? 2 : 1));
+        var btn:GroupButton = new GroupButton(labels[i], '', 1, i === 0 ?
+          GroupButton.FIRST : (i === 3 ? GroupButton.LAST : GroupButton.MIDDLE));
         btn.x = offset;
         btn.y = contentHeight + 15 + headerHeight;
+        btn.value = sizes[i];
         btn.addEventListener(MouseEvent.CLICK, sizeButton_clickHandler);
         addChild(btn);
         offset += btn.width;
+        
+        if (i === 0) {
+          btn.active();
+        }
       }
     }
-    
     override protected function resetAttr():void {
       title = '制作海报';
       hasCancel = false;
@@ -107,24 +120,56 @@ package com.meathill.diy.popup.view
       popupWidth = 700;
     }
     
-    private function createColorPreview():void {
-      preview.graphics.clear();
-      color = color ? color : parseInt(_colors[_colors.length * Math.random() >> 0], 16);
+    private function createBitmapCanvas(target:Sprite, bitmap:Bitmap, width:uint, height:uint):void {
+      var matrix:Matrix = new Matrix(width / bitmap.width * bitmap.scaleX, 0, 0, height / bitmap.height * bitmap.scaleY);
+      target.graphics.clear();
+      target.graphics.beginBitmapFill(bitmap.bitmapData, matrix, true, true);
+      target.graphics.drawRect(0, 0, width, height);
+      target.graphics.endFill();
+    }
+    private function createColorCanvas(target:Sprite, color:uint, width:uint, height:uint):void {
       var colors:Array = [ColorMaker.lighten(color, 10), ColorMaker.draken(color, 20)];
       var matrix:Matrix = new Matrix();
-      matrix.createGradientBox(w, h);
-      preview.graphics.beginGradientFill(GradientType.RADIAL, colors, [1, 1], [0, 255], matrix);
-      preview.graphics.drawRect(0, 0, w, h);
-      preview.graphics.endFill();
+      matrix.createGradientBox(width, height);
+      target.graphics.clear();
+      target.graphics.beginGradientFill(GradientType.RADIAL, colors, [1, 1], [0, 255], matrix);
+      target.graphics.drawRect(0, 0, width, height);
+      target.graphics.endFill();
+    }
+    private function createColorPreview():void {
+      isSimpleColor = true;
+      color = color ? color : parseInt(_colors[_colors.length * Math.random() >> 0], 16);
+      createColorCanvas(preview, color, w, h);
     }
     private function createHaibaoPreview(bitmap:Bitmap):void {
-      preview.graphics.clear();
-      var matrix:Matrix = new Matrix(w / bitmap.width * bitmap.scaleX, 0, 0, h / bitmap.height * bitmap.scaleY);
-      preview.graphics.beginBitmapFill(bitmap.bitmapData, matrix, true, true);
-      preview.graphics.drawRect(0, 0, w, h);
-      preview.graphics.endFill();
+      isSimpleColor = false;
+      currBitmap = bitmap;
+      createBitmapCanvas(preview, bitmap, w, h);
+    }
+    private function createPreview():void {
+      
     }
     
+    override protected function confirmButton_clickHandler(e:MouseEvent):void {
+      var mc:Sprite = new Sprite();
+      var w:uint = 1366;
+      var h:uint = 768;
+      if (isSimpleColor) {
+        createColorCanvas(mc, color, w, h);
+      } else {
+        createBitmapCanvas(mc, currBitmap, w, h);
+      }
+      var bmp:Bitmap = new Bitmap(_cloth.bitmapData.clone(), "auto", true);
+      bmp.x = w - bmp.width >> 1;
+      bmp.y = h - bmp.height >> 1;
+      mc.addChild(bmp);
+      var bmpd:BitmapData = new BitmapData(w, h, true, 0);
+      bmpd.draw(mc);
+      var encoder:JPEGEncoder = new JPEGEncoder(80);
+      var data:ByteArray = encoder.encode(bmpd);
+      var file:FileReference = new FileReference();
+      file.save(data, '.jpg');
+    }
     private function colorCardItem_clickHandler(e:MouseEvent):void {
       var colorCardItem:ColorCardItem = ColorCardItem(e.target);
       color = colorCardItem.color;
@@ -135,8 +180,12 @@ package com.meathill.diy.popup.view
       createHaibaoPreview(Bitmap(mc.getChildAt(0)));
     }
     private function sizeButton_clickHandler(e:MouseEvent):void {
-      
+      var btn:GroupButton = GroupButton(e.target);
+      var size:Object = btn.value;
+      createPreview();
     }
+    
+    
   }
 
 }

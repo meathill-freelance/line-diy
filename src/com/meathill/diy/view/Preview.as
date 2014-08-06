@@ -40,7 +40,11 @@ package com.meathill.diy.view
     public function get bitmaps():Vector.<BitmapData> {
       var result:Vector.<BitmapData> = new Vector.<BitmapData>();
       for (var i:uint = 0; i < numChildren; i++) {
-        var mc:DisplayObject = getChildAt(i);
+        var mc:Sprite = Sprite(getChildAt(i));
+        // 去掉因为选中产生的高光
+        for (var j:uint = 0; j < mc.numChildren; j++) {
+          mc.getChildAt(i).filters = null;
+        }
         var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
         bmpd.draw(mc, new Matrix(mc.scaleX, 0, 0, mc.scaleY, 0, 0), null, null, null, true);
         result.push(bmpd);
