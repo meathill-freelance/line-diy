@@ -37,7 +37,6 @@ package com.meathill.diy.controller
       } else {
         clothes = ['football-t3', 'football-pants3'];
       }
-      cloth.numParts = clothes.length;
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
         server.add(ServerManager.CLOTH + clothes[i] + '.json', null, cloth_loadCompleteHandler);
       }
@@ -47,7 +46,6 @@ package com.meathill.diy.controller
     private function cloth_loadCompleteHandler(response:Object):void {
       cloth.parse(response);
       cloth.sights = response.templates.length;
-      cloth.seperator = cloth.seperator || response.steps.length - 1;
     }
     private function assets_completeHandler(e:Event):void {
       assets.removeEventListener(Event.COMPLETE, assets_completeHandler);

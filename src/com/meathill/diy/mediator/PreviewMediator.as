@@ -75,9 +75,9 @@ package com.meathill.diy.mediator
     private function user_gotoStepHandler(e:UserEvent):void {
       if (cloth.steps[e.step] !== undefined) {
         if (cloth.numParts > 1) {
-          view.show(assets.templates[cloth.steps[e.step].sight], assets.templates[cloth.steps[e.step].sight + cloth.sights], cloth.seperator);
+          view.show(assets.templates[cloth.steps[e.step].sight], assets.templates[cloth.getConfig(e.step).sight + cloth.sights], cloth.seperator);
         } else {
-          view.show(assets.templates[cloth.steps[e.step].sight], null, cloth.seperator);
+          view.show(assets.templates[cloth.getConfig(e.step).sight], null, cloth.seperator);
         }
         useUserDesign();
       }
@@ -102,7 +102,7 @@ package com.meathill.diy.mediator
       view.setColor(e.color, cloth.step);
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
-      var config:SingleStepConfig = cloth.steps[cloth.step];
+      var config:SingleStepConfig = cloth.getConfig(cloth.step);
       view.setNumber(e.number, e.style, cloth.step, Sprite(assets.getAsset(config.asset)));
     }
     private function teamName_changeHandler(e:DesignEvent):void {

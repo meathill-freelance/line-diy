@@ -9,8 +9,7 @@ package com.meathill.diy.popup.mediator
    * ...
    * @author Meathill
    */
-  public class SaveMediator extends Mediator 
-  {
+  public class SaveMediator extends Mediator {
     [Inject]
     public var view:SavePopup;
     
@@ -19,8 +18,6 @@ package com.meathill.diy.popup.mediator
       addContextListener(SystemEvent.SAVE_COMPLETE, saveCompleteHandler);
       addContextListener(SystemEvent.SAVE_FAILED, saveFailedHandler);
     }
-    
-    
     
     private function confirmHandler(e:UserEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.SAVE);

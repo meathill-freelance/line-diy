@@ -52,7 +52,7 @@ package com.meathill.diy.service
       if (isLoading) {
         return;
       }
-      if (queue[0].req.contentType === 'binary/octet-stream') {
+      if (queue[0].req.contentType === 'application/octet-stream') {
         loader.dataFormat = URLLoaderDataFormat.BINARY;
       } else {
         loader.dataFormat = URLLoaderDataFormat.TEXT;
@@ -76,7 +76,7 @@ package com.meathill.diy.service
     
     public function isLogin(success:Function, fail:Function):void {
       add(API, {
-        action: 'line_is_login'
+        action: 'is_login'
       }, function (response:Object):void {
         if (response.is_login) {
           success();

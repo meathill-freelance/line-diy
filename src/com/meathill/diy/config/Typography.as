@@ -10,6 +10,7 @@ package com.meathill.diy.config
   {
     public static const BODY:String = 'body';
     public static const LEAD:String = 'lead';
+    public static const H2:String = 'h2';
     public static const H3:String = 'h3';
     public static const SMALL:String = 'small';
     private static var defaults:Object = {
@@ -29,7 +30,10 @@ package com.meathill.diy.config
         
       },
       h2: {
-        
+        font: '微软雅黑',
+        size: 20,
+        color: 0x333333,
+        bold: true
       },
       h3: {
         font: '宋体',

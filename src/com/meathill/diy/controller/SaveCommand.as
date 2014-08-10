@@ -50,7 +50,7 @@ package com.meathill.diy.controller
       server.add(ServerManager.API, {
         id: cloth.id,
         action: 'line_save',
-        desgin: cloth.toJSON(),
+        design: cloth.toJSON(),
         url: response.url,
         name: event.name
       }, successHandler, null, errorHandler);
@@ -63,11 +63,13 @@ package com.meathill.diy.controller
     }
     
     private function successHandler(response:Object):void {
+      cloth.isChanged = false;
       cloth.id = response.id;
       var event:SystemEvent = new SystemEvent(SystemEvent.SAVE_COMPLETE);
       eventDispatcher.dispatchEvent(event);
     }
     private function errorHandler(error:Error):void {
+      trace(error);
       var event:SystemEvent = new SystemEvent(SystemEvent.SAVE_FAILED);
       eventDispatcher.dispatchEvent(event);
     }

@@ -6,7 +6,11 @@ package com.meathill.diy.model
    * @author Meathill
    */
   public class ClothModel {
-    public var id:uint;
+    public var id:uint = 0;
+    public var isChanged:Boolean = false;
+    
+    private var cloth1:Object;
+    private var cloth2:Object;
     
     private var _step:uint;
     public function get step():uint {
@@ -14,16 +18,6 @@ package com.meathill.diy.model
     }
     public function set step(value:uint):void {
       _step = value;
-    }
-    
-    private var _steps:Vector.<SingleStepConfig>
-    public function get steps():Vector.<SingleStepConfig> {
-      return _steps;
-    }
-    
-    private var _templates:Vector.<String>;
-    public function get templates():Vector.<String> {
-      return _templates;
     }
     
     private var _template:uint;
@@ -34,11 +28,6 @@ package com.meathill.diy.model
       _template = value;
     }
     
-    private var _clothes:Vector.<Object>;
-    public function get clothes():Vector.<Object> {
-      return _clothes;
-    }
-    
     private var _sights:uint;
     public function get sights():uint {
       return _sights;
@@ -47,46 +36,58 @@ package com.meathill.diy.model
       _sights = value;
     }
     
-    private var _seperator:uint;
-    public function get seperator():uint {
-      return _seperator;
-    }
-    public function set seperator(value:uint):void {
-      _seperator = value;
-    }
-    
     private var _numParts:uint;
     public function get numParts():uint {
       return _numParts;
     }
-    public function set numParts(value:uint):void {
-      _numParts = value;
+    
+    private var _numSteps:uint = 0;
+    public function get numSteps():uint {
+      return _numSteps;
     }
     
+    private var _clothes:Vector.<Object> = new Vector.<Object>();
+    public function get clothes():Vector.<Object> {
+      return _clothes;
+    }
     
-    public function ClothModel() {
-      _steps = new Vector.<SingleStepConfig>();
-      _templates = new Vector.<String>();
-      _clothes = new Vector.<Object>();
+    public function get steps():Vector.<SingleStepConfig> {
+      return cloth1.steps.concat(cloth2 ? cloth2.steps : null);
+    }
+    public function get templates():Array {
+      return cloth1.templates.concat(cloth2 ? cloth2.templates : null);
+    }
+    public function get seperator():uint { 
+      return cloth1.steps.length - 1;
     }
     
     public function parse(store:Object):void {
+      var _steps:Vector.<SingleStepConfig> = new Vector.<SingleStepConfig>();
       for (var i:uint = 0, len:uint = store.steps.length; i < len; i++) {
         _steps.push(new SingleStepConfig(store.steps[i]));
       }
-      for (i = 0, len = store.templates.length; i < len; i++) {
-        _templates.push(store.templates[i]);
+      store.steps = _steps;
+      _numSteps += _steps.length;
+      _numParts++;
+      
+      if (_numParts === 1) {
+        cloth1 = store;
+      } else {
+        cloth2 = store;
       }
+      
       _clothes.push(store);
     }
     
-    public function toJSON():String {
-      var obj:Object = {
-        top: _clothes[0].tid,
-        pants: _clothes.length > 0 ? _clothes[1].tid : null,
-        steps: steps
+    public function getConfig(step:uint):SingleStepConfig {
+      if (step > cloth1.steps.length - 1) {
+        return cloth2.steps[step - cloth1.steps.length];
       }
-      return JSON.stringify(obj);
+      return cloth1.steps[step];
+    }
+    
+    public function toJSON():String {
+      return JSON.stringify([cloth1, cloth2]);
     }
     
     

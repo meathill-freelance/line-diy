@@ -18,9 +18,10 @@ package com.meathill.diy.controller
     public var event:DesignEvent;
     
     override public function execute():void {
-      var step:SingleStepConfig = cloth.steps[cloth.step];
+      var step:SingleStepConfig = cloth.getConfig(cloth.step);
       step.number = event.number;
       step.style = event.style;
+      cloth.isChanged = true;
     }
     
   }

@@ -40,7 +40,7 @@ package com.meathill.diy.component.options
       }
     }
     private function view_gotoNextHandler(e:UserEvent):void {
-      if (cloth.step < cloth.steps.length -1) {
+      if (cloth.step < cloth.numSteps -1) {
         var event:UserEvent = new UserEvent(UserEvent.GO_TO_STEP);
         event.step = cloth.step + 1;
         dispatch(event);
@@ -49,8 +49,8 @@ package com.meathill.diy.component.options
     
     private function user_gotoStepHandler(e:UserEvent):void {
       view.clear();
-      view.show(cloth.steps[e.step]);
-      view.showStepButtons(e.step > 0, e.step < cloth.steps.length - 1);
+      view.show(cloth.getConfig(e.step));
+      view.showStepButtons(e.step > 0, e.step < cloth.numSteps - 1);
     }
   }
 
