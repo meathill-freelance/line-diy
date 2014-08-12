@@ -35,10 +35,10 @@ package com.meathill.diy.popup.mediator
       dispatch(event);
     }
     private function addedToCartHandler(e:SystemEvent):void {
-      view.light(1);
+      view.light(2);
     }
     private function saveCompleteHandler(e:SystemEvent):void {
-      view.light(0);
+      view.light(1);
     }
     
   }

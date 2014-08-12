@@ -41,8 +41,8 @@ package com.meathill.diy.model
       return _colors;
     }
     
-    private var _haibao:Array;
-    public function get haibao():Array {
+    private var _haibao:Object;
+    public function get haibao():Object {
       return _haibao;
     }
     

@@ -1,11 +1,15 @@
 package com.meathill.diy.popup.view 
 {
+  import com.meathill.diy.config.Typography;
   import com.meathill.diy.popup.AbstractPopup;
   import com.meathill.diy.service.AssetsManager;
   import flash.display.Bitmap;
 	import flash.display.Sprite;
   import flash.events.MouseEvent;
   import flash.geom.ColorTransform;
+  import flash.text.TextField;
+  import flash.text.TextFieldAutoSize;
+  import flash.text.TextFormatAlign;
 	
 	/**
    * ...
@@ -17,6 +21,7 @@ package com.meathill.diy.popup.view
     
     private var steps:Vector.<PopupStepItem>;
     private var icons:Vector.<Bitmap>;
+    private var info:TextField;
     
     public function BuyPopup() {
       super();
@@ -24,9 +29,13 @@ package com.meathill.diy.popup.view
     }
     
     public function light(step:uint):void {
-      steps[step].transform.colorTransform = colorTransform;
-      if (step < icons.length - 1) {
-        icons[step].transform.colorTransform = colorTransform;
+      steps[step].working = true;
+      info.text = '正在' + stepsLabel[step] + '中，请稍候';
+      if (step > 0) {
+        steps[step - 1].ready = true;
+      }
+      if (step < icons.length - 1 && step > 0) {
+        icons[step - 1].transform.colorTransform = colorTransform;
       }
     }
     
@@ -49,6 +58,15 @@ package com.meathill.diy.popup.view
           icons.push(icon);
         }
       }
+      
+      info = new TextField();
+      info.x = 20;
+      info.y = headerHeight + contentHeight - 30;
+      info.width = popupWidth - 40;
+      info.defaultTextFormat = Typography.getTextFormat(Typography.BODY, { align: TextFormatAlign.CENTER } );
+      info.wordWrap = false;
+      info.text = '保存您的设计并添加进购物车需要一点时间，请耐心等候。';
+      addChild(info);
     }
     override protected function resetAttr():void {
       title = '添加到购物车';
@@ -59,6 +77,7 @@ package com.meathill.diy.popup.view
       super.confirmButton_clickHandler(e);
       
       addLoading();
+      light(0);
     }
   }
 

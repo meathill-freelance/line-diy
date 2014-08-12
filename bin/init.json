@@ -10,11 +10,28 @@
     "bg": "../assets/bg.jpg",
     "assets": "../assets/assets.swf"
   },
-  "haibao": [
-    "../assets/1.jpg",
-    "../assets/2.jpg",
-    "../assets/3.jpg"
-  ],
+  "haibao": {
+    "wallpaper": [
+      "../assets/wallpaper/1.jpg",
+      "../assets/wallpaper/2.jpg",
+      "../assets/wallpaper/3.jpg"
+    ],
+    "Android": [
+      "../assets/Android/blue.jpg",
+      "../assets/Android/green.jpg",
+      "../assets/Android/red.jpg"
+    ],
+    "iPad": [
+      "../assets/iPad/blue.jpg",
+      "../assets/iPad/green.jpg",
+      "../assets/iPad/red.jpg"
+    ],
+    "iPhone": [
+      "../assets/iPhone/blue.jpg",
+      "../assets/iPhone/green.jpg",
+      "../assets/iPhone/red.jpg"
+    ]
+  },
   "colors": [
     "001F3F",
     "0074D9",

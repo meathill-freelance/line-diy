@@ -39,8 +39,8 @@ package com.meathill.diy.popup.mediator
     
     private function loadHaibaoAssets():void {
       assets.addEventListener(Event.COMPLETE, haibao_loadHandler);
-      for (var i:uint = 0, len:uint = config.haibao.length; i < len; i++) {
-        assets.add(AssetsManager.HAIBAO, config.haibao[i]);
+      for (var i:uint = 0, len:uint = config.haibao.wallpaper.length; i < len; i++) {
+        assets.add(AssetsManager.HAIBAO, config.haibao.wallpaper[i]);
       }
       assets.load();
     }

@@ -21,6 +21,28 @@ package com.meathill.diy.popup.view
    * @author Meathill
    */
   public class HaibaoPopup extends AbstractPopup {
+    private static var type:Array = [
+      {
+        label: '桌面',
+        w: 1366,
+        h: 768
+      }, 
+      { 
+        label: 'iPhone',
+        w: 640,
+        h: 1136
+      },
+      { 
+        label: 'iPad',
+        w:1024,
+        h: 768
+      },
+      { 
+        label: 'Android',
+        w: 1280,
+        h: 720
+      }
+    ];
     private var color:uint = 0;
     private var w:uint = 368;
     private var h:uint = 207;
@@ -94,16 +116,14 @@ package com.meathill.diy.popup.view
       return;
       
       // 创建4个按钮用来选择尺寸
-      var labels:Array = ['桌面', 'iPhone', 'iPad', 'Android'];
-      var sizes:Array = [ { w:stage.stageWidth, h:stage.stageHeight }, { w: 640, h: 1136 }, { w:1024, h: 768 }, { w: 1280, h: 720 } ];
       var offset:uint = 20;
       for (var i:uint = 0; i < 4; i++) {
-        var btn:GroupButton = new GroupButton(labels[i], '', 1, i === 0 ?
+        var btn:GroupButton = new GroupButton(type[i].label, '', 1, i === 0 ?
           GroupButton.FIRST : (i === 3 ? GroupButton.LAST : GroupButton.MIDDLE));
         btn.x = offset;
         btn.y = contentHeight + 15 + headerHeight;
         btn.value = sizes[i];
-        btn.addEventListener(MouseEvent.CLICK, sizeButton_clickHandler);
+        btn.addEventListener(MouseEvent.CLICK, typeButton_clickHandler);
         addChild(btn);
         offset += btn.width;
         
@@ -179,10 +199,12 @@ package com.meathill.diy.popup.view
       var mc:Sprite = Sprite(e.target);
       createHaibaoPreview(Bitmap(mc.getChildAt(0)));
     }
-    private function sizeButton_clickHandler(e:MouseEvent):void {
+    private function typeButton_clickHandler(e:MouseEvent):void {
       var btn:GroupButton = GroupButton(e.target);
-      var size:Object = btn.value;
-      createPreview();
+      var key:String = btn.group;
+      var group:Vector.<GroupButton> = GroupButton.groups[key];
+      var index:uint = group.indexOf(btn);
+      var size:Object = type[index];
     }
     
     
