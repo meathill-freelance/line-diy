@@ -25,10 +25,11 @@ package com.meathill.diy.component.options
         }
         
         numColor = mc.numChildren;
-        var size:Object = Scaler.getSize(mc, 50, 100);
+        var size:Object = Scaler.getSize(mc, 50, 80);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
         bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
+        bmp.x = (50 - size.width >> 1) + i * 60;
         vector.push(bmp);
       }
       return vector;

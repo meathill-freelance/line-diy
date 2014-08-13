@@ -35,7 +35,7 @@ package com.meathill.diy.controller
       if ('cloth' in view.view.loaderInfo.parameters) {
         clothes = view.view.loaderInfo.parameters.cloth.split(',');
       } else {
-        clothes = ['football-t3', 'football-pants3'];
+        clothes = ['basketball-t2', 'basketball-pants2'];
       }
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
         server.add(ServerManager.CLOTH + clothes[i] + '.json', null, cloth_loadCompleteHandler);

@@ -48,9 +48,9 @@ package com.meathill.diy.component.options
       var init:Object = {
         width: 200,
         height: 45,
-        maxLength: 10,
+        maxLength: _config.length,
         text: _config.teamname,
-        textFormat: Typography.getTextFormat(Typography.LEAD, { align: TextFormatAlign.CENTER } )
+        textFormat: Typography.getTextFormat(Typography.LEAD, { align: TextFormatAlign.CENTER, font: _config.font } )
       }
       nameInput = new Input(init);
       nameInput.addEventListener(Event.CHANGE, nameInput_changeHandler);
