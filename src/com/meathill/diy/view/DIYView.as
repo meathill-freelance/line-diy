@@ -49,7 +49,7 @@ package com.meathill.diy.view
     }
     public function getBitmapData(bg:uint = 0):BitmapData {
       var mc:Sprite = image;
-      var bmpd:BitmapData
+      var bmpd:BitmapData;
       if (bg) {
         mc.graphics.beginFill(bg);
         mc.graphics.drawRect(0, 0, mc.width + 200, mc.height + 100);

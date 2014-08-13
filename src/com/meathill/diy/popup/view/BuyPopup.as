@@ -34,7 +34,7 @@ package com.meathill.diy.popup.view
       if (step > 0) {
         steps[step - 1].ready = true;
       }
-      if (step < icons.length - 1 && step > 0) {
+      if (step - 1 < icons.length && step > 0) {
         icons[step - 1].transform.colorTransform = colorTransform;
       }
     }

@@ -23,6 +23,7 @@ package com.meathill.diy.popup.view
     private var label:String;
     private var text:TextField;
     private var bg:Shape;
+    private var p:TextField;
     
     public function set working(value:Boolean):void {
       drawDashedCircle();
@@ -35,6 +36,7 @@ package com.meathill.diy.popup.view
       }
       var style:TextFormat = new TextFormat(null, null, Colors.EMERALD);
       text.setTextFormat(style);
+      p.setTextFormat(style);
       removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
       drawCircle(Colors.EMERALD);
     }
@@ -54,7 +56,7 @@ package com.meathill.diy.popup.view
       text.text = (index + 1).toString();
       addChild(text);
       
-      var p:TextField = new TextField();
+      p = new TextField();
       p.x = -10;
       p.defaultTextFormat = Typography.getTextFormat(Typography.LEAD, {align: TextFormatAlign.CENTER, color: COLOR});
       p.y = WIDTH + 10;

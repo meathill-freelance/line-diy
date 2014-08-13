@@ -58,6 +58,7 @@ package com.meathill.diy.controller
     
     
     private function saveCompleteHandler(e:SystemEvent):void {
+      eventDispatcher.removeEventListener(SystemEvent.SAVE_COMPLETE, saveCompleteHandler);
       callAddToCart();
     }
     private function successHandler(response:Object):void {

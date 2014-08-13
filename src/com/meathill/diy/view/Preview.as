@@ -12,6 +12,8 @@ package com.meathill.diy.view
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
+  import flash.filters.BitmapFilter;
+  import flash.filters.ColorMatrixFilter;
   import flash.geom.Matrix;
   import flash.geom.Point;
   import flash.text.TextField;
@@ -43,7 +45,11 @@ package com.meathill.diy.view
         var mc:Sprite = Sprite(getChildAt(i));
         // 去掉因为选中产生的高光
         for (var j:uint = 0; j < mc.numChildren; j++) {
-          mc.getChildAt(i).filters = null;
+          var filters:Array = mc.getChildAt(i).filters;
+          filters.filter(function (filter:BitmapFilter):Boolean {
+            return filter is ColorMatrixFilter;
+          });
+          mc.getChildAt(i).filters = filters;
         }
         var bmpd:BitmapData = new BitmapData(mc.width, mc.height, true, 0);
         bmpd.draw(mc, new Matrix(mc.scaleX, 0, 0, mc.scaleY, 0, 0), null, null, null, true);
