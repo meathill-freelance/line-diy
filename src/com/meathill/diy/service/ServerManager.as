@@ -17,7 +17,7 @@ package com.meathill.diy.service
   public class ServerManager extends EventDispatcher
   {
     public static const API:String = 'http://www.xline.com.cn/wp-admin/admin-ajax.php';
-    static public const INIT:String = "init.json";
+    static public const INIT:String = "http://www.xline.com.cn/init.json";
     static public const CLOTH:String = 'cloth-';
     
     public static const COMPLETE:String = 'complete';

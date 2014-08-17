@@ -38,7 +38,8 @@ package com.meathill.diy.controller
         clothes = ['basketball-t2', 'basketball-pants2'];
       }
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
-        server.add(ServerManager.CLOTH + clothes[i] + '.json', null, cloth_loadCompleteHandler);
+        var url:String = /\?id=\d+/.test(clothes[i]) ? clothes[i] + '&p=' + (i + 1) : ServerManager.CLOTH + clothes[i] + '.json';
+        server.add(url, null, cloth_loadCompleteHandler);
       }
       server.addEventListener(ServerManager.COMPLETE_ALL, completeAllHandler);
     }
