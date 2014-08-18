@@ -35,7 +35,7 @@ package com.meathill.diy.controller
       if ('cloth' in view.view.loaderInfo.parameters) {
         clothes = view.view.loaderInfo.parameters.cloth.split(',');
       } else {
-        clothes = ['basketball-t2', 'basketball-pants2'];
+        clothes = ['basketball-t1', 'basketball-pants1'];
       }
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
         var url:String = /\?id=\d+/.test(clothes[i]) ? clothes[i] + '&p=' + (i + 1) : ServerManager.CLOTH + clothes[i] + '.json';

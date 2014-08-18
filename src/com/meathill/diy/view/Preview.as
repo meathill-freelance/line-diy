@@ -1,6 +1,8 @@
 package com.meathill.diy.view 
 {
+  import com.greensock.TweenLite;
   import com.greensock.TweenMax;
+  import com.meathill.diy.component.options.SquadNumberUtils;
   import com.meathill.diy.config.Typography;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.filter.Filters;
@@ -17,7 +19,6 @@ package com.meathill.diy.view
   import flash.geom.Matrix;
   import flash.geom.Point;
   import flash.text.TextField;
-  import flash.text.TextFormat;
   import flash.text.TextFormatAlign;
 	
 	/**
@@ -89,8 +90,8 @@ package com.meathill.diy.view
       step = checkStep(step);
       cloth.getChildAt(step).filters = [Filters.getColorFilter(color)];
     }
-    public function setNumber(number:uint, style:uint, step:uint, asset:Sprite):void {
-      step = checkStep(step);
+    public function setNumber(number:uint, style:uint, step:uint, asset:Sprite, isSync:Boolean = false):void {
+      step = checkStep(step, isSync);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
       var numberAsset:Sprite = Sprite(asset.getChildAt(style));
       while (piece.numChildren > 1) {
@@ -99,24 +100,11 @@ package com.meathill.diy.view
       var width:uint = piece.getChildAt(0).width;
       var height:uint = piece.getChildAt(0).height;
       piece.getChildAt(0).visible = false;
-      var str:String = number.toString();
-      var length:uint = str.length;
-      var gap:uint = 10;
-      var singleWidth:uint = (width - gap * (length - 1)) / length;
-      for (var i:uint = 0; i < length; i++) {
-        var index:uint = parseInt(str.charAt(i));
-        index = index === 0 ? 10 : index;
-        var mc:DisplayObject = numberAsset.getChildAt(index - 1);
-        var size:Object = Scaler.getSize(mc, singleWidth, height);
-        var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
-        bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
-        var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x = (singleWidth - size.width >> 1) + i * (singleWidth + 10);
-        bmp.y = height - size.height >> 1;
+      var bmps:Vector.<Bitmap> = SquadNumberUtils.useDesign(numberAsset, number.toString(), NaN, NaN, width, height, true);
+      for each (var bmp:Bitmap in bmps) {
         piece.addChild(bmp);
       }
     }
-    
     public function setTeamName(teamname:String, font:String, color:uint, step:uint):void {
       step = checkStep(step);
       var piece:Sprite = Sprite(cloth.getChildAt(step));
@@ -158,10 +146,12 @@ package com.meathill.diy.view
       scrollTo(getChildAt(part));
     }
     
-    private function checkStep(step:uint):uint {
+    private function checkStep(step:uint, isSync:Boolean = false):uint {
       cloth = step > seperator ? cloth2 : cloth1;
       step = step > seperator ? step - seperator - 1 : step;
-      scrollTo(cloth);
+      if (!isSync) {
+        scrollTo(cloth);
+      }
       return step;
     }
     private function findRealMc(parent:Sprite, mc:Sprite, stageX:Number, stageY:Number):Sprite {
@@ -194,7 +184,7 @@ package com.meathill.diy.view
     }
     private function scrollTo(cloth:DisplayObject):void {
       if (_isReady) {
-        TweenMax.to(this, 0.3, { y: cloth === cloth1 ? _y : _y - 400 } ); 
+        TweenLite.to(this, 0.3, { y: cloth === cloth1 ? _y : _y - 400 } ); 
       }
     }
     

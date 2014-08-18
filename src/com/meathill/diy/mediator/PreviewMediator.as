@@ -1,14 +1,13 @@
 package com.meathill.diy.mediator 
 {
+  import com.meathill.diy.component.options.SquadNumberUtils;
   import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.UserEvent;
   import com.meathill.diy.model.ClothModel;
   import com.meathill.diy.model.vo.SingleStepConfig;
   import com.meathill.diy.service.AssetsManager;
   import com.meathill.diy.view.Preview;
-  import com.meathill.diy.component.options.SquadNumberUtils;
   import flash.display.Sprite;
-  import flash.events.MouseEvent;
   import robotlegs.bender.bundles.mvcs.Mediator;
 	
 	/**
@@ -103,7 +102,7 @@ package com.meathill.diy.mediator
     }
     private function squadNumber_changeHandler(e:DesignEvent):void {
       var config:SingleStepConfig = cloth.getConfig(cloth.step);
-      view.setNumber(e.number, e.style, cloth.step, Sprite(assets.getAsset(config.asset)));
+      view.setNumber(e.number, e.style, cloth.step, Sprite(assets.getAsset(config.asset)), e.isSync);
     }
     private function teamName_changeHandler(e:DesignEvent):void {
       view.setTeamName(e.teamname, e.font, e.color, cloth.step);

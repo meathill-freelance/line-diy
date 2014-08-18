@@ -3,23 +3,14 @@ package com.meathill.diy.component.options
   import com.meathill.diy.component.Button;
   import com.meathill.diy.component.Input;
   import com.meathill.diy.config.Typography;
-  import com.meathill.diy.event.DesignEvent;
   import com.meathill.diy.event.SystemEvent;
-  import com.meathill.diy.filter.Filters;
   import com.meathill.diy.model.vo.SingleStepConfig;
-  import com.meathill.diy.utils.ColorMaker;
-  import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
-  import flash.display.BitmapData;
-  import flash.display.DisplayObject;
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
-  import flash.geom.ColorTransform;
-  import flash.geom.Matrix;
-  import flash.sampler.getSize;
-  import flash.sampler.getSize;
   import flash.text.TextFormatAlign;
+  import flash.utils.setTimeout;
 	
 	/**
    * ...
@@ -33,9 +24,17 @@ package com.meathill.diy.component.options
     private var preview:Sprite;
     private var prevButton:Button;
     private var nextButton:Button;
-    private var _style:uint;
     private var totalStyle:uint;
     private var _color:uint;
+    
+    public function get number():uint {
+      return uint(numberInput.value);
+    }
+    
+    private var _style:uint;
+    public function get style():uint {
+      return _style;
+    }
     
     public function SquadNumber(config:SingleStepConfig, asset:Sprite) {
       _config = config;
@@ -45,13 +44,6 @@ package com.meathill.diy.component.options
       layout();
       draw();
     }
-    public function get number():uint {
-      return uint(numberInput.value);
-    }
-    public function get style():uint {
-      return _style;
-    }
-    
     
     public function setColor():void {
       draw();
@@ -62,13 +54,12 @@ package com.meathill.diy.component.options
       while (preview.numChildren) {
         preview.removeChildAt(0);
       }
-      var bmps:Vector.<Bitmap> = SquadNumberUtils.useDesign(numberAsset, numberInput.value, _config.color, _config.color2, _config.length, true);
+      var bmps:Vector.<Bitmap> = SquadNumberUtils.useDesign(numberAsset, numberInput.value, _config.color, _config.color2, 110, 80, true);
       for (var i:uint = 0, len:uint = bmps.length; i < len; i++) {
-        bmps[i].x = preview.width + (i % len * 10) + (_config.length - len) * 25; 
         preview.addChild(bmps[i]);
       }
       var event:SystemEvent = new SystemEvent(SquadNumberUtils.numColor > 1 ? SystemEvent.DOUBLE_COLOR : SystemEvent.SINGLE_COLOR);
-      dispatchEvent(event);
+      setTimeout(dispatchEvent, 0, event);
     }
     private function layout():void {
       // 输入队服号码
@@ -103,7 +94,6 @@ package com.meathill.diy.component.options
       var event:Event = new Event(Event.CHANGE);
       dispatchEvent(event);
     }
-    
     
     private function prevButton_clickHandler(e:MouseEvent):void {
       _style = _style === 0 ? totalStyle - 1 : (_style - 1);

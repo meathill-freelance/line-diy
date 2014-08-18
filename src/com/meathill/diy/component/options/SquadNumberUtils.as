@@ -12,24 +12,30 @@ package com.meathill.diy.component.options
    */
   public class SquadNumberUtils {
     static public var numColor:uint = 1;
+    static public var gap:uint = 10;
     
-    public static function useDesign(asset:Sprite, number:String, color:uint, color2:uint, length:uint, hasOutput:Boolean = false):Vector.<Bitmap> {
+    public static function useDesign(asset:Sprite, number:String, color:Number, color2:Number, width:uint = 0, height: uint = 80, hasOutput:Boolean = false):Vector.<Bitmap> {
       var vector:Vector.<Bitmap> = hasOutput ? new Vector.<Bitmap>() : null;
+      var length:uint = number.length;
+      var singleWidth:uint = (width - gap * (length - 1)) / length;
       for (var i:uint = 0, len:uint = number.length; i < len; i++) {
         var index:uint = parseInt(number.charAt(i));
         index = index === 0 ? 10 : index;
         var mc:Sprite = Sprite(asset.getChildAt(index - 1));
-        SquadNumberUtils.colorNumber(mc, color, color2);
+        if (!isNaN(color)) {
+          SquadNumberUtils.colorNumber(mc, color, color2);
+        }
         if (!hasOutput) {
           continue;
         }
         
         numColor = mc.numChildren;
-        var size:Object = Scaler.getSize(mc, 50, 80);
+        var size:Object = Scaler.getSize(mc, singleWidth, height);
         var bmpd:BitmapData = new BitmapData(size.width, size.height, true, 0);
         bmpd.draw(mc, new Matrix(size.width / mc.width, 0, 0, size.height/ mc.height), null, null, null, true);
         var bmp:Bitmap = new Bitmap(bmpd, "auto", true);
-        bmp.x = (50 - size.width >> 1) + i * 60;
+        bmp.x = (singleWidth - size.width >> 1) + i * (singleWidth + gap);
+        bmp.y = height - size.height >> 1;
         vector.push(bmp);
       }
       return vector;
