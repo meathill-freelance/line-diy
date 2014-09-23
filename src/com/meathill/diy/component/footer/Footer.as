@@ -65,7 +65,7 @@ package com.meathill.diy.component.footer
       
       serviceTxt = new TextField();
       serviceTxt.x = w - 210;
-      serviceTxt.y = 30;
+      serviceTxt.y = 24;
       serviceTxt.width = 180;
       serviceTxt.height = HEIGHT - 30;
       serviceTxt.wordWrap = true;

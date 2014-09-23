@@ -47,7 +47,7 @@ package com.meathill.diy.view
         // 去掉因为选中产生的高光
         for (var j:uint = 0; j < mc.numChildren; j++) {
           var filters:Array = mc.getChildAt(i).filters;
-          filters.filter(function (filter:BitmapFilter):Boolean {
+          filters.filter(function (filter:BitmapFilter, index:uint, arr:Array):Boolean {
             return filter is ColorMatrixFilter;
           });
           mc.getChildAt(i).filters = filters;

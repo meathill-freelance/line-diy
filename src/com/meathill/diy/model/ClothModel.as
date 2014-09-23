@@ -52,10 +52,10 @@ package com.meathill.diy.model
     }
     
     public function get steps():Vector.<SingleStepConfig> {
-      return cloth1.steps.concat(cloth2 ? cloth2.steps : null);
+      return cloth2 ? cloth1.steps.concat(cloth2.steps) : cloth1.steps;
     }
     public function get templates():Array {
-      return cloth1.templates.concat(cloth2 ? cloth2.templates : null);
+      return cloth2 ? cloth1.templates.concat(cloth2.templates) : cloth1.templates;
     }
     public function get seperator():uint { 
       return cloth1.steps.length - 1;

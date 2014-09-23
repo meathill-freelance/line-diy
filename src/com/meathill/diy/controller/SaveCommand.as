@@ -38,7 +38,7 @@ package com.meathill.diy.controller
     }
     
     private function saveThumbnail():void {
-      var bmpd:BitmapData = view.getBitmapData(0xFFFFFF),
+      var bmpd:BitmapData = view.getBitmapData(true),
           coder:JPEGEncoder = new JPEGEncoder(80),
           bytes:ByteArray = coder.encode(bmpd);
       server.upload(ServerManager.API, {

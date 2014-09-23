@@ -38,6 +38,9 @@ package com.meathill.diy.controller
         clothes = ['basketball-t1', 'basketball-pants1'];
       }
       for (var i:uint = 0, len:uint = clothes.length; i < len; i++) {
+        if (!clothes[i]) {
+          continue;
+        }
         var url:String = /\?id=\d+/.test(clothes[i]) ? clothes[i] + '&p=' + (i + 1) : ServerManager.CLOTH + clothes[i] + '.json';
         server.add(url, null, cloth_loadCompleteHandler);
       }

@@ -5,17 +5,26 @@ package com.meathill.diy.view
   import com.meathill.diy.component.options.Options;
   import com.meathill.diy.component.rightBar.RightBar;
   import com.meathill.diy.component.wizard.Wizard;
+  import com.meathill.diy.service.AssetsManager;
+  import com.meathill.diy.utils.Scaler;
   import flash.display.Bitmap;
   import flash.display.BitmapData;
+  import flash.display.Shape;
   import flash.display.Sprite;
   import flash.events.Event;
+  import flash.filters.BlurFilter;
 	
 	/**
    * ...
    * @author Meathill
    */
-  public class DIYView extends Sprite 
-  {
+  public class DIYView extends Sprite {
+    public static const THUMBNAIL_WIDTH:uint = 600;
+    public static const THUMBNAIL_HEIGHT:uint = 450;
+    
+    [Inject]
+    public var assets:AssetsManager;
+      
     private var wizard:Wizard;
     private var preview:Preview;
     private var options:Options;
@@ -26,14 +35,18 @@ package com.meathill.diy.view
     public function get image():Sprite {
       var vector:Vector.<BitmapData> = preview.bitmaps;
       var mc:Sprite = new Sprite();
-      for (var i:uint = 0, len:uint = vector.length; i < len; i++) {
-        var bmp:Bitmap = new Bitmap(vector[i], "auto", true);
-        if (i === 0) {
-          bmp.x = 200;
-        } else if (i === 1) {
-          bmp.y = 100;
+      if (vector.length === 1) {
+        mc.addChild(new Bitmap(vector[0], "auto", true));
+      } else {
+        for (var i:uint = 0, len:uint = vector.length; i < len; i++) {
+          var bmp:Bitmap = new Bitmap(vector[i], "auto", true);
+          if (i === 0) {
+            bmp.x = 200;
+          } else if (i === 1) {
+            bmp.y = 100;
+          }
+          mc.addChildAt(bmp, 0);
         }
-        mc.addChildAt(bmp, 0);
       }
       return mc;
     }
@@ -47,17 +60,31 @@ package com.meathill.diy.view
       bmp.y = wizard.height;
       addChildAt(bmp, 0);
     }
-    public function getBitmapData(bg:uint = 0):BitmapData {
+    public function getBitmapData(hasBackground:Boolean = false):BitmapData {
       var mc:Sprite = image;
       var bmpd:BitmapData;
-      if (bg) {
-        mc.graphics.beginFill(bg);
-        mc.graphics.drawRect(0, 0, mc.width + 200, mc.height + 100);
-        bmpd = new BitmapData(mc.width, mc.height, true, 0);
+      if (hasBackground) {
+        Scaler.resize(mc, THUMBNAIL_WIDTH * 0.8, THUMBNAIL_HEIGHT * 0.8);
+        mc.x += THUMBNAIL_WIDTH * .1;
+        mc.y += THUMBNAIL_HEIGHT * .05;
+        var bg:Bitmap = assets.clone('thumbnail');
+        var shadow:Shape = new Shape();
+        shadow.graphics.beginFill(0x000000, 0.05);
+        shadow.graphics.drawEllipse(0, 0, mc.width - 20, 30);
+        shadow.graphics.endFill();
+        shadow.filters = [new BlurFilter(16, 16)];
+        shadow.x = mc.x + 10;
+        shadow.y = mc.y + mc.height + 10;
+        var container:Sprite = new Sprite();
+        container.addChild(bg);
+        container.addChild(mc);
+        container.addChild(shadow);
+        bmpd = new BitmapData(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, true, 0);
+        bmpd.draw(container);
       } else {
-        bmpd = new BitmapData(mc.width + 200, mc.height + 100, true, 0);
+        bmpd = new BitmapData(mc.width, mc.height, true, 0);
+        bmpd.draw(mc);
       }
-      bmpd.draw(mc);
       return bmpd;
     }
     

@@ -188,7 +188,7 @@ package com.meathill.diy.popup.view
       var encoder:JPEGEncoder = new JPEGEncoder(80);
       var data:ByteArray = encoder.encode(bmpd);
       var file:FileReference = new FileReference();
-      file.save(data, '.jpg');
+      file.save(data, '海报.jpg');
     }
     private function colorCardItem_clickHandler(e:MouseEvent):void {
       var colorCardItem:ColorCardItem = ColorCardItem(e.target);
