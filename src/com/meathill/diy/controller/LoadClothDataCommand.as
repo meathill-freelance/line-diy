@@ -48,6 +48,9 @@ package com.meathill.diy.controller
     }
     
     private function cloth_loadCompleteHandler(response:Object):void {
+      if (!response) {
+        return;
+      }
       cloth.parse(response);
       cloth.sights = response.templates.length;
     }

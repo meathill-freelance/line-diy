@@ -87,6 +87,20 @@ package com.meathill.diy.view
       }
       return bmpd;
     }
+    public function getThumbnail():BitmapData {
+      var mc:Sprite = image;
+      var bmpd:BitmapData;
+      Scaler.resize(mc, 600, 500);
+      mc.x += 150;
+      mc.y += 50;
+      var container:Sprite = new Sprite();
+      container.graphics.beginFill(0x7f7f7f);
+      container.graphics.drawRect(0, 0, 900, 600);
+      container.addChild(mc);
+      bmpd = new BitmapData(900, 600, true, 0);
+      bmpd.draw(container);
+      return bmpd;
+    }
     
     private function layout():void {
       preview = new Preview();
