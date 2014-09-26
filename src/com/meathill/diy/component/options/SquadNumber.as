@@ -108,7 +108,6 @@ package com.meathill.diy.component.options
     }
     private function numberInput_changeHandler(e:Event):void {
       draw();
-      dispatchChangeEvent();
     }
     
   }
