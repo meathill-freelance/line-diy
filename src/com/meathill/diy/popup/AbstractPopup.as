@@ -53,9 +53,30 @@ package com.meathill.diy.popup
     public function beforeShow():void {
       alpha = 0;
     }
-    
     public function afterHide():void {
       
+    }
+    public function addLoading():void {
+      confirmButton.mouseEnabled = cancelButton.mouseEnabled = closeButton.mouseEnabled = false;
+      confirmButton.filters = cancelButton.filters = closeButton.filters = Filters.DISABLED;
+      
+      var bmp:Bitmap = AssetsManager.instance.clone('spinner');
+      bmp.transform.colorTransform = new ColorTransform(.3, .3, .3);
+      spinner = new Sprite();
+      bmp.x = -bmp.width >> 1;
+      bmp.y = -bmp.height >> 1;
+      spinner.addChild(bmp);
+      spinner.x = confirmButton.x - 25;
+      spinner.y = confirmButton.y + 18;
+      spinner.addEventListener(Event.ENTER_FRAME, spinner_enterFrameHandler);
+      addChild(spinner);
+    }
+    public function removeLoading():void {
+      spinner.removeEventListener(Event.ENTER_FRAME, spinner_enterFrameHandler);
+      removeChild(spinner);
+      
+      confirmButton.filters = cancelButton.filters = closeButton.filters = null;
+      confirmButton.mouseEnabled = cancelButton.mouseEnabled = closeButton.mouseEnabled = true;
     }
     
     protected function createContent():void {
@@ -115,28 +136,6 @@ package com.meathill.diy.popup
     }
     protected function resetAttr():void {
       
-    }
-    protected function addLoading():void {
-      confirmButton.mouseEnabled = cancelButton.mouseEnabled = closeButton.mouseEnabled = false;
-      confirmButton.filters = cancelButton.filters = closeButton.filters = Filters.DISABLED;
-      
-      var bmp:Bitmap = AssetsManager.instance.clone('spinner');
-      bmp.transform.colorTransform = new ColorTransform(.3, .3, .3);
-      spinner = new Sprite();
-      bmp.x = -bmp.width >> 1;
-      bmp.y = -bmp.height >> 1;
-      spinner.addChild(bmp);
-      spinner.x = confirmButton.x - 25;
-      spinner.y = confirmButton.y + 18;
-      spinner.addEventListener(Event.ENTER_FRAME, spinner_enterFrameHandler);
-      addChild(spinner);
-    }
-    protected function removeLoading():void {
-      spinner.removeEventListener(Event.ENTER_FRAME, spinner_enterFrameHandler);
-      removeChild(spinner);
-      
-      confirmButton.filters = cancelButton.filters = closeButton.filters = null;
-      confirmButton.mouseEnabled = cancelButton.mouseEnabled = closeButton.mouseEnabled = true;
     }
     protected function createLabel(label:String, x:int = 0, y:int = 0, color:uint = 0):void {
       color = color ? color : Colors.EMERALD;

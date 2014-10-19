@@ -24,15 +24,20 @@ package com.meathill.diy.popup.mediator
       }
       
       addViewListener(UserEvent.CONFIRM, view_confirmHandler);
+      addContextListener(SystemEvent.NOT_LOGIN, notLoginHandler);
       addContextListener(SystemEvent.SAVE_COMPLETE, saveCompleteHandler);
       addContextListener(SystemEvent.ADDED_TO_CART, addedToCartHandler);
     }
     
     
     
+    
     private function view_confirmHandler(e:UserEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.BUY);
       dispatch(event);
+    }
+    private function notLoginHandler(e:SystemEvent):void {
+      view.removeLoading();
     }
     private function addedToCartHandler(e:SystemEvent):void {
       view.light(2);

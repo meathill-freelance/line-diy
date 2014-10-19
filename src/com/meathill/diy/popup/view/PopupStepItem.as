@@ -26,8 +26,13 @@ package com.meathill.diy.popup.view
     private var p:TextField;
     
     public function set working(value:Boolean):void {
-      drawDashedCircle();
-      addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+      if (!value) {
+        drawCircle();
+        removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
+      } else {
+        drawDashedCircle();
+        addEventListener(Event.ENTER_FRAME, enterFrameHandler);
+      }
     }
     
     public function set ready(value:Boolean):void {

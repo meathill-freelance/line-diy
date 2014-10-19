@@ -15,14 +15,19 @@ package com.meathill.diy.popup.mediator
     
     override public function initialize():void {
       addViewListener(UserEvent.CONFIRM, confirmHandler);
+      addContextListener(SystemEvent.NOT_LOGIN, notLoginHandler);
       addContextListener(SystemEvent.SAVE_COMPLETE, saveCompleteHandler);
       addContextListener(SystemEvent.SAVE_FAILED, saveFailedHandler);
     }
+    
     
     private function confirmHandler(e:UserEvent):void {
       var event:UserEvent = new UserEvent(UserEvent.SAVE);
       event.name = view.desginName;
       dispatch(event);
+    }
+    private function notLoginHandler(e:SystemEvent):void {
+      view.removeLoading();
     }
     private function saveCompleteHandler(e:SystemEvent):void {
       view.showSuccess();

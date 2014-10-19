@@ -38,6 +38,12 @@ package com.meathill.diy.popup.view
         icons[step - 1].transform.colorTransform = colorTransform;
       }
     }
+    override public function removeLoading():void {
+      super.removeLoading();
+      
+      info.text = '请登录后再购买球衣。';
+      steps[0].working = false;
+    }
     
     override protected function createContent():void {
       steps = new Vector.<PopupStepItem>();

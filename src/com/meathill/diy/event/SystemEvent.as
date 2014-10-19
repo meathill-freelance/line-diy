@@ -16,6 +16,7 @@ package com.meathill.diy.event
     static public const SINGLE_COLOR:String = "single_color";
     static public const BUY_FAILED:String = "buy_failed";
     static public const ADDED_TO_CART:String = "added_to_cart";
+    static public const NOT_LOGIN:String = "not_login";
     
     public function SystemEvent(type:String, bubbles:Boolean = true, cancelable:Boolean = false) {
       super(type, bubbles, cancelable);

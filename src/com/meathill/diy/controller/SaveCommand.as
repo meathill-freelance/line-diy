@@ -60,6 +60,8 @@ package com.meathill.diy.controller
       if (ExternalInterface.available) {
         ExternalInterface.call('showLoginModal');
       }
+      var event:SystemEvent = new SystemEvent(SystemEvent.NOT_LOGIN);
+      eventDispatcher.dispatchEvent(event);
     }
     
     private function successHandler(response:Object):void {
