@@ -41,7 +41,7 @@ package com.meathill.diy.controller
     
     private function callSaveCommand():void {
       var event:UserEvent = new UserEvent(UserEvent.SAVE);
-      event.name = '未命名设计';
+      event.name = 'XLINE球队';
       eventDispatcher.dispatchEvent(event);
     }
     private function callAddToCart():void {

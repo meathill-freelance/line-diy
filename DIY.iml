@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="DIY">
     <configurations>
       <configuration name="DIY" pure-as="true" main-class="com.meathill.diy.Main" output-file="DIY.swf" output-folder="$MODULE_DIR$/bin" wrapper-template-path="$MODULE_DIR$/html-template">
-        <dependencies target-player="11.0">
+        <dependencies target-player="14.0">
           <entries>
             <entry library-id="978f4a9e-7b8a-44f8-9187-e364548b3ac6">
               <dependency linkage="Merged" />
@@ -18,7 +18,7 @@
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="apache-flex-4.12" />
+          <sdk name="apache-flex-4.13" />
         </dependencies>
         <compiler-options>
           <map>
@@ -37,7 +37,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="apache-flex-4.12" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="apache-flex-4.13" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library type="flex">

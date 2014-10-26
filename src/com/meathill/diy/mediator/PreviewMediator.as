@@ -44,8 +44,6 @@ package com.meathill.diy.mediator
       addContextListener(UserEvent.SHOW_PANTS, user_showPantsHandler);
     }
     
-    
-    
     private function useUserDesign(isFirst:Boolean = false):void {
       // 是否需要设置号码
       view.isReady = false;
