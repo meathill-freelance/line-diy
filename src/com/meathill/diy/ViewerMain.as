@@ -16,6 +16,7 @@ import robotlegs.bender.framework.impl.Context;
    * 展示工具
    * @author Meathill
    */
+[SWF(width="900", height="1000")]
 public class ViewerMain extends Sprite {
   private var context:Context;
     
