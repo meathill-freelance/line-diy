@@ -5,9 +5,6 @@
       <configuration name="DIY" pure-as="true" main-class="com.meathill.diy.Main" output-file="DIY.swf" output-folder="$MODULE_DIR$/bin" wrapper-template-path="$MODULE_DIR$/html-template">
         <dependencies target-player="14.0">
           <entries>
-            <entry library-id="978f4a9e-7b8a-44f8-9187-e364548b3ac6">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-id="eb56291a-195c-4296-b200-c1801bc0535a">
               <dependency linkage="Merged" />
             </entry>
@@ -22,6 +19,7 @@
         </dependencies>
         <compiler-options>
           <map>
+            <entry key="compiler.debug.swf" value="false" />
             <entry key="compiler.locale" value="en_US&#10;zh_CN" />
           </map>
         </compiler-options>
@@ -39,16 +37,6 @@
     </content>
     <orderEntry type="jdk" jdkName="apache-flex-4.13" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
-        <properties id="978f4a9e-7b8a-44f8-9187-e364548b3ac6" />
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/robotlegs-framework-v2.1.0.swc!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
         <properties id="eb56291a-195c-4296-b200-c1801bc0535a" />
