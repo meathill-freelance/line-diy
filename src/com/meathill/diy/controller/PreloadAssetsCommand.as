@@ -11,8 +11,7 @@ package com.meathill.diy.controller
    * ...
    * @author Meathill
    */
-  public class PreloadAssetsCommand extends Command 
-  {
+  public class PreloadAssetsCommand extends Command {
     [Inject]
     public var assets:AssetsManager;
     

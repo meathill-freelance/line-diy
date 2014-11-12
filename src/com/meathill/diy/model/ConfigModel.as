@@ -1,6 +1,8 @@
 package com.meathill.diy.model 
 {
-	/**
+import flash.text.Font;
+
+/**
    * 保存设置信息
    * @author Meathill
    */
@@ -45,6 +47,11 @@ package com.meathill.diy.model
     public function get haibao():Object {
       return _haibao;
     }
+
+  private var _fonts:Array;
+  public function get fonts():Array {
+    return _fonts;
+  }
     
     public function parse(init:Object):void {
       _baseURL = init.baseURL;
@@ -55,8 +62,18 @@ package com.meathill.diy.model
       _haibao = init.haibao;
       _more = init.moreText;
       _colors = init.colors;
+
+      var hanzi:Array = ['黑体', '华文行楷', '华文琥珀', '方正姚体', '幼圆', '微软雅黑'];
+      var local:Array = Font.enumerateFonts(true);
+      _fonts = [];
+      for (var i:uint = 0, len:uint = local.length; i < len; i++) {
+        if (hanzi.indexOf(local[i].fontName) !== -1) {
+          _fonts.push(local[i].fontName);
+        }
+      }
+      trace('Fonts: ', _fonts);
     }
-    
-  }
+
+}
 
 }

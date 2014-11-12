@@ -16,6 +16,7 @@ package com.meathill.diy
 	 * ...
 	 * @author Meathill
 	 */
+  [SWF(width=1200, height=900)]
 	public class Main extends Sprite 
 	{
     private var _context:Context;
