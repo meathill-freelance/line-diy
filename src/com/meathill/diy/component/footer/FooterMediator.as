@@ -43,7 +43,7 @@ package com.meathill.diy.component.footer
           case 'weibo':
             var base:String = 'http://v.t.sina.com.cn/share/share.php?appkey=',
                 param:String = '&url=' +  url + '&title=' + content + '&source=&sourceUrl=&content=UTF-8&pic=';
-            go(url + param);
+            go(base + param);
             break;
             
           case 'renren':

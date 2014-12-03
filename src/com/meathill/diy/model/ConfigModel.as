@@ -1,5 +1,7 @@
 package com.meathill.diy.model 
 {
+import com.meathill.diy.component.options.TeamName;
+
 import flash.text.Font;
 
 /**
@@ -72,6 +74,7 @@ import flash.text.Font;
         }
       }
       trace('Fonts: ', _fonts);
+      TeamName.FONTS = _fonts;
     }
 
 }

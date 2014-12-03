@@ -15,7 +15,7 @@ package com.meathill.diy.component.options
    * @author Meathill
    */
   public class TeamName extends Sprite {
-    private static var FONTS:Array = ['宋体', '微软雅黑', '幼圆'];
+    public static var FONTS:Array = ['宋体', '微软雅黑', '幼圆'];
     private var _config:SingleStepConfig;
     private var fontText:TextField;
     private var prevButton:Button;
